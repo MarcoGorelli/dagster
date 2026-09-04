@@ -229,6 +229,7 @@ class OpenAIResource(ConfigurableResource):
 
     def setup_for_execution(self, context: InitResourceContext) -> None:
         # Set up an OpenAI client based on the API key.
+        # pyrefly: ignore [read-only]
         self._client = Client(
             api_key=self.api_key,
             organization=self.organization,

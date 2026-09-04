@@ -218,6 +218,7 @@ class UnboundInitResourceContext(InitResourceContext):
         return self._resource_config
 
     @property
+    # pyrefly: ignore [bad-override]
     def resource_def(self) -> ResourceDefinition | None:
         raise DagsterInvariantViolationError(
             "UnboundInitResourceContext has not been bound to resource definition."

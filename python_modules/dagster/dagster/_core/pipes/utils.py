@@ -89,6 +89,7 @@ class PipesTempFileContextInjector(PipesContextInjector):
     """
 
     @contextmanager
+    # pyrefly: ignore [bad-override-param-name]
     def inject_context(self, context: "PipesContextData") -> Iterator[PipesParams]:
         """Inject context to external environment by writing it to an automatically-generated
         temporary file as JSON and exposing the path to the file.
@@ -703,6 +704,7 @@ class PipesBlobStoreMessageReader(PipesThreadedMessageReader):
         ...
         # historical reasons, keeping the original interface of PipesBlobStoreMessageReader
 
+    # pyrefly: ignore [bad-override]
     def download_messages(self, cursor: int | None, params: PipesParams) -> tuple[int, str] | None:
         # mapping new interface to the old one
         # the old interface isn't using the cursor parameter, instead, it keeps track of counter in the "counter" attribute

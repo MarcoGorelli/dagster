@@ -656,9 +656,11 @@ class AssetDaemon(DagsterDaemon):
                 if sensor.get_current_instigator_state(
                     all_sensor_states.get(selector_id)
                 ).is_running:
+                    # pyrefly: ignore [missing-attribute]
                     sensors_and_repos.append((sensor, repo))
 
         else:
+            # pyrefly: ignore [missing-attribute]
             sensors_and_repos.append(
                 (
                     None,

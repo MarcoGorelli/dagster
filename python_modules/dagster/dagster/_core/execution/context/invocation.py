@@ -263,6 +263,7 @@ class DirectOpExecutionContext(OpExecutionContext, BaseDirectExecutionContext):
         # of self._per_invocation_properties without causing pyright errors
         return self._per_invocation_properties
 
+    # pyrefly: ignore [bad-override]
     def bind(
         self,
         op_def: OpDefinition,
@@ -786,11 +787,13 @@ class DirectOpExecutionContext(OpExecutionContext, BaseDirectExecutionContext):
 
 
 class DirectAssetCheckExecutionContext(AssetCheckExecutionContext, BaseDirectExecutionContext):
+    # pyrefly: ignore [bad-override-mutable-attribute]
     _op_execution_context: DirectOpExecutionContext
 
     def __init__(self, op_execution_context: DirectOpExecutionContext):
         self._op_execution_context = op_execution_context
 
+    # pyrefly: ignore [bad-override]
     def bind(
         self,
         op_def: OpDefinition,
@@ -851,6 +854,7 @@ class DirectAssetExecutionContext(AssetExecutionContext, BaseDirectExecutionCont
     being invoked directly. Can also be used as a context manager.
     """
 
+    # pyrefly: ignore [bad-override-mutable-attribute]
     _op_execution_context: DirectOpExecutionContext
 
     def __init__(self, op_execution_context: DirectOpExecutionContext):
@@ -870,6 +874,7 @@ class DirectAssetExecutionContext(AssetExecutionContext, BaseDirectExecutionCont
         if not self._op_execution_context._per_invocation_properties:  # noqa: SLF001
             raise DagsterInvalidPropertyError(_property_msg(fn_name, fn_type))
 
+    # pyrefly: ignore [bad-override]
     def bind(
         self,
         op_def: OpDefinition,

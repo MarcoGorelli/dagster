@@ -63,6 +63,7 @@ def _subschemas_on_path(
         check.failed(f"Unexpected valpath element: {el}")
 
     # the path wasn't valid, or unspecified
+    # pyrefly: ignore [unbound-name]
     if not inner:
         return
 

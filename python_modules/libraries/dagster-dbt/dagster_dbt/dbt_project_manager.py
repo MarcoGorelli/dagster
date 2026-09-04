@@ -119,6 +119,7 @@ class DbtProjectArgsManager(DbtProjectManager):
         return DbtProject(
             project_dir=project_dir,
             # allow default values on DbtProject to take precedence
+            # pyrefly: ignore [bad-argument-type]
             **{k: v for k, v in kwargs.items() if v is not None and k != "project_dir"},
         )
 

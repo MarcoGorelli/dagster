@@ -28,6 +28,7 @@ def sum_numbers(base, nums):
     return base + sum(nums)
 
 
+# pyrefly: ignore [missing-argument]
 @op(out=DynamicOut())
 def emit():
     for i in range(3):

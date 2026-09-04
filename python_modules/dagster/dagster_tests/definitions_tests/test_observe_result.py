@@ -75,7 +75,9 @@ def test_multi_asset_observe_result():
     assert observe([outs_multi_asset]).success
 
     res = outs_multi_asset()
+    # pyrefly: ignore [bad-index]
     assert res[0].metadata["foo"] == "bar"
+    # pyrefly: ignore [bad-index]
     assert res[1].metadata["baz"] == "qux"
 
     @dg.multi_observable_source_asset(
@@ -92,7 +94,9 @@ def test_multi_asset_observe_result():
     assert observe([specs_multi_asset]).success
 
     res = specs_multi_asset()
+    # pyrefly: ignore [bad-index]
     assert res[0].metadata["foo"] == "bar"
+    # pyrefly: ignore [bad-index]
     assert res[1].metadata["baz"] == "qux"
 
 
@@ -118,6 +122,7 @@ def test_yield_materialization_multi_asset():
     assert "one" in observations[0].metadata
     assert "two" in observations[1].metadata
 
+    # pyrefly: ignore [bad-argument-type]
     direct_results = list(multi())
     assert len(direct_results) == 2
 
@@ -144,6 +149,7 @@ def test_yield_materialization_multi_asset():
         dg.DagsterInvariantViolationError,
         match='Invocation of op "missing" did not return an output for non-optional output "two"',
     ):
+        # pyrefly: ignore [bad-argument-type]
         list(missing())
 
     #
@@ -174,6 +180,7 @@ def test_yield_materialization_multi_asset():
             " asset_key, options are:"
         ),
     ):
+        # pyrefly: ignore [bad-argument-type]
         list(no_key())
 
     #
@@ -200,6 +207,7 @@ def test_yield_materialization_multi_asset():
     assert "two" in observations[1].metadata
 
     res = ret_multi()
+    # pyrefly: ignore [bad-argument-type]
     assert len(res) == 2
 
     #
@@ -379,6 +387,7 @@ def test_observe_result_generators():
     assert observations[0].metadata["foo"].value == "bar"
     assert observations[1].metadata["baz"].value == "qux"
 
+    # pyrefly: ignore [bad-argument-type]
     result = list(generator_specs_multi_asset())
     assert len(result) == 2
     assert result[0].metadata["foo"] == "bar"
@@ -396,6 +405,7 @@ def test_observe_result_generators():
     assert observations[0].metadata["foo"].value == "bar"
     assert observations[1].metadata["baz"].value == "qux"
 
+    # pyrefly: ignore [bad-argument-type]
     result = list(generator_outs_multi_asset())
     assert len(result) == 2
     assert result[0].metadata["foo"] == "bar"
@@ -414,6 +424,7 @@ def test_observe_result_generators():
     assert observations[0].metadata["foo"].value == "bar"
     assert observations[1].metadata["baz"].value == "qux"
 
+    # pyrefly: ignore [bad-argument-type]
     result = asyncio.run(async_specs_multi_asset())
     assert len(result) == 2
     assert result[0].metadata["foo"] == "bar"
@@ -432,6 +443,7 @@ def test_observe_result_generators():
     assert observations[1].metadata["baz"].value == "qux"
 
     async def _run_async_gen():
+        # pyrefly: ignore [not-iterable]
         results = [result async for result in async_gen_specs_multi_asset()]
         return results
 
@@ -467,4 +479,5 @@ def test_observe_result_with_partitions_direct_invocation():
     context = dg.build_op_context(partition_key="red")
 
     res = partitioned_asset(context)
+    # pyrefly: ignore [missing-attribute]
     assert res.metadata["key"] == "red"

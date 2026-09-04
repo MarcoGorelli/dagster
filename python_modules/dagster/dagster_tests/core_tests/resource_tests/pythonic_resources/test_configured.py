@@ -10,6 +10,7 @@ def test_config_mapping_return_resource_config_dict_noargs() -> None:
     class MyResource(dg.ConfigurableResource):
         resource_param: str
 
+    # pyrefly: ignore [bad-specialization]
     @dg.configured(MyResource)
     def my_resource_noargs(_) -> dict[str, Any]:
         return {"resource_param": "foo"}
@@ -59,11 +60,13 @@ def test_config_mapping_return_resource_config_dict() -> None:
         simplified_param: str
 
     # New, fancy config mapping takes in a Pythonic config object but returns normal config dict
+    # pyrefly: ignore [bad-specialization]
     @dg.configured(MyResource)
     def my_resource_simplified(config_in: MyResourceSimplifiedConfig) -> dict[str, Any]:
         return {"resource_param": config_in.simplified_param}
 
     result = do_it_all.execute_in_process(
+        # pyrefly: ignore [missing-attribute]
         resources={"my_resource": my_resource_simplified.configured({"simplified_param": "foo"})}
     )
     assert result.success
@@ -86,11 +89,13 @@ def test_config_mapping_return_resource_object() -> None:
         simplified_param: str
 
     # New, fancy config mapping takes in a Pythonic config object and returns a constructed resource
+    # pyrefly: ignore [bad-specialization]
     @dg.configured(MyResource)
     def my_resource_simplified(config_in: MyResourceSimplifiedConfig) -> MyResource:
         return MyResource(resource_param=config_in.simplified_param)
 
     result = do_it_all.execute_in_process(
+        # pyrefly: ignore [missing-attribute]
         resources={"my_resource": my_resource_simplified.configured({"simplified_param": "foo"})}
     )
     assert result.success
@@ -110,7 +115,7 @@ def test_config_annotation_no_config_schema_err() -> None:
         CheckError,
         match="Cannot provide config_schema to @configured function with Config-annotated param",
     ):
-
+        # pyrefly: ignore [bad-specialization]
         @dg.configured(MyResource, config_schema={"simplified_param": str})
         def my_resource_simplified(config_in: MyResourceSimplifiedConfig): ...
 
@@ -127,7 +132,7 @@ def test_config_annotation_extra_param_err() -> None:
         CheckError,
         match="@configured function should have exactly one parameter",
     ):
-
+        # pyrefly: ignore [bad-specialization]
         @dg.configured(MyResource)
         def my_resource_simplified(config_in: MyResourceSimplifiedConfig, useless_param: str): ...
 

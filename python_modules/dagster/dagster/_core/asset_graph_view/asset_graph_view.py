@@ -153,6 +153,7 @@ class AssetGraphView(LoadingContext):
         return self._instance
 
     @property
+    # pyrefly: ignore [bad-override]
     def loaders(self) -> dict[type, DataLoader]:
         return self._loaders
 
@@ -222,6 +223,7 @@ class AssetGraphView(LoadingContext):
         partitions_def = check.not_none(
             self._get_partitions_def(asset_key), "Must have partitions def"
         )
+        # pyrefly: ignore [missing-attribute]
         partition_subset_in_range = partitions_def.empty_subset().with_partition_key_range(
             partitions_def=partitions_def, partition_key_range=partition_key_range
         )
@@ -516,6 +518,7 @@ class AssetGraphView(LoadingContext):
             self._get_partitions_def(asset_subset.key), "Must have partitions def"
         )
         for partition_key in partition_keys:
+            # pyrefly: ignore [missing-attribute]
             if not partitions_def.has_partition_key(partition_key):
                 check.failed(
                     f"Partition key {partition_key} not in partitions def {partitions_def}"

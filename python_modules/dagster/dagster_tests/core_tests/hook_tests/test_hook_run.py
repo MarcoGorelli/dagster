@@ -298,6 +298,7 @@ def test_op_outputs_access():
         raise SomeUserException()
         yield dg.Output(3, "two")
 
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def dynamic_op(_):
         yield dg.DynamicOutput(1, mapping_key="mapping_1")

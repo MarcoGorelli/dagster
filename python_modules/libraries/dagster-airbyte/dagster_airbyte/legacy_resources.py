@@ -756,7 +756,9 @@ class AirbyteCloudResource(BaseAirbyteResource):
                 include_additional_request_params=False,
             )
         )
+        # pyrefly: ignore [read-only]
         self._access_token_value = str(response["access_token"])
+        # pyrefly: ignore [read-only]
         self._access_token_timestamp = datetime.now().timestamp()
 
     def _needs_refreshed_access_token(self) -> bool:

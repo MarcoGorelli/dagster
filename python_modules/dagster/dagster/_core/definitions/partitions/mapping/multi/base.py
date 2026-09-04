@@ -79,6 +79,7 @@ class BaseMultiPartitionMapping(ABC):
                     a_partition_keys_by_dimension[dimension_name].add(key)
         else:
             for partition_key in a_partitions_subset.get_partition_keys():
+                # pyrefly: ignore [bad-index]
                 a_partition_keys_by_dimension[None].add(partition_key)
 
         # Maps the dimension name and key of a partition in a_partitions_def to the list of
@@ -214,6 +215,7 @@ class BaseMultiPartitionMapping(ABC):
                 ],
             ):
                 b_partition_keys.add(
+                    # pyrefly: ignore [bad-argument-type]
                     MultiPartitionKey(
                         {
                             cast("str", (mapped_b_dim_names + unmapped_b_dim_names)[i]): key

@@ -74,6 +74,7 @@ class GithubEvent:
         else:
             gh = github3.enterprise_login(url=self.github_server_url, token=token)
         repo_owner, repo_name = self.github_repository.split("/", 1)
+        # pyrefly: ignore [missing-attribute]
         return gh.repository(repo_owner, repo_name)
 
     def get_github_avatar_url(self) -> str | None:

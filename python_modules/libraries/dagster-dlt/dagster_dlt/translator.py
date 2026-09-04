@@ -58,6 +58,7 @@ class DagsterDltTranslator:
             group_name=self._resolve_back_compat_method(
                 "get_group_name", self._default_group_name_fn, data.resource
             ),
+            # pyrefly: ignore [invalid-argument]
             metadata={**metadata, **TableMetadataSet(storage_kind=destination_name)},
             owners=self._resolve_back_compat_method(
                 "get_owners", self._default_owners_fn, data.resource

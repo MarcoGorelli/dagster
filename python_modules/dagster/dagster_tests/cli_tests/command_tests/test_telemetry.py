@@ -362,9 +362,11 @@ def test_get_stats_from_remote_repo_code_checks():
     @dg.asset
     def my_asset(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=my_asset)
     def my_check(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=my_asset)
     def my_check_2(): ...
 
@@ -511,10 +513,12 @@ def test_get_stats_from_remote_repo_functional_resources():
 
 def test_get_stats_from_remote_repo_functional_io_managers():
     @dagster_maintained_io_manager
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(config_schema={"foo": str})
     def my_io_manager():
         return 1
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(config_schema={"baz": str})
     def custom_io_manager():
         return 2
@@ -586,6 +590,7 @@ def test_get_stats_from_remote_repo_delayed_resource_configuration():
         return 1
 
     @dagster_maintained_io_manager
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(config_schema={"foo": str})
     def my_io_manager():
         return 1

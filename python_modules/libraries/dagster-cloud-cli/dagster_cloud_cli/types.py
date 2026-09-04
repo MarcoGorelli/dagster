@@ -50,6 +50,7 @@ class CliEventTags:
     def contains(cls, value) -> bool:
         for enum in cls.enums():
             with suppress(ValueError):
+                # pyrefly: ignore [no-matching-overload]
                 if enum(value):
                     return True
         return False

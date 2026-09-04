@@ -100,6 +100,7 @@ class ScopedResourcesBuilder(
 
             class _ScopedResourcesContainsGenerator(
                 namedtuple(
+                    # pyrefly: ignore [bad-class-definition]
                     "_ScopedResourcesContainsGenerator",
                     list(resources_to_attach_to_context.keys()),
                 ),
@@ -115,6 +116,7 @@ class ScopedResourcesBuilder(
         else:
 
             class _ScopedResources(
+                # pyrefly: ignore [bad-class-definition]
                 namedtuple("_ScopedResources", list(resources_to_attach_to_context.keys())),
                 Resources,
             ):

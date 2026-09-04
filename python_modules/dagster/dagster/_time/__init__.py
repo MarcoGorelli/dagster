@@ -117,9 +117,12 @@ def parse_time_string(datetime_str) -> datetime:
     """
     dt = parser.parse(datetime_str)
 
+    # pyrefly: ignore [missing-attribute]
     if not dt.tzinfo:
+        # pyrefly: ignore [missing-attribute]
         dt = dt.replace(tzinfo=timezone.utc)
 
+    # pyrefly: ignore [bad-return]
     return dt
 
 

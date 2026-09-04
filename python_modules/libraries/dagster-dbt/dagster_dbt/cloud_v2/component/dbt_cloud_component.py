@@ -388,6 +388,7 @@ class DbtCloudComponentTranslator(
         settings: DagsterDbtComponentTranslatorSettings | None,
     ):
         self._component = component
+        # pyrefly: ignore [bad-argument-type]
         super().__init__(settings)
 
     def get_asset_spec(

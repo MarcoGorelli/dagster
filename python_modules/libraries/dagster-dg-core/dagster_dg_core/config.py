@@ -255,6 +255,7 @@ class DgConfig:
             DgCliConfig.from_raw(*all_cli_config) if all_cli_config else DgCliConfig.default()
         )
 
+        # pyrefly: ignore [unbound-name]
         return cls(cli_config, project_config, workspace_config)
 
 
@@ -289,10 +290,12 @@ class DgCliConfig:
         merged = cast("DgRawCliConfig", functools.reduce(lambda acc, x: {**acc, **x}, partials))
         return cls(
             verbose=merged.get("verbose", DgCliConfig.verbose),
+            # pyrefly: ignore [bad-argument-type]
             use_component_modules=merged.get(
                 "use_component_modules",
                 cls.__dataclass_fields__["use_component_modules"].default_factory(),  # ty: ignore[call-non-callable]
             ),
+            # pyrefly: ignore [bad-argument-type]
             suppress_warnings=merged.get(
                 "suppress_warnings",
                 cls.__dataclass_fields__["suppress_warnings"].default_factory(),  # ty: ignore[call-non-callable]
@@ -722,6 +725,7 @@ class _DgConfigValidator:
         self._validate_file_config_setting(
             raw_dict,
             "directory_type",
+            # pyrefly: ignore [invalid-annotation]
             Required[Literal["workspace", "project"]],
         )
         self._validate_dg_config_file_cli_section(raw_dict.get("cli", {}))

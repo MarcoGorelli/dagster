@@ -1395,11 +1395,13 @@ def test_schedule_mutation(
     workspace_two: WorkspaceProcessContext,
     executor: ThreadPoolExecutor,
 ):
+    # pyrefly: ignore [missing-attribute]
     repo_one = next(
         iter(workspace_one.create_request_context().get_code_location_entries().values())
     ).code_location.get_repository(  # type: ignore
         "the_repo"
     )
+    # pyrefly: ignore [missing-attribute]
     repo_two = next(
         iter(workspace_two.create_request_context().get_code_location_entries().values())
     ).code_location.get_repository(  # type: ignore

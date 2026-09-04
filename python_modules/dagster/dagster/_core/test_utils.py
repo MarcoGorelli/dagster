@@ -106,6 +106,7 @@ def assert_namedtuples_equal(
     t1: T_NamedTuple, t2: T_NamedTuple, exclude_fields: Sequence[str] | None = None
 ) -> None:
     exclude_fields = exclude_fields or []
+    # pyrefly: ignore [missing-attribute]
     for field in type(t1)._fields:
         if field not in exclude_fields:
             assert getattr(t1, field) == getattr(t2, field)

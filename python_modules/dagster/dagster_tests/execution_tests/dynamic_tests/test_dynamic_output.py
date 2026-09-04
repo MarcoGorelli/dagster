@@ -8,6 +8,7 @@ from dagster._core.events import DagsterEventType
 
 
 def test_basic():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def should_work():
         yield dg.DynamicOutput(1, mapping_key="1")
@@ -36,6 +37,7 @@ def test_fails_without_def():
 
 
 def test_fails_with_wrong_output():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def should_fail():
         yield dg.Output(1)
@@ -51,6 +53,7 @@ def test_fails_with_wrong_output():
     # with pytest.raises(DagsterInvariantViolationError, match="must yield DynamicOutput"):
     #     list(should_fail())
 
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def should_also_fail():
         return 1
@@ -74,6 +77,7 @@ def test_fails_with_wrong_output():
 
 
 def test_fails_dupe_keys():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def should_fail():
         yield dg.DynamicOutput(True, mapping_key="dunk")
@@ -107,7 +111,9 @@ def test_invalid_mapping_keys():
 def test_multi_output():
     @dg.op(
         out={
+            # pyrefly: ignore [bad-argument-type, missing-argument]
             "numbers": dg.DynamicOut(int),
+            # pyrefly: ignore [bad-argument-type, missing-argument]
             "letters": dg.DynamicOut(str),
             "wildcard": dg.Out(str),
         }
@@ -141,6 +147,7 @@ def test_multi_output():
 
 
 def test_multi_out_map():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def emit():
         yield dg.DynamicOutput(1, mapping_key="1")
@@ -188,6 +195,7 @@ def test_context_mapping_key():
     def observe_key(context, _dep=None):
         _observed.append(context.get_mapping_key())
 
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def emit():
         yield dg.DynamicOutput(1, mapping_key="key_1")
@@ -213,6 +221,7 @@ def test_dynamic_with_op():
     def passthrough(_ctx, _dep=None):
         pass
 
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def emit():
         yield dg.DynamicOutput(1, mapping_key="key_1")
@@ -229,6 +238,7 @@ class DangerNoodle(NamedTuple):
     x: int
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out={"items": dg.DynamicOut(), "refs": dg.Out()})
 def spawn():
     for i in range(10):
@@ -263,6 +273,7 @@ def test_dealloc_prev_outputs(executor):
 
 
 def test_collect_and_map():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def dyn_vals():
         for i in range(3):

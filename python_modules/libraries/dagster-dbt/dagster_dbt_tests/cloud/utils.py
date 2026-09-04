@@ -102,6 +102,7 @@ def sample_runs_details(include_related=None, **kwargs):
                 "supports_docs": False,
                 "state": 10,
             }
+            # pyrefly: ignore [unsupported-operation]
             runs[i] = deep_merge_dicts(run, kwargs)
     return {
         "status": {

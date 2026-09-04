@@ -161,6 +161,7 @@ def test_produces_declared_on_spec_flows_to_snap_and_json():
         def get_spec(cls):
             return dg.ComponentTypeSpec(produces=["asset", "schedule"])
 
+        # pyrefly: ignore [bad-override]
         def build_defs(self, context):
             pass
 
@@ -175,6 +176,7 @@ def test_produces_declared_on_spec_flows_to_snap_and_json():
 
 def test_produces_defaults_to_empty_when_not_declared():
     class PlainComponent(dg.Component):
+        # pyrefly: ignore [bad-override]
         def build_defs(self, context):
             pass
 

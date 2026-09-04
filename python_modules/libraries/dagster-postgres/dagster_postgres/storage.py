@@ -75,6 +75,7 @@ class DagsterPostgresStorage(DagsterStorage, ConfigurableClass):
         return DagsterPostgresStorage(
             inst_data=inst_data,
             postgres_url=pg_url_from_config(config_value),
+            # pyrefly: ignore [bad-argument-type]
             should_autocreate_tables=config_value.get("should_autocreate_tables", True),
             token_provider=get_token_provider_from_config(config_value),
         )

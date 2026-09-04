@@ -225,11 +225,13 @@ class DagsterAirbyteTranslator:
         column_schema = generate_table_schema(table_schema_props)
 
         metadata = {
+            # pyrefly: ignore [invalid-argument]
             **TableMetadataSet(
                 column_schema=column_schema,
                 table_name=props.fully_qualified_table_name,
                 storage_kind=props.destination_type,
             ),
+            # pyrefly: ignore [invalid-argument]
             **AirbyteMetadataSet(
                 connection_id=props.connection_id,
                 connection_name=props.connection_name,

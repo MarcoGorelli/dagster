@@ -99,6 +99,7 @@ def test_basic_resource_request(
     all_api_mocks.calls.reset()
     client.poll_sync(
         connector_id=connector_id,
+        # pyrefly: ignore [bad-argument-type]
         previous_sync_completed_at=parser.parse(MIN_TIME_STR),
     )
     assert len(all_api_mocks.calls) == 1
@@ -110,6 +111,7 @@ def test_basic_resource_request(
             connector_id=connector_id,
             # The poll process will time out because the value of
             # `FivetranConnector.last_sync_completed_at` does not change in the test
+            # pyrefly: ignore [bad-argument-type]
             previous_sync_completed_at=parser.parse(TEST_MAX_TIME_STR),
             poll_timeout=2,
             poll_interval=1,
@@ -129,6 +131,7 @@ def test_basic_resource_request(
     with pytest.raises(Failure, match=f"Sync for connector '{connector_id}' failed!"):
         client.poll_sync(
             connector_id=connector_id,
+            # pyrefly: ignore [bad-argument-type]
             previous_sync_completed_at=parser.parse(MIN_TIME_STR),
             poll_timeout=2,
             poll_interval=1,
@@ -566,6 +569,7 @@ def test_poll_sync_rescheduled_connector(connector_id: str) -> None:
             )
             client.poll_sync(
                 connector_id=connector_id,
+                # pyrefly: ignore [bad-argument-type]
                 previous_sync_completed_at=parser.parse(MIN_TIME_STR),
                 poll_timeout=2,
                 poll_interval=0.1,
@@ -615,6 +619,7 @@ def test_poll_sync_rescheduled_for_in_past_is_ignored(connector_id: str) -> None
             )
             return client.poll_sync(
                 connector_id=connector_id,
+                # pyrefly: ignore [bad-argument-type]
                 previous_sync_completed_at=parser.parse(MIN_TIME_STR),
                 poll_interval=0.1,
             )
@@ -662,6 +667,7 @@ def test_poll_sync_rescheduled_no_retry(connector_id: str) -> None:
             )
             return client.poll_sync(
                 connector_id=connector_id,
+                # pyrefly: ignore [bad-argument-type]
                 previous_sync_completed_at=parser.parse(MIN_TIME_STR),
                 poll_interval=0.1,
             )
@@ -696,6 +702,7 @@ def test_poll_sync_rescheduled_retry_default(connector_id: str) -> None:
             )
             client.poll_sync(
                 connector_id=connector_id,
+                # pyrefly: ignore [bad-argument-type]
                 previous_sync_completed_at=parser.parse(MIN_TIME_STR),
                 poll_timeout=2,
                 poll_interval=0.1,

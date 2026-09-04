@@ -41,6 +41,7 @@ def test_override_dataclass() -> None:
 
     @dataclass
     class Derived(Base):
+        # pyrefly: ignore [bad-override-mutable-attribute]
         value: Annotated[str, CustomResolver(lambda context, val: str(val))]
 
     annotations = _get_annotations(Derived)
@@ -57,6 +58,7 @@ def test_override_pydantic() -> None:
     class CustomResolver(dg.Resolver): ...
 
     class Derived(Base):
+        # pyrefly: ignore [bad-override-mutable-attribute]
         value: Annotated[str, CustomResolver(lambda context, val: str(val))]
 
     annotations = _get_annotations(Derived)

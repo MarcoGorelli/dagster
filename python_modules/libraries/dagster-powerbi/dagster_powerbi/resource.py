@@ -88,6 +88,7 @@ class PowerBIServicePrincipal(ConfigurableResource):
         )
         response.raise_for_status()
         out = response.json()
+        # pyrefly: ignore [read-only]
         self._api_token = out["access_token"]
         return out["access_token"]
 
@@ -259,6 +260,7 @@ class PowerBIWorkspace(ConfigurableResource):
             now = get_current_timestamp()
 
         if status != "Succeeded":
+            # pyrefly: ignore [unbound-name]
             raise Failure(f"Scan not successful after {ADMIN_SCAN_TIMEOUT} seconds: {scan_details}")
 
         return self._fetch_json(

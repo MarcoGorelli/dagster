@@ -744,9 +744,11 @@ def test_required_assets_and_checks_by_key_check_decorator(
     @dg.asset
     def asset0(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=asset0)
     def check0(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(
         asset=asset0,
         blocking=True,
@@ -784,9 +786,11 @@ def test_toposort(
     @dg.asset(deps=[A])
     def B(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=A)
     def Ac(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=B)
     def Bc(): ...
 
@@ -807,6 +811,7 @@ def test_with_job_nodes() -> None:
     @dg.asset(deps=[A])
     def B(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=A)
     def Ac(): ...
 
@@ -844,6 +849,7 @@ def test_toposort_with_job_nodes() -> None:
     @dg.asset(deps=[A])
     def B(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=A)
     def Ac(): ...
 
@@ -990,6 +996,7 @@ def test_required_assets_and_checks_by_key_asset_decorator(
     @dg.asset(check_specs=[foo_check, bar_check])
     def asset0(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=asset0)
     def check0(): ...
 
@@ -1177,6 +1184,7 @@ def test_serdes() -> None:
     @dg.asset
     def a(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=a)
     def c(): ...
 

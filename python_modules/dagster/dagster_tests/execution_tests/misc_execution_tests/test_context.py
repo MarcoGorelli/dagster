@@ -332,6 +332,7 @@ def test_context_provided_to_asset_check():
     def to_check():
         return 1
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=to_check)
     def no_annotation(context):
         assert isinstance(context, dg.AssetCheckExecutionContext)
@@ -344,6 +345,7 @@ def test_context_provided_to_asset_check():
 
     execute_assets_and_checks(assets=[to_check], asset_checks=[no_annotation])
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=to_check)
     def asset_annotation(context: AssetExecutionContext):
         pass
@@ -354,6 +356,7 @@ def test_context_provided_to_asset_check():
     ):
         execute_assets_and_checks(assets=[to_check], asset_checks=[asset_annotation])
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=to_check)
     def op_annotation(context: OpExecutionContext):
         assert isinstance(context, dg.OpExecutionContext)
@@ -362,6 +365,7 @@ def test_context_provided_to_asset_check():
 
     execute_assets_and_checks(assets=[to_check], asset_checks=[op_annotation])
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=to_check)
     def check_annotation(context: AssetCheckExecutionContext):
         assert not isinstance(context, dg.AssetCheckExecutionContext)

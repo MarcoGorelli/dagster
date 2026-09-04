@@ -219,7 +219,9 @@ def test_root_asset_keys_diamond() -> None:
     op = _operator(condition)
     key = AssetJobKey("my_job")
 
+    # pyrefly: ignore [bad-argument-type]
     assert op._get_root_asset_keys(key, graph) == {dg.AssetKey("root_a"), dg.AssetKey("root_b")}
+    # pyrefly: ignore [bad-argument-type]
     assert op._get_asset_keys(key, graph) == {
         dg.AssetKey("root_a"),
         dg.AssetKey("root_b"),
@@ -241,6 +243,7 @@ def test_root_asset_keys_linear_chain_single_root() -> None:
     job = dg.define_asset_job("chain", selection=[a, b, c], automation_condition=condition)
     graph = _local_graph(dg.Definitions(assets=[a, b, c], jobs=[job]))
 
+    # pyrefly: ignore [bad-argument-type]
     assert _operator(condition)._get_root_asset_keys(AssetJobKey("chain"), graph) == {
         dg.AssetKey("a")
     }
@@ -258,6 +261,7 @@ def test_root_asset_keys_all_independent() -> None:
     graph = _local_graph(dg.Definitions(assets=[x, y], jobs=[job]))
 
     # no in-job dependencies, so every asset is a root
+    # pyrefly: ignore [bad-argument-type]
     assert _operator(condition)._get_root_asset_keys(AssetJobKey("indep"), graph) == {
         dg.AssetKey("x"),
         dg.AssetKey("y"),
@@ -276,6 +280,7 @@ def test_root_asset_keys_parent_outside_job_still_root() -> None:
     job = dg.define_asset_job("j", selection=[in_job], automation_condition=condition)
     graph = _local_graph(dg.Definitions(assets=[external, in_job], jobs=[job]))
 
+    # pyrefly: ignore [bad-argument-type]
     assert _operator(condition)._get_root_asset_keys(AssetJobKey("j"), graph) == {
         dg.AssetKey("in_job")
     }

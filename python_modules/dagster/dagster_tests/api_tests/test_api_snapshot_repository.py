@@ -103,6 +103,7 @@ def giant_job():
         do_something()
 
 
+# pyrefly: ignore [bad-argument-type]
 @dg.repository
 def giant_repo():
     return {

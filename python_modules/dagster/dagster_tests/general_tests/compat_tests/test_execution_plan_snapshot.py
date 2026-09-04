@@ -78,6 +78,7 @@ def echo_default(_, y: int) -> int:
 
 
 @dg.op(
+    # pyrefly: ignore [missing-argument]
     out=dg.DynamicOut(),
     ins={"range_input": dg.In(int, default_value=3)},
 )
@@ -91,6 +92,7 @@ def sum_numbers(_, nums):
     return sum(nums)
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out=dg.DynamicOut())
 def dynamic_echo(_, nums):
     for x in nums:

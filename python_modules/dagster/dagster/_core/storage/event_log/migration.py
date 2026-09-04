@@ -151,6 +151,7 @@ def migrate_asset_keys_index_columns(event_log_storage, print_fn=None):
                     AssetKeyTable.update()
                     .values(
                         last_materialization=serialize_value(event),
+                        # pyrefly: ignore [missing-attribute]
                         last_materialization_timestamp=datetime_from_timestamp(event.timestamp),
                         wipe_timestamp=(
                             datetime_from_timestamp(wipe_timestamp) if wipe_timestamp else None

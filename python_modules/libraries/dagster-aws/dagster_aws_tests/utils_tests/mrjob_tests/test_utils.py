@@ -58,7 +58,9 @@ def test_is_retriable_client_error():
 def test_wrap_aws_client(mock_s3_resource):
     client = _wrap_aws_client(mock_s3_resource.meta.client, min_backoff=1000)
     res = client.list_buckets()
+    # pyrefly: ignore [unsupported-operation]
     assert res["ResponseMetadata"]["HTTPStatusCode"] == 200
+    # pyrefly: ignore [unsupported-operation]
     assert res["Buckets"] == []
 
 

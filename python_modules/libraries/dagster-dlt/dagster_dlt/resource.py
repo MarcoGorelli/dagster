@@ -165,6 +165,7 @@ class DagsterDltResource(ConfigurableResource):
         base_metadata = {
             **child_table_schemas,
             **base_metadata,
+            # pyrefly: ignore [invalid-argument]
             **TableMetadataSet(
                 column_schema=table_schema,
                 table_name=table_name,

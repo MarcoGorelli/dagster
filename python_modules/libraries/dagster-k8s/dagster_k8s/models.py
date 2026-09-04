@@ -73,6 +73,7 @@ def _k8s_parse_value(data: Any, classname: str, attr_name: str) -> Any:
     elif klass == object:
         return data
     elif klass == datetime.date:
+        # pyrefly: ignore [missing-attribute]
         return parse(data).date()
     elif klass == datetime.datetime:
         return parse(data)
@@ -172,4 +173,5 @@ def k8s_model_from_dict(
             value = model_dict[attr]
             kwargs[attr] = _k8s_parse_value(value, attr_type, attr)
 
+    # pyrefly: ignore [unexpected-keyword]
     return model_class(**kwargs)

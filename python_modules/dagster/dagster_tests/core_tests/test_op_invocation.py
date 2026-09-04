@@ -62,6 +62,7 @@ def test_op_invocation_lifecycle():
         pass
 
     # Verify dispose was called on the instance
+    # pyrefly: ignore [missing-attribute]
     assert context.instance.run_storage._held_conn.closed  # noqa
 
 
@@ -855,6 +856,7 @@ def test_op_invocation_nothing_deps():
 
 
 def test_dynamic_output_gen():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out={"a": dg.DynamicOut(is_required=False), "b": dg.Out(is_required=False)})
     def my_dynamic():
         yield dg.DynamicOutput(value=1, mapping_key="1", output_name="a")
@@ -871,6 +873,7 @@ def test_dynamic_output_gen():
 
 
 def test_dynamic_output_async_gen():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out={"a": dg.DynamicOut(is_required=False), "b": dg.Out(is_required=False)})
     async def aio_gen():
         yield dg.DynamicOutput(value=1, mapping_key="1", output_name="a")
@@ -893,6 +896,7 @@ def test_dynamic_output_async_gen():
 
 
 def test_dynamic_output_non_gen():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out={"a": dg.DynamicOut(is_required=False)})
     def should_not_work():
         return dg.DynamicOutput(value=1, mapping_key="1", output_name="a")
@@ -913,6 +917,7 @@ def test_dynamic_output_non_gen():
 def test_dynamic_output_async_non_gen():
     @dg.op(
         out={
+            # pyrefly: ignore [missing-argument]
             "a": dg.DynamicOut(is_required=False),
         }
     )
@@ -1032,6 +1037,7 @@ def test_add_output_metadata_after_output():
 
 
 def test_log_metadata_multiple_dynamic_outputs():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out={"out1": dg.DynamicOut(), "out2": dg.DynamicOut()})
     def the_op(context):
         context.add_output_metadata({"one": "one"}, output_name="out1", mapping_key="one")
@@ -1054,6 +1060,7 @@ def test_log_metadata_multiple_dynamic_outputs():
 
 
 def test_log_metadata_after_dynamic_output():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def the_op(context):
         yield dg.DynamicOutput(1, mapping_key="one")

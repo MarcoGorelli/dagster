@@ -9,6 +9,7 @@ from dagster_k8s import execute_k8s_job, k8s_job_op
 from dagster_k8s.client import DagsterK8sError, DagsterKubernetesClient
 from dagster_k8s.job import get_k8s_job_name
 
+# pyrefly: ignore [missing-import]
 from tests.utils import BUSYBOX_IMAGE, _wait_k8s_job_to_delete
 
 

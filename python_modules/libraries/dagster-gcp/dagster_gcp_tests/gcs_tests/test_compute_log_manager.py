@@ -320,6 +320,7 @@ def test_storage_download_url_fallback(gcs_bucket):
 
             def _return_mocked_blob(*args, **kwargs):
                 blob = orig_blob_fn(*args, **kwargs)
+                # pyrefly: ignore [bad-assignment]
                 blob.generate_signed_url = mock.Mock().side_effect = Exception("unauthorized")
                 return blob
 

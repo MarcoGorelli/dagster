@@ -224,7 +224,7 @@ def test_launcher_with_container_context(kubeconfig_file):
             assert (
                 args
                 == ExecuteRunArgs(
-                    job_origin=run.job_code_origin,
+                    job_origin=run.job_code_origin,  # pyrefly: ignore [bad-argument-type]
                     run_id=run.run_id,
                     instance_ref=instance.get_ref(),
                     set_exit_code_on_failure=None,
@@ -487,7 +487,7 @@ def test_user_defined_k8s_config_in_run_tags(kubeconfig_file):
         assert (
             args
             == ExecuteRunArgs(
-                job_origin=run.job_code_origin,
+                job_origin=run.job_code_origin,  # pyrefly: ignore [bad-argument-type]
                 run_id=run.run_id,
                 instance_ref=instance.get_ref(),
                 set_exit_code_on_failure=None,
@@ -549,7 +549,7 @@ def test_raise_on_error(kubeconfig_file):
         assert (
             args
             == ExecuteRunArgs(
-                job_origin=run.job_code_origin,
+                job_origin=run.job_code_origin,  # pyrefly: ignore [bad-argument-type]
                 run_id=run.run_id,
                 instance_ref=instance.get_ref(),
                 set_exit_code_on_failure=True,

@@ -63,6 +63,7 @@ def define_inty_job(adls_io_resource=adls2_resource):
 
     @op(
         ins={"num": In(Int)},
+        # pyrefly: ignore [bad-argument-type, missing-argument]
         out=DynamicOut(Int),
     )
     def add_one(num):

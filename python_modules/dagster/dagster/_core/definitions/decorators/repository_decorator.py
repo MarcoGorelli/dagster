@@ -133,6 +133,7 @@ class _Repository:
                 ):
                     bad_defns.append((i, type(definition)))
                 else:
+                    # pyrefly: ignore [bad-argument-type]
                     repository_defns.append(definition)
 
             if bad_defns:

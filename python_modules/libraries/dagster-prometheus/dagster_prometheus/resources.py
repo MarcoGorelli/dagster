@@ -55,6 +55,7 @@ class PrometheusResource(ConfigurableResource):
         return True
 
     def setup_for_execution(self, context: InitResourceContext) -> None:
+        # pyrefly: ignore [read-only]
         self._registry = prometheus_client.CollectorRegistry()
 
     @property

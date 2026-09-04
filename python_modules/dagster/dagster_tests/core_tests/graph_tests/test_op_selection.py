@@ -242,6 +242,7 @@ def test_op_selection_on_dynamic_orchestration():
     def num_range():
         return 3
 
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def emit(num: int = 2):
         for i in range(num):

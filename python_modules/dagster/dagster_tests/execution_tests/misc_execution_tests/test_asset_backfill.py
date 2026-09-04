@@ -833,6 +833,7 @@ def test_matching_partitions_with_different_subsets():
     # child: 2023-01-01 to 2020-01-09
     target_asset_graph_subset = AssetGraphSubset(
         partitions_subsets_by_asset_key={
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["grandparent"]): asset_graph.get(
                 AssetKey(["grandparent"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -841,6 +842,7 @@ def test_matching_partitions_with_different_subsets():
                     end=create_datetime(2023, 1, 2),
                 )
             ),
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["parent"]): asset_graph.get(
                 AssetKey(["parent"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -849,6 +851,7 @@ def test_matching_partitions_with_different_subsets():
                     end=create_datetime(2023, 1, 10),
                 )
             ),
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["child"]): asset_graph.get(
                 AssetKey(["child"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -857,6 +860,7 @@ def test_matching_partitions_with_different_subsets():
                     end=create_datetime(2023, 1, 10),
                 )
             ),
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["other_parent"]): asset_graph.get(
                 AssetKey(["other_parent"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -885,7 +889,7 @@ def test_matching_partitions_with_different_subsets():
         assert asset_backfill_data.requested_subset == AssetGraphSubset(
             non_partitioned_asset_keys=set(),
             partitions_subsets_by_asset_key={
-                AssetKey(["grandparent"]): asset_graph.get(
+                AssetKey(["grandparent"]): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                     AssetKey(["grandparent"])
                 ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
                     TimeWindow(
@@ -893,7 +897,7 @@ def test_matching_partitions_with_different_subsets():
                         end=create_datetime(2023, 1, 2),
                     )
                 ),
-                AssetKey(["other_parent"]): asset_graph.get(
+                AssetKey(["other_parent"]): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                     AssetKey(["other_parent"])
                 ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
                     TimeWindow(
@@ -920,6 +924,7 @@ def test_matching_partitions_with_different_subsets_failure():
     # and the parts of child that are downstream of other_parent get filtered out)
     target_asset_graph_subset = AssetGraphSubset(
         partitions_subsets_by_asset_key={
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["grandparent"]): asset_graph.get(
                 AssetKey(["grandparent"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -928,6 +933,7 @@ def test_matching_partitions_with_different_subsets_failure():
                     end=create_datetime(2023, 1, 2),
                 )
             ),
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["parent"]): asset_graph.get(
                 AssetKey(["parent"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -936,6 +942,7 @@ def test_matching_partitions_with_different_subsets_failure():
                     end=create_datetime(2023, 1, 10),
                 )
             ),
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["child"]): asset_graph.get(
                 AssetKey(["child"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -944,6 +951,7 @@ def test_matching_partitions_with_different_subsets_failure():
                     end=create_datetime(2023, 1, 10),
                 )
             ),
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["other_parent"]): asset_graph.get(
                 AssetKey(["other_parent"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -987,7 +995,7 @@ def test_matching_partitions_with_different_subsets_failure():
         assert asset_backfill_data.requested_subset == AssetGraphSubset(
             non_partitioned_asset_keys=set(),
             partitions_subsets_by_asset_key={
-                AssetKey(["grandparent"]): asset_graph.get(
+                AssetKey(["grandparent"]): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                     AssetKey(["grandparent"])
                 ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
                     TimeWindow(
@@ -995,7 +1003,7 @@ def test_matching_partitions_with_different_subsets_failure():
                         end=create_datetime(2023, 1, 2),
                     )
                 ),
-                AssetKey(["other_parent"]): asset_graph.get(
+                AssetKey(["other_parent"]): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                     AssetKey(["other_parent"])
                 ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
                     TimeWindow(
@@ -1032,7 +1040,7 @@ def test_matching_partitions_with_different_subsets_failure():
         assert asset_backfill_data.requested_subset == AssetGraphSubset(
             non_partitioned_asset_keys=set(),
             partitions_subsets_by_asset_key={
-                AssetKey(["grandparent"]): asset_graph.get(
+                AssetKey(["grandparent"]): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                     AssetKey(["grandparent"])
                 ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
                     TimeWindow(
@@ -1040,7 +1048,7 @@ def test_matching_partitions_with_different_subsets_failure():
                         end=create_datetime(2023, 1, 2),
                     )
                 ),
-                AssetKey(["parent"]): asset_graph.get(
+                AssetKey(["parent"]): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                     AssetKey(["parent"])
                 ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
                     TimeWindow(
@@ -1048,7 +1056,7 @@ def test_matching_partitions_with_different_subsets_failure():
                         end=create_datetime(2023, 1, 10),
                     )
                 ),
-                AssetKey(["other_parent"]): asset_graph.get(
+                AssetKey(["other_parent"]): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                     AssetKey(["other_parent"])
                 ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
                     TimeWindow(
@@ -1087,6 +1095,7 @@ def test_child_with_two_parents_with_identical_partitions_same_subsets():
     # target the same subset in both parents and child, so everything is grouped together
     target_asset_graph_subset = AssetGraphSubset(
         partitions_subsets_by_asset_key={
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["parent_a"]): asset_graph.get(
                 AssetKey(["parent_a"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -1095,6 +1104,7 @@ def test_child_with_two_parents_with_identical_partitions_same_subsets():
                     end=create_datetime(2023, 1, 3),
                 )
             ),
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["parent_b"]): asset_graph.get(
                 AssetKey(["parent_b"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -1103,6 +1113,7 @@ def test_child_with_two_parents_with_identical_partitions_same_subsets():
                     end=create_datetime(2023, 1, 3),
                 )
             ),
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["child"]): asset_graph.get(
                 AssetKey(["child"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -1137,6 +1148,7 @@ def test_child_with_two_parents_with_identical_partitions_different_subsets():
     # parent - so the parents need to run before the child does
     target_asset_graph_subset = AssetGraphSubset(
         partitions_subsets_by_asset_key={
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["parent_a"]): asset_graph.get(
                 AssetKey(["parent_a"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -1145,6 +1157,7 @@ def test_child_with_two_parents_with_identical_partitions_different_subsets():
                     end=create_datetime(2023, 1, 4),
                 )
             ),
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["parent_b"]): asset_graph.get(
                 AssetKey(["parent_b"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -1153,6 +1166,7 @@ def test_child_with_two_parents_with_identical_partitions_different_subsets():
                     end=create_datetime(2023, 1, 3),
                 )
             ),
+            # pyrefly: ignore [missing-attribute]
             AssetKey(["child"]): asset_graph.get(
                 AssetKey(["child"])
             ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
@@ -1179,7 +1193,7 @@ def test_child_with_two_parents_with_identical_partitions_different_subsets():
         assert asset_backfill_data.requested_subset == AssetGraphSubset(
             non_partitioned_asset_keys=set(),
             partitions_subsets_by_asset_key={
-                AssetKey(["parent_a"]): asset_graph.get(
+                AssetKey(["parent_a"]): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                     AssetKey(["parent_a"])
                 ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
                     TimeWindow(
@@ -1187,7 +1201,7 @@ def test_child_with_two_parents_with_identical_partitions_different_subsets():
                         end=create_datetime(2023, 1, 4),
                     )
                 ),
-                AssetKey(["parent_b"]): asset_graph.get(
+                AssetKey(["parent_b"]): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                     AssetKey(["parent_b"])
                 ).partitions_def.get_partition_subset_in_time_window(  # type: ignore
                     TimeWindow(
@@ -1795,6 +1809,7 @@ def _requested_asset_partitions_in_run_request(
                 f"{asset_partition} requested twice. Requested: {requested_asset_partitions}."
             )
             requested_asset_partitions.add(asset_partition)
+    # pyrefly: ignore [bad-return]
     return requested_asset_partitions
 
 
@@ -2889,6 +2904,7 @@ def test_asset_backfill_unpartitioned_root_turned_to_partitioned():
     )
 
     repo_with_partitioned_root = {"repo": [first_partitioned, second]}
+    # pyrefly: ignore [missing-attribute]
     assert asset_backfill_data.get_target_root_partitions_subset(
         get_asset_graph(repo_with_partitioned_root)
     ).get_partition_keys() == ["2024-01-01"]  # ty: ignore[unresolved-attribute]

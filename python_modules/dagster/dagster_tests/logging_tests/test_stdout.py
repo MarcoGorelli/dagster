@@ -187,6 +187,7 @@ def test_compute_log_manager_subscriptions():
         log_data = []
         subscription(log_data.append)
         assert len(log_data) == 1
+        # pyrefly: ignore [missing-attribute]
         assert log_data[0].stdout.decode("utf-8").startswith(HELLO_FROM_OP)
 
 

@@ -34,6 +34,7 @@ def test_sensor_result_one_run_request():
 def test_sensor_result_skip_reason():
     skip_reason = dg.SkipReason("I'm skipping")
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=do_something_job)
     def test_sensor(_):
         return [
@@ -54,6 +55,7 @@ def test_sensor_result_skip_reason():
 def test_sensor_result_string_skip_reason():
     skip_reason = "I'm skipping"
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=do_something_job)
     def test_sensor(_):
         return [
@@ -72,6 +74,7 @@ def test_sensor_result_string_skip_reason():
 
 
 def test_invalid_skip_reason_invocations():
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=do_something_job)
     def multiple_sensor_results(_):
         return [
@@ -79,6 +82,7 @@ def test_invalid_skip_reason_invocations():
             dg.SensorResult(skip_reason=dg.SkipReason("I'm skipping")),
         ]
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=do_something_job)
     def sensor_result_w_other_objects(_):
         return [
@@ -86,6 +90,7 @@ def test_invalid_skip_reason_invocations():
             dg.RunRequest(run_key="foo"),
         ]
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=do_something_job)
     def invalid_sensor_result(_):
         return [
@@ -125,6 +130,7 @@ def test_invalid_skip_reason_invocations():
 
 
 def test_update_cursor():
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=do_something_job)
     def test_sensor(_):
         return [
@@ -140,6 +146,7 @@ def test_update_cursor():
 
 
 def test_update_cursor_and_sensor_result_cursor():
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=do_something_job)
     def test_sensor(context):
         context.update_cursor("bar")

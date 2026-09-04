@@ -19,6 +19,7 @@ def sleeper(context, units):
 
 
 class GiverConfig(Config):
+    # pyrefly: ignore [no-matching-overload]
     units: list[int] = Field(default_value=[1, 1, 1, 1])
 
 

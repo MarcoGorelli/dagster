@@ -127,13 +127,17 @@ class SSHResource(ConfigurableResource):
     _key_obj: paramiko.RSAKey | None = PrivateAttr(default=None)
 
     def set_logger(self, logger: logging.Logger) -> None:
+        # pyrefly: ignore [read-only]
         self._logger = logger
 
     def setup_for_execution(self, context: InitResourceContext) -> None:
+        # pyrefly: ignore [read-only]
         self._logger = context.log
+        # pyrefly: ignore [read-only]
         self._host_proxy = None
 
         # Create RSAKey object from private key string
+        # pyrefly: ignore [read-only]
         self._key_obj = key_from_str(self.key_string) if self.key_string is not None else None
 
         # Auto detecting username values from system
@@ -143,6 +147,7 @@ class SSHResource(ConfigurableResource):
                     f"username to ssh to host: {self.remote_host} is not specified. Using system's default provided"
                     " by getpass.getuser()"
                 )
+            # pyrefly: ignore [read-only]
             self.username = getpass.getuser()
 
         user_ssh_config_filename = os.path.expanduser("~/.ssh/config")
@@ -153,11 +158,13 @@ class SSHResource(ConfigurableResource):
 
             proxy_command = host_info.get("proxycommand")
             if host_info and proxy_command:
+                # pyrefly: ignore [read-only]
                 self._host_proxy = paramiko.ProxyCommand(proxy_command)
 
             if not (self.password or self.key_file):
                 identify_file = host_info.get("identityfile")
                 if host_info and identify_file:
+                    # pyrefly: ignore [read-only]
                     self.key_file = identify_file[0]
 
     @property

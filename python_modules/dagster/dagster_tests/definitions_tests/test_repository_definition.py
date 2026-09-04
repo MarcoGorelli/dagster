@@ -31,6 +31,7 @@ def create_single_node_job(name, called):
 def test_repo_lazy_definition():
     called = defaultdict(int)
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def lazy_repo():
         return {
@@ -78,6 +79,7 @@ def test_dupe_op_repo_definition():
     def noop2():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def error_repo():
         return {
@@ -130,6 +132,7 @@ def test_conflict():
 def test_key_mismatch():
     called = defaultdict(int)
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def some_repo():
         return {"jobs": {"foo": lambda: create_single_node_job("bar", called)}}
@@ -142,7 +145,7 @@ def test_non_job_in_jobs():
     with pytest.raises(
         dg.DagsterInvalidDefinitionError, match="all elements of list must be of type"
     ):
-
+        # pyrefly: ignore [bad-argument-type]
         @dg.repository
         def _some_repo():
             return ["not-a-job"]
@@ -168,6 +171,7 @@ def test_bad_schedule():
 
 
 def test_bad_sensor():
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(
         job_name="foo",
     )
@@ -231,6 +235,7 @@ def test_direct_sensor_target():
     def wonder():
         wow()
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=wonder)
     def direct_sensor(_):
         return {}
@@ -249,6 +254,7 @@ def test_direct_sensor_unresolved_target():
     def foo():
         return None
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=unresolved_job)
     def direct_sensor(_):
         return {}
@@ -271,6 +277,7 @@ def test_target_dupe_job():
 
     w_job = wonder.to_job()
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=w_job)
     def direct_sensor(_):
         return {}
@@ -289,6 +296,7 @@ def test_target_dupe_unresolved():
     def foo():
         return None
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.sensor(job=unresolved_job)
     def direct_sensor(_):
         return {}
@@ -491,7 +499,7 @@ def test_job_validation():
         dg.DagsterInvalidDefinitionError,
         match=r"Object mapped to my_job is not an instance of JobDefinition or GraphDefinition.",
     ):
-
+        # pyrefly: ignore [bad-argument-type]
         @dg.repository
         def _my_repo():
             return {"jobs": {"my_job": "blah"}}
@@ -502,6 +510,7 @@ def test_dict_jobs():
     def my_graph():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def jobs():
         return {
@@ -526,6 +535,7 @@ def test_lazy_jobs():
     def my_graph():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def jobs():
         return {
@@ -550,6 +560,7 @@ def test_lazy_graph():
     def my_graph():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def jobs():
         return {
@@ -597,7 +608,7 @@ def test_bad_coerce():
         dg.DagsterInvalidDefinitionError,
         match="resource with key 'x' required by op 'foo' was not provided",
     ):
-
+        # pyrefly: ignore [bad-argument-type]
         @dg.repository
         def _fails():
             return {
@@ -609,7 +620,7 @@ def test_bad_resolve():
     with pytest.raises(
         dg.DagsterInvalidSubsetError, match=r"AssetKey\(s\) \['foo'\] were selected"
     ):
-
+        # pyrefly: ignore [bad-argument-type]
         @dg.repository
         def _fails():
             return {"jobs": {"tbd": dg.define_asset_job(name="tbd", selection="foo")}}
@@ -631,6 +642,7 @@ def test_source_assets():
 def test_assets_checks():
     foo = dg.SourceAsset(key=dg.AssetKey("foo"))
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=foo)
     def foo_check():
         return True
@@ -643,6 +655,7 @@ def test_assets_checks():
 
 
 def test_direct_assets():
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(required_resource_keys={"foo"})
     def the_manager():
         pass
@@ -725,6 +738,7 @@ def test_direct_asset_unsatified_resource_transitive():
 
 
 def test_source_asset_unsatisfied_resource():
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(required_resource_keys={"foo"})
     def the_manager():
         pass
@@ -744,6 +758,7 @@ def test_source_asset_unsatisfied_resource():
 
 
 def test_source_asset_unsatisfied_resource_transitive():
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(required_resource_keys={"foo"})
     def the_manager():
         pass
@@ -794,6 +809,7 @@ def test_source_asset_resource_conflicts():
     def the_asset():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(required_resource_keys={"foo"})
     def the_manager():
         pass
@@ -1110,10 +1126,12 @@ def test_default_executor_jobs():
 
     unresolved_job = dg.define_asset_job("asset_job", selection="*")
 
+    # pyrefly: ignore [no-matching-overload]
     @dg.executor
     def custom_executor(_):
         pass
 
+    # pyrefly: ignore [no-matching-overload]
     @dg.executor
     def other_custom_executor(_):
         pass
@@ -1169,6 +1187,7 @@ def test_list_load():
 
     all_assets: Sequence[dg.AssetsDefinition, dg.SourceAsset] = [asset1, asset2, source]  # ty: ignore[invalid-type-arguments]
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def assets_repo():
         return [all_assets]
@@ -1197,6 +1216,7 @@ def test_list_load():
 
     job_list = [job1, job2]
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def job_repo():
         return [job_list]
@@ -1217,6 +1237,7 @@ def test_list_load():
 
     combo_list = [asset3, job3]
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def combo_repo():
         return [combo_list]
@@ -1242,7 +1263,7 @@ def test_multi_nested_list():
     layer_2 = [layer_1, asset1]
 
     with pytest.raises(dg.DagsterInvalidDefinitionError, match="Bad return value from repository"):
-
+        # pyrefly: ignore [bad-argument-type]
         @dg.repository
         def assets_repo():
             return [layer_2]
@@ -1324,10 +1345,12 @@ def test_default_loggers_for_jobs():
 
     unresolved_job = dg.define_asset_job("asset_job", selection="*")
 
+    # pyrefly: ignore [no-matching-overload]
     @dg.logger
     def custom_logger(_):
         pass
 
+    # pyrefly: ignore [no-matching-overload]
     @dg.logger
     def other_custom_logger(_):
         pass
@@ -1579,6 +1602,7 @@ def test_custom_repository_data_has_no_job_nodes() -> None:
     repo_data = CustomRepositoryData()
     assert repo_data.get_asset_job_nodes() == []
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def custom_repo():
         return CustomRepositoryData()

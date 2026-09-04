@@ -51,6 +51,7 @@ def _get_execution_plan_entity_keys(
                 if output_properties.asset_key:
                     output_entity_keys.add(output_properties.asset_key)
                 if output_properties.asset_check_key:
+                    # pyrefly: ignore [bad-argument-type]
                     output_entity_keys.add(output_properties.asset_check_key)
     return output_entity_keys
 
@@ -214,6 +215,7 @@ async def _create_asset_run(
                 asset_check_selection=frozenset(run_request.asset_check_keys)
                 if run_request.asset_check_keys
                 else None,
+                # pyrefly: ignore [unbound-name]
                 asset_graph=asset_graph,
             )
 

@@ -572,9 +572,11 @@ def test_bare_executor():
     def an_asset(): ...
 
     class DummyExecutor(dg.Executor):
+        # pyrefly: ignore [bad-override]
         def execute(self, plan_context, execution_plan): ...
 
         @property
+        # pyrefly: ignore [bad-override]
         def retries(self): ...
 
     executor_inst = DummyExecutor()
@@ -1160,6 +1162,7 @@ def test_definitions_class_metadata():
 
 
 def test_assets_def_with_only_checks():
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset="asset1")
     def check1():
         pass

@@ -230,6 +230,7 @@ def check_connector_sync(
                     ),
                     metadata={
                         **metadata,
+                        # pyrefly: ignore [invalid-argument]
                         **FivetranMetadataSet(
                             connector_id=connector.id,
                             connector_name=connector.name,

@@ -1358,6 +1358,7 @@ def _get_nested_resources_map(
 ) -> Mapping[str, Mapping[str, NestedResource]]:
     out_map: Mapping[str, Mapping[str, NestedResource]] = {}
     for resource_name, resource_def in resource_datas.items():
+        # pyrefly: ignore [unsupported-operation]
         out_map[resource_name] = _get_nested_resources(resource_def, top_level_resources)
     return out_map
 

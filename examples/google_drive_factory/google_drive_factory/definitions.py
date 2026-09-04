@@ -2,6 +2,7 @@ import json
 import os
 from datetime import datetime
 from io import StringIO
+from typing import Any
 
 import dagster as dg
 import polars as pl
@@ -25,7 +26,11 @@ class GoogleDriveClient:
         self.credentials = service_account.Credentials.from_service_account_info(
             credentials_json, scopes=["https://www.googleapis.com/auth/drive.readonly"]
         )
-        self.service = build("drive", "v3", credentials=self.credentials)
+        # `build()` returns a `Resource` whose methods (`.files()`, etc.) are
+        # synthesized dynamically at runtime from a discovery document, so
+        # there's no real static type for it without the (unvendored)
+        # `google-api-python-client-stubs` package.
+        self.service: Any = build("drive", "v3", credentials=self.credentials)
 
     def retrieve_files(self, folder_id: str):
         """Query for files in a Google Drive folder."""
@@ -56,6 +61,7 @@ class GoogleDriveResource(dg.ConfigurableResource):
     def setup_for_execution(self, context: dg.InitResourceContext):
         """Initialize the Google Drive client using the credentials."""
         credentials_json = json.loads(self.json_data)
+        # pyrefly: ignore [read-only]
         self._client = GoogleDriveClient(credentials_json)
 
     def retrieve_files(self, folder_id: str):

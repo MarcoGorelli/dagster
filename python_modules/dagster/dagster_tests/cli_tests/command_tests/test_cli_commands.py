@@ -166,6 +166,7 @@ def my_op():
     return 5
 
 
+# pyrefly: ignore [bad-argument-type]
 @dg.repository
 def bar():
     return {
@@ -331,6 +332,7 @@ def grpc_server_bar_cli_args(instance, job_name=None):
         args = ["--grpc-host", client.host]
         if client.port:
             args.append("--grpc-port")
+            # pyrefly: ignore [bad-argument-type]
             args.append(client.port)
         if client.socket:
             args.append("--grpc-socket")

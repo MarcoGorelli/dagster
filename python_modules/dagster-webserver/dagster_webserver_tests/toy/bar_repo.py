@@ -36,6 +36,7 @@ def define_bar_schedules():
     }
 
 
+# pyrefly: ignore [bad-argument-type]
 @repository
 def bar():
     return {

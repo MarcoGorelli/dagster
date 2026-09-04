@@ -2,12 +2,14 @@ import dagster as dg
 import pytest
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out=dg.DynamicOut())
 def dynamic_op():
     yield dg.DynamicOutput(1, mapping_key="1")
     yield dg.DynamicOutput(2, mapping_key="2")
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out=dg.DynamicOut())
 def dynamic_echo(x):
     yield dg.DynamicOutput(x, mapping_key="echo")
@@ -163,6 +165,7 @@ def test_multi_composite_in_4():
 
 
 def test_direct_dep():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def dynamic_add(_, x):
         yield dg.DynamicOutput(x + 1, mapping_key="1")

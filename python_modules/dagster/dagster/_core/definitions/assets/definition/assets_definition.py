@@ -706,6 +706,7 @@ class AssetsDefinition(ResourceAddable, IHasInternalInit):
         for output_name, key in keys_by_output_name.items():
             # add key_prefix to the beginning of each asset key
             key_with_key_prefix = AssetKey(
+                # pyrefly: ignore [bad-argument-type]
                 list(filter(None, [*(key_prefix_list or []), *key.path]))
             )
             keys_by_output_name_with_prefix[output_name] = key_with_key_prefix

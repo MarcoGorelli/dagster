@@ -146,12 +146,15 @@ def test_out_of_job_yield_event():
 
 def test_in_job_manager_resources():
     with in_job_manager() as manager:
+        # pyrefly: ignore [missing-attribute]
         assert "output_notebook_io_manager" in manager.context.resources._asdict()
+        # pyrefly: ignore [missing-attribute]
         assert len(manager.context.resources._asdict()) == 1
 
 
 def test_in_job_manager_op_config():
     with in_job_manager() as manager:
+        # pyrefly: ignore [missing-attribute]
         assert manager.context.op_config is None
 
     with in_job_manager(
@@ -163,6 +166,7 @@ def test_in_job_manager_op_config():
         ).to_dict(),
         step_key="hello_world_config",
     ) as manager:
+        # pyrefly: ignore [missing-attribute]
         assert manager.context.op_config == {"greeting": "hello"}
 
     with in_job_manager(
@@ -180,6 +184,7 @@ def test_in_job_manager_op_config():
         ).to_dict(),
         step_key="hello_world_config",
     ) as manager:
+        # pyrefly: ignore [missing-attribute]
         assert manager.context.op_config == {"greeting": "bonjour"}
 
     with in_job_manager(
@@ -199,6 +204,7 @@ def test_in_job_manager_op_config():
         ).to_dict(),
         step_key="goodbye_config",
     ) as manager:
+        # pyrefly: ignore [missing-attribute]
         assert manager.context.op_config == {"farewell": "goodbye"}
 
 
@@ -217,6 +223,7 @@ def test_in_job_manager_with_resources():
             run_config={"resources": {"list": {"config": path}}},
             step_key="hello_world_resource",
         ) as manager:
+            # pyrefly: ignore [missing-attribute]
             assert "list" in manager.context.resources._asdict()
 
             with open(path, "rb") as fd:

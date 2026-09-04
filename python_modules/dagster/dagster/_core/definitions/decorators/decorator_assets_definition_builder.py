@@ -160,7 +160,7 @@ def build_named_outs(asset_outs: Mapping[str, AssetOut]) -> Mapping[AssetKey, "N
     for output_name, asset_out in asset_outs.items():
         out = asset_out.to_out()
         asset_key = asset_out.key or AssetKey(
-            list(filter(None, [*(asset_out.key_prefix or []), output_name]))
+            list(filter(None, [*(asset_out.key_prefix or []), output_name]))  # pyrefly: ignore [no-matching-overload]
         )
 
         named_outs_by_asset_key[asset_key] = NamedOut(output_name.replace("-", "_"), out)
@@ -357,6 +357,7 @@ class DecoratorAssetsDefinitionBuilder:
                 dagster_type = DagsterAny
             else:
                 dagster_type = Nothing
+            # pyrefly: ignore [unsupported-operation]
             named_outs_by_asset_key[asset_spec.key] = NamedOut(
                 output_name,
                 Out(

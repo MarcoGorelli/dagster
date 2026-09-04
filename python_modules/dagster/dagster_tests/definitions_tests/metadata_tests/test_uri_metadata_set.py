@@ -15,6 +15,7 @@ def test_uri_metadata_set_basic() -> None:
     dict_uri_metadata = dict(uri_metadata)
     assert dict_uri_metadata == {"dagster/uri": "s3://bucket/key"}
 
+    # pyrefly: ignore [invalid-argument]
     splat_uri_metadata = {**uri_metadata}
     assert splat_uri_metadata == {"dagster/uri": "s3://bucket/key"}
     dg.AssetMaterialization(asset_key="a", metadata=splat_uri_metadata)

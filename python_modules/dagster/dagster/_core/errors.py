@@ -318,6 +318,7 @@ class DagsterUserCodeExecutionError(DagsterError):
         self.original_exc_info = original_exc_info
 
     @property
+    # pyrefly: ignore [bad-override]
     def is_user_code_error(self) -> bool:
         return True
 

@@ -437,6 +437,7 @@ def test_basic_init_with_privateattr() -> None:
 
         def setup_for_execution(self, context: InitResourceContext) -> None:
             log.append(f"setup_for_execution with {self.username} and {self.password}")
+            # pyrefly: ignore [read-only]
             self._connection = Connection(self.username, self.password)
 
         def query(self, query: str) -> dict[str, Any]:
@@ -480,6 +481,7 @@ def test_nested_resources_init_with_privateattr() -> None:
         _jwt: str = PrivateAttr()
 
         def setup_for_execution(self, context: InitResourceContext) -> None:
+            # pyrefly: ignore [read-only]
             self._jwt = fetch_jwt(self.access_key, self.secret_key)
 
         @property
@@ -493,6 +495,7 @@ def test_nested_resources_init_with_privateattr() -> None:
 
         def setup_for_execution(self, context: InitResourceContext) -> None:
             log.append(f"setup_for_execution with jwt {self.credentials.jwt}")
+            # pyrefly: ignore [read-only]
             self._s3_client = S3Client(self.credentials.jwt)
 
         def get_object(self, bucket: str, key: str) -> dict[str, Any]:
@@ -544,6 +547,7 @@ def test_nested_resources_init_with_privateattr_runtime_config() -> None:
         _jwt: str = PrivateAttr()
 
         def setup_for_execution(self, context: InitResourceContext) -> None:
+            # pyrefly: ignore [read-only]
             self._jwt = fetch_jwt(self.access_key, self.secret_key)
 
         @property
@@ -557,6 +561,7 @@ def test_nested_resources_init_with_privateattr_runtime_config() -> None:
 
         def setup_for_execution(self, context: InitResourceContext) -> None:
             log.append(f"setup_for_execution with jwt {self.credentials.jwt}")
+            # pyrefly: ignore [read-only]
             self._s3_client = S3Client(self.credentials.jwt)
 
         def get_object(self, bucket: str, key: str) -> dict[str, Any]:
@@ -607,6 +612,7 @@ def test_direct_invocation_from_context() -> None:
         _jwt: str = PrivateAttr()
 
         def setup_for_execution(self, context: InitResourceContext) -> None:
+            # pyrefly: ignore [read-only]
             self._jwt = "my_jwt"
             log.append("setup_for_execution")
 
@@ -639,10 +645,12 @@ def test_direct_invocation_from_context_cm() -> None:
         _jwt: str = PrivateAttr()
 
         def setup_for_execution(self, context: InitResourceContext) -> None:
+            # pyrefly: ignore [read-only]
             self._jwt = "my_jwt"
             log.append("setup_for_execution")
 
         def teardown_after_execution(self, context: InitResourceContext) -> None:
+            # pyrefly: ignore [read-only]
             del self._jwt
             log.append("teardown_after_execution")
 
@@ -677,10 +685,12 @@ def test_process_config_and_initialize_cm() -> None:
         _jwt: str = PrivateAttr()
 
         def setup_for_execution(self, context: InitResourceContext) -> None:
+            # pyrefly: ignore [read-only]
             self._jwt = "my_jwt"
             log.append("setup_for_execution")
 
         def teardown_after_execution(self, context: InitResourceContext) -> None:
+            # pyrefly: ignore [read-only]
             del self._jwt
             log.append("teardown_after_execution")
 
@@ -710,10 +720,12 @@ def test_process_config_and_initialize_cm_nested() -> None:
         _jwt: str = PrivateAttr()
 
         def setup_for_execution(self, context: InitResourceContext) -> None:
+            # pyrefly: ignore [read-only]
             self._jwt = "my_jwt"
             log.append("inner_setup_for_execution")
 
         def teardown_after_execution(self, context: InitResourceContext) -> None:
+            # pyrefly: ignore [read-only]
             del self._jwt
             log.append("inner_teardown_after_execution")
 

@@ -23,6 +23,7 @@ from dagster_test.test_project import (
     get_test_project_environments_path,
 )
 
+# pyrefly: ignore [missing-import]
 from tests.utils import _wait_k8s_job_to_delete
 
 

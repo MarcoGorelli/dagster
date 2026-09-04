@@ -122,6 +122,7 @@ class ConfigurableAssetBasedInMemoryIOManager(dg.ConfigurableIOManager):
     _values: dict = PrivateAttr(default={})
 
     def setup_for_execution(self, context: InitResourceContext) -> None:
+        # pyrefly: ignore [read-only]
         self._values = {}
         LOG.append(f"setup_for_execution {self.name}")
 

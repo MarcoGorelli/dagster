@@ -442,6 +442,7 @@ def test_bad_config_provided():
 
 
 def test_overlapping_io_manager_asset():
+    # pyrefly: ignore [no-matching-overload]
     @dg.io_manager
     def the_io_manager():
         pass
@@ -502,6 +503,7 @@ def test_overlapping_resources_asset():
 
 
 def test_overlapping_io_manager_source_asset():
+    # pyrefly: ignore [no-matching-overload]
     @dg.io_manager
     def the_io_manager():
         pass
@@ -527,6 +529,7 @@ def test_overlapping_io_manager_source_asset():
 def test_overlapping_resources_source_asset():
     foo_resource = ResourceDefinition.hardcoded_resource("blah")
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(required_resource_keys={"foo"})
     def the_io_manager():
         pass
@@ -572,6 +575,7 @@ def test_with_resources_no_exp_warnings():
     def blah():
         pass
 
+    # pyrefly: ignore [no-matching-overload]
     @dg.io_manager
     def the_manager():
         pass

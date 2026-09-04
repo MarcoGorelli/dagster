@@ -276,6 +276,7 @@ class DagsterDbtTranslator:
                 DAGSTER_DBT_TRANSLATOR_METADATA_KEY: self,
                 DAGSTER_DBT_UNIQUE_ID_METADATA_KEY: resource_props["unique_id"],
                 **({DAGSTER_DBT_PROJECT_METADATA_KEY: project} if project else {}),
+                # pyrefly: ignore [invalid-argument]
                 **TableMetadataSet(storage_kind=adapter_type),
             }
         )
@@ -814,6 +815,7 @@ def _attach_sql_model_code_reference(
 
     return {
         **existing_metadata,
+        # pyrefly: ignore [invalid-argument]
         **CodeReferencesMetadataSet(
             code_references=CodeReferencesMetadataValue(
                 code_references=[

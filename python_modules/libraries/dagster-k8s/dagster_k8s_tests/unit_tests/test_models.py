@@ -16,6 +16,7 @@ def test_deserialize_volume():
 
     model = k8s_model_from_dict(kubernetes.client.V1Volume, volume_dict)
     assert model.name == "my_volume"
+    # pyrefly: ignore [missing-attribute]
     assert model.config_map.name == "my_config_map"
 
 
@@ -58,6 +59,7 @@ def test_list_type():
         },
     }
     model = k8s_model_from_dict(kubernetes.client.V1Volume, volume_dict)
+    # pyrefly: ignore [missing-attribute]
     assert model.cephfs.monitors == ["ip1", "ip2"]
 
 
@@ -86,6 +88,7 @@ def test_dict_type():
         },
     }
     model = k8s_model_from_dict(kubernetes.client.V1Volume, volume_dict)
+    # pyrefly: ignore [missing-attribute]
     assert model.csi.volume_attributes == {"foo_key": "foo_val", "bar_key": "bar_val"}
 
 

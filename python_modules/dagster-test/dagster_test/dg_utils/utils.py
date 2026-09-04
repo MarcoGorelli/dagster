@@ -832,12 +832,14 @@ def normalize_windows_path(path: str) -> str:
     buffer_ = ctypes.create_unicode_buffer(buffer_len)
 
     # Call GetLongPathNameW
+    # pyrefly: ignore [missing-attribute]
     get_len = ctypes.windll.kernel32.GetLongPathNameW(path, buffer_, buffer_len)
 
     # If the buffer wasn't large enough, retry with bigger size
     if get_len > buffer_len:
         buffer_len = get_len
         buffer_ = ctypes.create_unicode_buffer(buffer_len)
+        # pyrefly: ignore [missing-attribute]
         get_len = ctypes.windll.kernel32.GetLongPathNameW(path, buffer_, buffer_len)
 
     # get_len == 0 indicates error (e.g. file not found, path doesn't exist)

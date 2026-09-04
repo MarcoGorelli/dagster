@@ -627,6 +627,7 @@ def test_to_serializable_asset_selection():
     @dg.asset
     def asset2(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=asset1)
     def check1(): ...
 

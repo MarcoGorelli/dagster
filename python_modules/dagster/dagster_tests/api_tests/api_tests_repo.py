@@ -199,6 +199,7 @@ def pipeline_snapshot():
     do_fail()
 
 
+# pyrefly: ignore [bad-argument-type]
 @dg.repository(metadata={"string": "foo", "integer": 123})
 def bar_repo():
     return {
@@ -224,6 +225,7 @@ def bar_repo():
     }
 
 
+# pyrefly: ignore [bad-argument-type]
 @dg.repository
 def other_repo():
     return {"jobs": {"other_foo": define_other_foo_job, "bar": other_bar_job}}

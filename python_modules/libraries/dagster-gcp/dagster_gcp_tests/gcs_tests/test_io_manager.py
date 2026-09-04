@@ -155,6 +155,7 @@ def test_gcs_pickle_io_manager_execution(gcs_bucket):
 
 
 def test_dynamic(gcs_bucket):
+    # pyrefly: ignore [missing-argument]
     @op(out=DynamicOut())
     def numbers():
         for i in range(3):

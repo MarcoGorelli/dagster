@@ -163,6 +163,7 @@ class CeleryRunLauncher(RunLauncher, ConfigurableClass):
 
         self._instance.add_run_tags(
             run.run_id,
+            # pyrefly: ignore [bad-assignment]
             {DAGSTER_CELERY_TASK_ID_TAG: result.task_id},
         )
 

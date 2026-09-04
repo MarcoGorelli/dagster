@@ -701,7 +701,9 @@ def default_metadata_from_dbt_resource_props(
 
     materialization_type = dbt_resource_props.get("config", {}).get("materialized")
     return {
+        # pyrefly: ignore [invalid-argument]
         **DbtMetadataSet(materialization_type=materialization_type),
+        # pyrefly: ignore [invalid-argument]
         **TableMetadataSet(
             column_schema=column_schema,
             table_name=relation_name,

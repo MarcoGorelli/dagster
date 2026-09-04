@@ -65,6 +65,7 @@ def test_yes_output_notebook_yes_io_manager():
         assert result.output_for_node("hello_world", "notebook")
 
         output_path = (
+            # pyrefly: ignore [missing-attribute]
             materializations[0]
             .event_specific_data.materialization.metadata["Executed notebook"]
             .path

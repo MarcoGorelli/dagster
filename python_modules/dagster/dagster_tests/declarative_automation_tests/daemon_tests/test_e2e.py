@@ -210,6 +210,7 @@ def _execute_ticks(
         )
     )
 
+    # pyrefly: ignore [bad-argument-type]
     wait_for_futures(asset_daemon_futures)
     wait_for_futures(sensor_daemon_futures)
     wait_for_futures(backfill_daemon_futures)
@@ -307,6 +308,7 @@ def test_checks_and_assets_in_same_run() -> None:
         assert _get_runs_for_latest_ticks(context) == []
 
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             # nothing happening yet, as parent hasn't updated
@@ -320,6 +322,7 @@ def test_checks_and_assets_in_same_run() -> None:
                 dg.AssetMaterialization(asset_key=dg.AssetKey("processed_files"))
             )
 
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             # should just request the check
@@ -339,6 +342,7 @@ def test_checks_and_assets_in_same_run() -> None:
                 dg.AssetMaterialization(asset_key=dg.AssetKey("raw_files"))
             )
 
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             # should create a single run request targeting both the downstream asset
@@ -363,6 +367,7 @@ def test_no_da_checks_falls_back_to_none_selection() -> None:
         get_threadpool_executor() as executor,
     ):
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             # nothing yet -- parent hasn't updated
             assert _get_runs_for_latest_ticks(context) == []
@@ -373,6 +378,7 @@ def test_no_da_checks_falls_back_to_none_selection() -> None:
             context.instance.report_runless_asset_event(
                 dg.AssetMaterialization(asset_key=dg.AssetKey("raw_files"))
             )
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             runs = _get_runs_for_latest_ticks(context)
@@ -397,6 +403,7 @@ def test_requested_conditioned_check_selection() -> None:
         get_threadpool_executor() as executor,
     ):
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             # nothing yet -- parent hasn't updated
             assert _get_runs_for_latest_ticks(context) == []
@@ -406,6 +413,7 @@ def test_requested_conditioned_check_selection() -> None:
             context.instance.report_runless_asset_event(
                 dg.AssetMaterialization(asset_key=dg.AssetKey("raw_files"))
             )
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             runs = _get_runs_for_latest_ticks(context)
@@ -428,6 +436,7 @@ def test_unconditioned_default_check_selection() -> None:
         get_threadpool_executor() as executor,
     ):
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -436,6 +445,7 @@ def test_unconditioned_default_check_selection() -> None:
             context.instance.report_runless_asset_event(
                 dg.AssetMaterialization(asset_key=dg.AssetKey("raw_files"))
             )
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             runs = _get_runs_for_latest_ticks(context)
@@ -460,6 +470,7 @@ def test_check_on_other_asset_not_included() -> None:
         get_threadpool_executor() as executor,
     ):
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -468,6 +479,7 @@ def test_check_on_other_asset_not_included() -> None:
             context.instance.report_runless_asset_event(
                 dg.AssetMaterialization(asset_key=dg.AssetKey("raw_files"))
             )
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             runs = _get_runs_for_latest_ticks(context)
@@ -496,6 +508,7 @@ def test_cross_location_check_excluded_from_ride_along() -> None:
         get_threadpool_executor() as executor,
     ):
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -504,6 +517,7 @@ def test_cross_location_check_excluded_from_ride_along() -> None:
             context.instance.report_runless_asset_event(
                 dg.AssetMaterialization(asset_key=dg.AssetKey("raw_files"))
             )
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             runs = _get_runs_for_latest_ticks(context)
@@ -533,6 +547,7 @@ def test_cross_location_source_assets() -> None:
         assert _get_runs_for_latest_ticks(context) == []
 
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             # observable source asset executes
             assert _get_latest_evaluation_ids(context) == {1, 2}
@@ -562,6 +577,7 @@ def test_multiple_materializable_breaks_ties() -> None:
         assert _get_runs_for_latest_ticks(context) == []
 
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             # observable source asset executes
             assert _get_latest_evaluation_ids(context) == {
@@ -585,6 +601,7 @@ def test_cross_location_checks() -> None:
         assert _get_runs_for_latest_ticks(context) == []
 
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             # nothing happening yet, as parent hasn't updated
@@ -598,6 +615,7 @@ def test_cross_location_checks() -> None:
                 dg.AssetMaterialization(asset_key=dg.AssetKey("processed_files"))
             )
 
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             # should request both checks on processed_files, but one of the checks
@@ -626,6 +644,7 @@ def test_cross_location_checks() -> None:
                 dg.AssetMaterialization(asset_key=dg.AssetKey("raw_files"))
             )
 
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             # A combined run is always produced for processed_files + row_count
@@ -652,6 +671,7 @@ def test_cross_location_checks() -> None:
 
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             # row_count is always re-requested here because its condition is set
@@ -687,6 +707,7 @@ def test_unconditioned_check_in_other_location_not_pulled_into_asset_run() -> No
         get_threadpool_executor() as executor,
     ):
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             # nothing yet -- parent hasn't updated
             assert _get_runs_for_latest_ticks(context) == []
@@ -697,6 +718,7 @@ def test_unconditioned_check_in_other_location_not_pulled_into_asset_run() -> No
             context.instance.report_runless_asset_event(
                 dg.AssetMaterialization(asset_key=dg.AssetKey("raw_files"))
             )
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             runs = _get_runs_for_latest_ticks(context)
@@ -716,6 +738,7 @@ def test_default_condition() -> None:
         get_threadpool_executor() as executor,
     ):
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             # eager asset materializes
@@ -725,6 +748,7 @@ def test_default_condition() -> None:
 
         time += datetime.timedelta(seconds=60)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             # passed a cron tick, so cron asset materializes
@@ -740,6 +764,7 @@ def test_non_subsettable_check() -> None:
     ):
         time = datetime.datetime(2024, 8, 17, 1, 35)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             # eager asset materializes
@@ -798,6 +823,7 @@ def test_backfill_creation_simple(location: str) -> None:
         # all start off missing, should be requested
         time = get_current_datetime()
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             backfills = _get_backfills_for_latest_ticks(context)
             assert len(backfills) == 1
@@ -823,6 +849,7 @@ def test_backfill_creation_simple(location: str) -> None:
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
             # second tick, don't kick off again
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             backfills = _get_backfills_for_latest_ticks(context)
             assert len(backfills) == 0
@@ -843,6 +870,7 @@ def test_backfill_creation_dynamic() -> None:
         # all start off missing, should be requested
         time = get_current_datetime()
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             backfills = _get_backfills_for_latest_ticks(context)
             assert len(backfills) == 1
@@ -874,6 +902,7 @@ def test_backfill_with_runs_and_checks() -> None:
         # all start off missing, should be requested
         time = get_current_datetime()
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             # create a backfill for the part of the graph that has multiple partitions
             # required
@@ -913,6 +942,7 @@ def test_backfill_with_runs_and_checks() -> None:
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
             # second tick, don't kick off again
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
 
             backfills = _get_backfills_for_latest_ticks(context)
@@ -951,6 +981,7 @@ def test_toggle_user_code() -> None:
                 time += datetime.timedelta(seconds=35)
                 with freeze_time(time):
                     # first tick, nothing happened
+                    # pyrefly: ignore [bad-argument-type]
                     _execute_ticks(context, executor)
                     runs = _get_runs_for_latest_ticks(context)
                     assert len(runs) == 0
@@ -959,6 +990,7 @@ def test_toggle_user_code() -> None:
                 with freeze_time(time):
                     # second tick, root gets updated
                     instance.report_runless_asset_event(dg.AssetMaterialization("root"))
+                    # pyrefly: ignore [bad-argument-type]
                     _execute_ticks(context, executor)
                     runs = _get_runs_for_latest_ticks(context)
                     assert runs[0].asset_selection == {dg.AssetKey("downstream")}
@@ -966,6 +998,7 @@ def test_toggle_user_code() -> None:
                 time += datetime.timedelta(seconds=35)
                 with freeze_time(time):
                     # third tick, don't kick off again
+                    # pyrefly: ignore [bad-argument-type]
                     _execute_ticks(context, executor)
                     runs = _get_runs_for_latest_ticks(context)
                     assert len(runs) == 0
@@ -981,18 +1014,21 @@ def test_custom_condition() -> None:
         # custom condition only materializes on the 5th tick
         for _ in range(4):
             with freeze_time(time):
+                # pyrefly: ignore [bad-argument-type]
                 _execute_ticks(context, executor)
                 runs = _get_runs_for_latest_ticks(context)
                 assert len(runs) == 0
             time += datetime.timedelta(minutes=1)
 
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 1
 
         time += datetime.timedelta(minutes=1)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
@@ -1021,6 +1057,7 @@ def test_500_eager_assets_user_code(capsys) -> None:
         for _ in range(2):
             clock_time = time.time()
             with freeze_time(freeze_dt):
+                # pyrefly: ignore [bad-argument-type]
                 _execute_ticks(context, executor)
                 runs = _get_runs_for_latest_ticks(context)
                 assert len(runs) == 0
@@ -1045,6 +1082,7 @@ def test_fail_if_not_use_sensors(capsys) -> None:
         ) as context,
         get_threadpool_executor() as executor,
     ):
+        # pyrefly: ignore [bad-argument-type]
         _execute_ticks(context, executor)
         latest_ticks = _get_latest_ticks(context.create_request_context())
         assert len(latest_ticks) == 1
@@ -1064,6 +1102,7 @@ def test_simple_old_code_server() -> None:
         time = datetime.datetime(2024, 8, 16, 1, 35)
         with freeze_time(time):
             # initial evaluation
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 1
@@ -1076,12 +1115,14 @@ def test_observable_source_asset() -> None:
     ):
         time = datetime.datetime(2024, 8, 16, 1, 35)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
 
         time += datetime.timedelta(hours=1)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 1
@@ -1090,6 +1131,7 @@ def test_observable_source_asset() -> None:
         # runs haven't completed yet
         time += datetime.timedelta(minutes=1)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
@@ -1102,6 +1144,7 @@ def test_observable_source_asset_is_not_backfilled() -> None:
     ):
         time = datetime.datetime(2024, 8, 16, 1, 35)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
@@ -1110,6 +1153,7 @@ def test_observable_source_asset_is_not_backfilled() -> None:
 
         time += datetime.timedelta(hours=1)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 3
@@ -1120,6 +1164,7 @@ def test_observable_source_asset_is_not_backfilled() -> None:
         # runs haven't completed yet
         time += datetime.timedelta(minutes=1)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
@@ -1134,6 +1179,7 @@ def test_dynamic_partitions() -> None:
     ):
         time = datetime.datetime(2024, 8, 16, 1, 35)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
@@ -1144,6 +1190,7 @@ def test_dynamic_partitions() -> None:
 
         time += datetime.timedelta(hours=1)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 1
@@ -1152,6 +1199,7 @@ def test_dynamic_partitions() -> None:
 
         time += datetime.timedelta(minutes=1)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
@@ -1160,6 +1208,7 @@ def test_dynamic_partitions() -> None:
         time += datetime.timedelta(minutes=1)
         context.instance.add_dynamic_partitions("dynamic", ["d"])
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 1
@@ -1168,6 +1217,7 @@ def test_dynamic_partitions() -> None:
         time += datetime.timedelta(minutes=1)
         context.instance.delete_dynamic_partition("dynamic", "d")
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
@@ -1194,6 +1244,7 @@ def test_eager_asset_and_job() -> None:
     ):
         # tick 1: initial evaluation — nothing to do
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
@@ -1204,6 +1255,7 @@ def test_eager_asset_and_job() -> None:
             context.instance.report_runless_asset_event(
                 dg.AssetMaterialization(asset_key=dg.AssetKey("external"))
             )
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             runs = _get_runs_for_latest_ticks(context)
 
@@ -1215,6 +1267,7 @@ def test_eager_asset_and_job() -> None:
         # so "my_job" should now be requested
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 1
@@ -1235,6 +1288,7 @@ def test_eager_sibling_asset_and_job() -> None:
     ):
         # tick 1: initial evaluation — nothing to do
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
@@ -1245,6 +1299,7 @@ def test_eager_sibling_asset_and_job() -> None:
             context.instance.report_runless_asset_event(
                 dg.AssetMaterialization(asset_key=dg.AssetKey("external"))
             )
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             runs = _get_runs_for_latest_ticks(context)
 
@@ -1259,6 +1314,7 @@ def test_eager_sibling_asset_and_job() -> None:
         # parents, and the job run's materializations of b/c have no downstream)
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 0
@@ -1289,6 +1345,7 @@ def test_job_evaluated_by_exactly_one_sensor() -> None:
         # tick 1: the job fires immediately (its root asset is missing). exactly one run,
         # from exactly one sensor's tick -- the default sensor's
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 1
@@ -1302,6 +1359,7 @@ def test_job_evaluated_by_exactly_one_sensor() -> None:
         # tick 2: the job's root asset materialized via the run, so nothing new fires
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1330,6 +1388,7 @@ def test_user_code_sensor_alongside_conditioned_job() -> None:
 
         # tick 1: nothing has materialized; eager() has nothing to react to
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             assert len(_get_runs_for_latest_ticks(context)) == 0
 
@@ -1340,6 +1399,7 @@ def test_user_code_sensor_alongside_conditioned_job() -> None:
             context.instance.report_runless_asset_event(
                 dg.AssetMaterialization(asset_key=dg.AssetKey("external"))
             )
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 2
@@ -1358,6 +1418,7 @@ def test_user_code_sensor_alongside_conditioned_job() -> None:
         # tick 3: everything materialized via the runs; nothing further fires
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1389,6 +1450,7 @@ def test_job_run_requested_in_pre_sensor_mode() -> None:
         # tick 1: the job fires immediately (its root asset is missing) and is submitted
         # as a whole-job run by the single global evaluation
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             tick = _get_legacy_tick()
             assert tick.status == TickStatus.SUCCESS
@@ -1401,6 +1463,7 @@ def test_job_run_requested_in_pre_sensor_mode() -> None:
         # tick 2: the job's root asset materialized via the run, so nothing new fires
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             tick = _get_legacy_tick()
             assert tick.status == TickStatus.SKIPPED
@@ -1441,6 +1504,7 @@ def test_assets_checks_and_job_on_default_sensor() -> None:
         # tick 1: only the job fires (its member asset is missing); the eager asset's
         # parent hasn't updated yet
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 1
@@ -1455,6 +1519,7 @@ def test_assets_checks_and_job_on_default_sensor() -> None:
             context.instance.report_runless_asset_event(
                 dg.AssetMaterialization(asset_key=dg.AssetKey("raw_files"))
             )
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 1
@@ -1467,6 +1532,7 @@ def test_assets_checks_and_job_on_default_sensor() -> None:
         # any_deps_match(newly_updated) condition fires once more, alone this time
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 1
@@ -1478,6 +1544,7 @@ def test_assets_checks_and_job_on_default_sensor() -> None:
         # tick 4: everything satisfied
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1509,6 +1576,7 @@ def test_entities_split_across_sensors() -> None:
         # tick 1: everything is missing, so each sensor requests its own entities --
         # one asset run and one whole-job run apiece
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs_by_instigator = _get_runs_by_instigator_for_latest_ticks(context)
             assert set(runs_by_instigator) == {
@@ -1539,6 +1607,7 @@ def test_entities_split_across_sensors() -> None:
         # tick 2: everything materialized via tick 1's runs, so nothing new fires
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1556,6 +1625,7 @@ def test_partitioned_job() -> None:
     ):
         # tick 1: both partitions are missing, so the job launches once per partition
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 2
@@ -1576,6 +1646,7 @@ def test_partitioned_job() -> None:
         # tick 2: both partitions materialized via tick 1's runs, so nothing new fires
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1594,6 +1665,7 @@ def test_partitioned_job_with_explicit_partitions_def() -> None:
     ):
         # tick 1: both partitions are missing, so the job launches once per partition
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 2
@@ -1614,6 +1686,7 @@ def test_partitioned_job_with_explicit_partitions_def() -> None:
         # tick 2: both partitions materialized via tick 1's runs, so nothing new fires
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1632,6 +1705,7 @@ def test_partitioned_job_with_unpartitioned_member_and_check() -> None:
     ):
         # tick 1: all roots missing, so the job launches once per partition
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert len(runs) == 2
@@ -1654,6 +1728,7 @@ def test_partitioned_job_with_unpartitioned_member_and_check() -> None:
             dg.AssetRecordsFilter(asset_key=dg.AssetKey("unpart_asset")), limit=10
         ).records
         assert len(records) == 2
+        # pyrefly: ignore [missing-attribute]
         assert all(r.asset_materialization.partition is None for r in records)
 
         # the checks -- on the unpartitioned and the partitioned member alike -- rode
@@ -1670,6 +1745,7 @@ def test_partitioned_job_with_unpartitioned_member_and_check() -> None:
         # tick 2: every root materialized via tick 1's runs, so nothing new fires
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1687,6 +1763,7 @@ def test_partitioned_and_unpartitioned_jobs() -> None:
         get_threadpool_executor() as executor,
     ):
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             runs = _get_runs_for_latest_ticks(context)
             assert sorted((run.job_name, run.tags.get(PARTITION_NAME_TAG)) for run in runs) == [
@@ -1698,6 +1775,7 @@ def test_partitioned_and_unpartitioned_jobs() -> None:
         # tick 2: everything materialized via tick 1's runs, so nothing new fires
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1721,6 +1799,7 @@ def test_any_vs_all_partitioned_jobs() -> None:
     ):
         # tick 1: initial evaluation -- nothing to do
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1728,6 +1807,7 @@ def test_any_vs_all_partitioned_jobs() -> None:
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
             _materialize(context, "upstream_b", "p1")
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             runs = _get_runs_for_latest_ticks(context)
             assert [(r.job_name, r.tags[PARTITION_NAME_TAG]) for r in runs] == [("any_job", "p1")]
@@ -1735,6 +1815,7 @@ def test_any_vs_all_partitioned_jobs() -> None:
         # quiet tick: eager does not accumulate across ticks
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1744,6 +1825,7 @@ def test_any_vs_all_partitioned_jobs() -> None:
         with freeze_time(time):
             _materialize(context, "upstream_b", "p1")
             _materialize(context, "upstream_c", "p2")
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             runs = _get_runs_for_latest_ticks(context)
             assert sorted((r.job_name, r.tags[PARTITION_NAME_TAG]) for r in runs) == [
@@ -1754,6 +1836,7 @@ def test_any_vs_all_partitioned_jobs() -> None:
         # quiet tick
         time += datetime.timedelta(seconds=30)
         with freeze_time(time):
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             assert _get_runs_for_latest_ticks(context) == []
 
@@ -1762,6 +1845,7 @@ def test_any_vs_all_partitioned_jobs() -> None:
         with freeze_time(time):
             _materialize(context, "upstream_b", "p1")
             _materialize(context, "upstream_c", "p1")
+            # pyrefly: ignore [bad-argument-type]
             _execute_ticks(context, executor)  # pyright: ignore[reportArgumentType]
             runs = _get_runs_for_latest_ticks(context)
             assert sorted((r.job_name, r.tags[PARTITION_NAME_TAG]) for r in runs) == [

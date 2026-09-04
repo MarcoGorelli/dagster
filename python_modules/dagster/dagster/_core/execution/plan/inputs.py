@@ -503,6 +503,7 @@ class MultiStepInputSource(StepInputSource, ABC):
     sources: Sequence[StepInputSource]
 
     @property
+    # pyrefly: ignore [bad-override]
     def step_key_dependencies(self) -> AbstractSet[str]:
         keys = set()
         for source in self.sources:
@@ -871,4 +872,5 @@ StepInputSourceUnion: TypeAlias = (
     StepInputSource | FromDynamicCollect | FromUnresolvedStepOutput | FromPendingDynamicStepOutput
 )
 
+# pyrefly: ignore [missing-attribute]
 StepInputSourceTypes = StepInputSourceUnion.__args__

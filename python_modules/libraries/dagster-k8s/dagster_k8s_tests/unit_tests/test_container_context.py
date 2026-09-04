@@ -867,6 +867,7 @@ def test_env_var_precedence():
     ).to_dict()
 
     # Inner env var is applied after the outer
+    # pyrefly: ignore [bad-index]
     assert job["spec"]["template"]["spec"]["containers"][0]["env"] == [
         {"name": "FOO", "value": "outercontainerconfig", "value_from": None},
         {"name": "FOO", "value": "innerenvvars", "value_from": None},

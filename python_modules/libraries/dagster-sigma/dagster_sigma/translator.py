@@ -168,6 +168,7 @@ class DagsterSigmaTranslator:
         """Get the AssetSpec for a Sigma object, such as a workbook or dataset."""
         if isinstance(data, SigmaWorkbookTranslatorData):
             metadata = {
+                # pyrefly: ignore [invalid-argument]
                 **SigmaWorkbookMetadataSet(
                     web_url=MetadataValue.url(data.properties["url"]),
                     version=data.properties["latestVersion"],
@@ -213,6 +214,7 @@ class DagsterSigmaTranslator:
                 AssetDep(
                     asset=asset_key_from_table_name(".".join(table.get_table_path()).lower()),
                     metadata={
+                        # pyrefly: ignore [invalid-argument]
                         **TableMetadataSet(table_name=".".join(table.get_table_path()).lower())
                     },
                 )
@@ -232,6 +234,7 @@ class DagsterSigmaTranslator:
                     isoparse(data.properties["createdAt"])
                 ),
                 "dagster_sigma/properties": MetadataValue.json(data.properties),
+                # pyrefly: ignore [invalid-argument]
                 **TableMetadataSet(
                     column_schema=TableSchema(
                         columns=[

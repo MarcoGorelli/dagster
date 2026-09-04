@@ -1360,6 +1360,7 @@ class DagsterEvent(
         metadata = {}
         for key in resource_instances.keys():
             metadata[key] = MetadataValue.python_artifact(resource_instances[key].__class__)
+            # pyrefly: ignore [unsupported-operation]
             metadata[f"{key}:init_time"] = resource_init_times[key]
 
         return DagsterEvent.from_resource(

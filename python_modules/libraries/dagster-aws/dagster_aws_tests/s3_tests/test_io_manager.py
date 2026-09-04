@@ -232,6 +232,7 @@ def test_s3_pickle_io_manager_asset_execution(mock_s3_bucket):
 
 def define_dynamic_job(s3_resource, s3_io_manager_builder):
 
+    # pyrefly: ignore [missing-argument]
     @op(out=DynamicOut())
     def dynamic_values():
         for key in ["foo", "bar"]:

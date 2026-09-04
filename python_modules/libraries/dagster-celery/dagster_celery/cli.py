@@ -40,6 +40,7 @@ def get_config_value_from_yaml(yaml_path: str | None) -> Mapping[str, Any]:
 
 
 def get_app(config_yaml: str | None = None) -> CeleryExecutor:
+    # pyrefly: ignore [bad-return]
     return make_app(
         CeleryExecutor.for_cli(**get_config_value_from_yaml(config_yaml)).app_args()
         if config_yaml

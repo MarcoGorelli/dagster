@@ -174,12 +174,15 @@ class PipesGlueClient(PipesClient, TreatAsResourceParam):
         metadata: RawMetadataMapping = {}
 
         if job_run_id := job_run.get("Id"):
+            # pyrefly: ignore [unsupported-operation]
             metadata["AWS Glue Job Run ID"] = job_run_id
 
         if job_name := job_run.get("JobName"):
+            # pyrefly: ignore [unsupported-operation]
             metadata["AWS Glue Job Name"] = job_name
 
         if job_run_id is not None and job_name is not None:
+            # pyrefly: ignore [unsupported-operation]
             metadata["AWS Glue Job Run URL"] = MetadataValue.url(
                 f"https://{self._client.meta.region_name}.console.aws.amazon.com/gluestudio/home?region={self._client.meta.region_name}#/job/{job_name}/run/{job_run_id}"
             )

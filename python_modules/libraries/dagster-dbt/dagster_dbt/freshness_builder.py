@@ -104,6 +104,7 @@ def build_freshness_checks_from_dbt_assets(
                     f"Could not find dbt resource properties for asset key {asset_key.to_user_string()}."
                 )
             asset_key_to_assets_def[asset_key] = assets_def
+            # pyrefly: ignore [unsupported-operation]
             asset_key_to_resource_props[asset_key] = asset_key_to_resource_props_for_def[asset_key]
     for asset_key in assets_to_keys(dbt_assets):
         dbt_resource_props = asset_key_to_resource_props[asset_key]
@@ -137,6 +138,7 @@ def build_freshness_checks_from_dbt_assets(
 
             freshness_checks.extend(
                 build_last_update_freshness_checks(
+                    # pyrefly: ignore [unbound-name]
                     assets=[translator.get_asset_key(dbt_resource_props)],
                     deadline_cron=freshness_check_config.get("deadline_cron"),
                     lower_bound_delta=datetime.timedelta(seconds=lower_bound_seconds),

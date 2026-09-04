@@ -79,6 +79,7 @@ def _fetch_and_attach_col_metadata(
         return materialization.with_metadata(
             {
                 **materialization.metadata,
+                # pyrefly: ignore [invalid-argument]
                 **TableMetadataSet(column_schema=TableSchema(table_columns)),
             }
         )

@@ -99,6 +99,7 @@ def _simulate_orchestration_materializations(instance) -> None:
             AssetMaterialization(
                 asset_key=key,
                 metadata={
+                    # pyrefly: ignore [invalid-argument]
                     **FivetranMetadataSet(
                         connector_id=TEST_CONNECTOR_ID,
                         sync_completed_at=NEW_SYNC_TIMESTAMP,
@@ -300,6 +301,7 @@ def test_sensor_dedup_with_stale_orchestration_materialization() -> None:
             AssetMaterialization(
                 asset_key=AssetKey(["schema_name_in_destination_1", "table_name_in_destination_1"]),
                 metadata={
+                    # pyrefly: ignore [invalid-argument]
                     **FivetranMetadataSet(
                         connector_id=TEST_CONNECTOR_ID,
                         sync_completed_at=old_sync_timestamp,
@@ -354,6 +356,7 @@ def test_sensor_dedup_without_metadata_on_existing_materialization() -> None:
             AssetMaterialization(
                 asset_key=AssetKey(["schema_name_in_destination_1", "table_name_in_destination_1"]),
                 metadata={
+                    # pyrefly: ignore [invalid-argument]
                     **FivetranMetadataSet(
                         connector_id=TEST_CONNECTOR_ID,
                         # No sync_completed_at — simulates legacy materialization

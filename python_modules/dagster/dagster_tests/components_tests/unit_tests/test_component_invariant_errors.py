@@ -4,6 +4,7 @@ from dagster.components.core.component_tree import ComponentTree
 
 def test_component_does_not_implement_resolved_anything():
     class AComponent(dg.Component):
+        # pyrefly: ignore [bad-override]
         def build_defs(self, context): ...
 
     assert AComponent.load(attributes=None, context=ComponentTree.for_test().load_context)

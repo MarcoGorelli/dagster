@@ -108,6 +108,7 @@ class FivetranConnector:
         succeeded_at = parser.parse(self.succeeded_at or MIN_TIME_STR)
         failed_at = parser.parse(self.failed_at or MIN_TIME_STR)
 
+        # pyrefly: ignore [bad-return]
         return max(succeeded_at, failed_at)
 
     @property
@@ -131,6 +132,7 @@ class FivetranConnector:
         if not self.rescheduled_for:
             return False
         rescheduled_at = parser.parse(self.rescheduled_for)
+        # pyrefly: ignore [unsupported-operation]
         return rescheduled_at > self.last_sync_completed_at
 
     def validate_syncable(self) -> bool:
@@ -387,6 +389,7 @@ class DagsterFivetranTranslator:
 
         augmented_metadata = {
             **metadata,
+            # pyrefly: ignore [invalid-argument]
             **FivetranMetadataSet(
                 connector_id=props.connector_id,
                 connector_name=props.connector_name,

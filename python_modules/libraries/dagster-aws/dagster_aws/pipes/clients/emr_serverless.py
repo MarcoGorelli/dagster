@@ -149,6 +149,7 @@ class PipesEMRServerlessClient(PipesClient, TreatAsResourceParam):
             params["jobDriver"] = {}
 
         if "sparkSubmit" not in params["jobDriver"]:
+            # pyrefly: ignore [bad-typed-dict-key]
             params["jobDriver"]["sparkSubmit"] = {}
 
         params["jobDriver"]["sparkSubmit"]["sparkSubmitParameters"] = params.get(
@@ -180,6 +181,7 @@ class PipesEMRServerlessClient(PipesClient, TreatAsResourceParam):
         self,
         context: OpExecutionContext | AssetExecutionContext,
         start_response: "StartJobRunResponseTypeDef",
+        # pyrefly: ignore [bad-return]
     ) -> "GetJobRunResponseTypeDef":
         job_run_id = start_response["jobRunId"]
         application_id = start_response["applicationId"]
@@ -361,7 +363,9 @@ class PipesEMRServerlessClient(PipesClient, TreatAsResourceParam):
 
         job_run = response["jobRun"]
 
+        # pyrefly: ignore [unsupported-operation]
         metadata["AWS EMR Serverless Application ID"] = job_run["applicationId"]
+        # pyrefly: ignore [unsupported-operation]
         metadata["AWS EMR Serverless Job Run ID"] = job_run["jobRunId"]
 
         # TODO: it would be great to add a url to EMR Studio page for this run

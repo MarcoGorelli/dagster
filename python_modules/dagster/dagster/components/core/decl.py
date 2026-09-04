@@ -358,7 +358,11 @@ class AppManagedComponentDecl(ComponentDecl[Component]):
             f" {self.location_name} — it may have been deleted concurrently.",
         )
         return read_app_managed_component_entry_at_version(
-            storage, self.location_name, self.component_id, key_info.version
+            # pyrefly: ignore [bad-argument-type]
+            storage,
+            self.location_name,
+            self.component_id,
+            key_info.version,
         )
 
     @property

@@ -234,14 +234,17 @@ def test_request_asset_checks(init_load_context: None, instance: DagsterInstance
 
     dag_asset_key = make_dag_key("dag")
 
+    # pyrefly: ignore [bad-argument-type]
     @asset_check(asset="a")
     def check_task_asset():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @asset_check(asset=dag_asset_key)
     def check_dag_asset():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @asset_check(asset="c")
     def check_unrelated_asset():
         pass

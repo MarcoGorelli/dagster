@@ -257,14 +257,17 @@ class DagsterTableauTranslator:
         return AssetSpec(
             key=asset_key,
             deps=data_source_keys if data_source_keys else None,
+            # pyrefly: ignore [invalid-argument]
             tags={**TableauTagSet(asset_type="sheet")},
             metadata={
+                # pyrefly: ignore [invalid-argument]
                 **TableauViewMetadataSet(
                     id=data.properties["luid"],
                     workbook_id=data.properties["workbook"]["luid"],
                     project_name=workbook_data.properties["projectName"],
                     project_id=workbook_data.properties["projectLuid"],
                 ),
+                # pyrefly: ignore [invalid-argument]
                 **TableMetadataSet(storage_kind="tableau"),
             },
             kinds={"tableau", "sheet"},
@@ -313,14 +316,17 @@ class DagsterTableauTranslator:
         return AssetSpec(
             key=asset_key,
             deps=upstream_keys if upstream_keys else None,
+            # pyrefly: ignore [invalid-argument]
             tags={**TableauTagSet(asset_type="dashboard")},
             metadata={
+                # pyrefly: ignore [invalid-argument]
                 **TableauViewMetadataSet(
                     id=data.properties["luid"],
                     workbook_id=data.properties["workbook"]["luid"],
                     project_name=workbook_data.properties["projectName"],
                     project_id=workbook_data.properties["projectLuid"],
                 ),
+                # pyrefly: ignore [invalid-argument]
                 **TableMetadataSet(storage_kind="tableau"),
             },
             kinds={"tableau", "dashboard"},
@@ -348,8 +354,10 @@ class DagsterTableauTranslator:
 
         return AssetSpec(
             key=asset_key,
+            # pyrefly: ignore [invalid-argument]
             tags={**TableauTagSet(asset_type="data_source")},
             metadata={
+                # pyrefly: ignore [invalid-argument]
                 **TableauDataSourceMetadataSet(
                     id=data.properties["luid"],
                     has_extracts=data.properties["hasExtracts"],
@@ -358,6 +366,7 @@ class DagsterTableauTranslator:
                     if not data.properties["isPublished"]
                     else None,
                 ),
+                # pyrefly: ignore [invalid-argument]
                 **TableMetadataSet(storage_kind="tableau"),
             },
             kinds=kinds,

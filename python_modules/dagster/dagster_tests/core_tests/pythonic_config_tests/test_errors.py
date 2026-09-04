@@ -369,6 +369,7 @@ def test_trying_to_set_a_field() -> None:
         match=r"'MyConfig' is a Pythonic config class and does not support item assignment.",
     ):
         my_config = MyConfig(my_str="foo")
+        # pyrefly: ignore [read-only]
         my_config.my_str = "bar"
 
 
@@ -387,6 +388,7 @@ def test_trying_to_set_a_field_resource() -> None:
         ),
     ):
         my_resource = MyResource(my_str="foo")
+        # pyrefly: ignore [read-only]
         my_resource.my_str = "bar"
 
 
@@ -430,6 +432,7 @@ def test_config_named_wrong_thing() -> None:
 
         assert len(w) == 1
         assert (
+            # pyrefly: ignore [missing-attribute]
             w[0]
             .message.args[0]  # type: ignore
             .startswith(
@@ -443,6 +446,7 @@ def test_config_named_wrong_thing() -> None:
 
         assert len(w) == 2
         assert (
+            # pyrefly: ignore [missing-attribute]
             w[1]
             .message.args[0]  # type: ignore
             .startswith(

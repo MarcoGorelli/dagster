@@ -321,6 +321,7 @@ def test_deprecated_param_method():
 def test_deprecated_param_staticmethod(decorators):
     class Foo:
         @compose_decorators(*decorators)
+        # pyrefly: ignore [bad-function-definition]
         def bar(baz=None):
             pass
 
@@ -860,6 +861,7 @@ def test_beta_param_method():
 def test_beta_param_staticmethod(decorators):
     class Foo:
         @compose_decorators(*decorators)
+        # pyrefly: ignore [bad-function-definition]
         def bar(baz=None):
             pass
 

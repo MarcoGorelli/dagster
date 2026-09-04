@@ -251,6 +251,7 @@ class SlingResource(ConfigurableResource):
                 tmp_metadata["destination_table"] = re.sub(r"[^\w\s.]", "", tmp[0][1])
             if target_type and target_type[0] == "file system":
                 tmp_metadata["destination_file"] = re.sub(r"[^\w\s.]", "", tmp[0][1])
+            # pyrefly: ignore [unsupported-operation]
             tmp_metadata["elapsed_time"] = end_time - start_time
             tmp_metadata["row_count"] = tmp[0][0]
 
@@ -506,6 +507,7 @@ class SlingResource(ConfigurableResource):
             metadata = {
                 "elapsed_time": end_time - start_time,
                 "stream_name": stream_definition["name"],
+                # pyrefly: ignore [invalid-argument]
                 **TableMetadataSet(
                     table_name=table_name,
                     storage_kind=destination_name,
@@ -611,13 +613,16 @@ class SlingResource(ConfigurableResource):
                     metadata["stream_name"] = current_stream
                     logger.debug(metadata)
                     if context.has_assets_def:
+                        # pyrefly: ignore [unbound-name]
                         yield MaterializeResult(asset_key=asset_key, metadata=metadata)
                     else:
+                        # pyrefly: ignore [unbound-name]
                         yield AssetMaterialization(asset_key=asset_key, metadata=metadata)
 
                     current_stream = None
                     metadata_text = []
 
+                # pyrefly: ignore [bad-argument-type]
                 metadata_text.append(text)
 
         # clean up unused file

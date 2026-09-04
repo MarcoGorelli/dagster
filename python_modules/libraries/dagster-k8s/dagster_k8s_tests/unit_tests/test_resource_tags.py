@@ -96,6 +96,7 @@ def test_tags_to_plan():
     def k8s_ready():
         blank.tag(
             {  # ty: ignore[invalid-argument-type]
+                # pyrefly: ignore [bad-assignment]
                 USER_DEFINED_K8S_CONFIG_KEY: {
                     "container_config": {
                         "resources": {
@@ -148,6 +149,7 @@ def test_tags_to_dynamic_plan():
                 }
             }
         },
+        # pyrefly: ignore [missing-argument]
         out=DynamicOut(),
     )
     def emit(_):

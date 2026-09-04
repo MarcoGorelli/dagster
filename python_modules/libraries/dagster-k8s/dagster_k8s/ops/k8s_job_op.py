@@ -383,6 +383,7 @@ def execute_k8s_job(
 
             api_client.wait_for_pod(
                 pod_to_watch,
+                # pyrefly: ignore [bad-argument-type]
                 namespace,
                 wait_timeout=timeout,
                 start_time=start_time,

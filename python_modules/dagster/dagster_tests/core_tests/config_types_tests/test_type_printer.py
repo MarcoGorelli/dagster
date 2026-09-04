@@ -11,9 +11,11 @@ from dagster._config import (
 
 def assert_inner_types(parent_type, *dagster_types):
     config_type = resolve_to_config_type(parent_type)
+    # pyrefly: ignore [missing-attribute]
     config_schema_snapshot = config_type.schema_snapshot
 
     all_type_keys = get_recursive_type_keys(
+        # pyrefly: ignore [bad-argument-type]
         snap_from_config_type(config_type),
         config_schema_snapshot,
     )

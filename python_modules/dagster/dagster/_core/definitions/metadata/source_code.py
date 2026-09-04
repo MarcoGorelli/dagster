@@ -108,6 +108,7 @@ def merge_code_references(
     return asset_spec.replace_attributes(
         metadata={
             **asset_spec.metadata,
+            # pyrefly: ignore [invalid-argument]
             **CodeReferencesMetadataSet(
                 code_references=CodeReferencesMetadataValue(
                     code_references=[
@@ -185,6 +186,7 @@ def _with_code_source_single_definition(
 
             metadata_by_key[key] = {
                 **metadata_by_key.get(key, {}),
+                # pyrefly: ignore [invalid-argument]
                 **CodeReferencesMetadataSet(
                     code_references=CodeReferencesMetadataValue(code_references=sources_for_asset)
                 ),
@@ -322,6 +324,7 @@ def _convert_local_path_to_git_path_single_definition(
 
         metadata_by_key[key] = {
             **metadata_by_key.get(key, {}),
+            # pyrefly: ignore [invalid-argument]
             **CodeReferencesMetadataSet(
                 code_references=CodeReferencesMetadataValue(code_references=sources_for_asset)
             ),

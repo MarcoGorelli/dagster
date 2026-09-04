@@ -289,7 +289,9 @@ def _array_has_stable_hashes(hydrated_array, snapshot_config_snap_map):
 def _map_has_stable_hashes(hydrated_map, snapshot_config_snap_map):
     assert isinstance(hydrated_map, Map)
     assert hydrated_map.key in snapshot_config_snap_map
+    # pyrefly: ignore [missing-attribute]
     assert hydrated_map.inner_type.key in snapshot_config_snap_map
+    # pyrefly: ignore [missing-attribute]
     assert hydrated_map.key_type.key in snapshot_config_snap_map
 
 

@@ -715,6 +715,7 @@ def test_materialize_result_value_annotated_incorrect_type():
 def test_materialize_result_value_annotated_no_value():
     @dg.asset
     def asset_with_value() -> dg.MaterializeResult[int]:
+        # pyrefly: ignore [bad-return]
         return dg.MaterializeResult()
 
     with pytest.raises(dg.DagsterTypeCheckDidNotPass):

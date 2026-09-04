@@ -76,6 +76,7 @@ def make_op(
             raise IntentionalRandomFailure(f"random {rand} < error rate {error_rate}")
 
         if asset_key:
+            # pyrefly: ignore [unbound-name]
             metadata = {"Data size (bytes)": data_size} if data_size_fn else None
 
             yield AssetMaterialization(

@@ -791,6 +791,7 @@ class PipesStdioLogWriter(PipesLogWriter[T_LogChannel]):
         pass
 
     @contextmanager
+    # pyrefly: ignore [bad-override]
     def open(self, params: PipesParams) -> Iterator[None]:
         with ExitStack() as stack:
             stdout_channel = self.make_channel(params, stream="stdout")

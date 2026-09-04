@@ -75,7 +75,7 @@ class SnowflakeIOManager(ConfigurableIOManager):
             config["schema"] = schema
             with connect_snowflake(config=config) as con:
                 df = read_sql(f"SELECT * FROM {context.name} LIMIT 5", con=con)
-                num_rows = con.execute(f"SELECT COUNT(*) FROM {context.name}").fetchone()
+                num_rows = con.execute(f"SELECT COUNT(*) FROM {context.name}").scalar()
 
             metadata = {
                 "data_sample": MetadataValue.md(df.to_markdown()),

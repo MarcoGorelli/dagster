@@ -317,6 +317,7 @@ def test_time_window_partitioned_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -334,6 +335,7 @@ def test_time_window_partitioned_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -351,6 +353,7 @@ def test_time_window_partitioned_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -419,6 +422,7 @@ def test_static_partitioned_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -436,6 +440,7 @@ def test_static_partitioned_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -453,6 +458,7 @@ def test_static_partitioned_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -533,6 +539,7 @@ def test_multi_partitioned_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -550,6 +557,7 @@ def test_multi_partitioned_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -567,6 +575,7 @@ def test_multi_partitioned_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -584,6 +593,7 @@ def test_multi_partitioned_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -660,6 +670,7 @@ def test_dynamic_partitions(spark, io_manager):
 
             with snowflake_conn.get_connection() as conn:
                 out_df = (
+                    # pyrefly: ignore [missing-attribute]
                     conn.cursor()
                     .execute(
                         f"SELECT * FROM {snowflake_table_path}",
@@ -680,6 +691,7 @@ def test_dynamic_partitions(spark, io_manager):
 
             with snowflake_conn.get_connection() as conn:
                 out_df = (
+                    # pyrefly: ignore [missing-attribute]
                     conn.cursor()
                     .execute(
                         f"SELECT * FROM {snowflake_table_path}",
@@ -698,6 +710,7 @@ def test_dynamic_partitions(spark, io_manager):
 
             with snowflake_conn.get_connection() as conn:
                 out_df = (
+                    # pyrefly: ignore [missing-attribute]
                     conn.cursor()
                     .execute(
                         f"SELECT * FROM {snowflake_table_path}",
@@ -781,6 +794,7 @@ def test_self_dependent_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",
@@ -802,6 +816,7 @@ def test_self_dependent_asset(spark, io_manager):
 
         with snowflake_conn.get_connection() as conn:
             out_df = (
+                # pyrefly: ignore [missing-attribute]
                 conn.cursor()
                 .execute(
                     f"SELECT * FROM {snowflake_table_path}",

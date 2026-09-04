@@ -459,9 +459,13 @@ def test_execute_emits_run_results_metadata_at_parity():
     assert len(mats) == 1
     md = mats[0].metadata
     assert mats[0].asset_key == model_key
+    # pyrefly: ignore [unsupported-operation]
     assert md["unique_id"] == _MODEL_ID
+    # pyrefly: ignore [unsupported-operation]
     assert md["invocation_id"] == "inv-1"
+    # pyrefly: ignore [unsupported-operation]
     assert md["execution_duration"] == 1.5
+    # pyrefly: ignore [not-iterable]
     assert "dagster_dbt/completed_at_timestamp" in md
 
     assert len(checks) == 1
@@ -642,9 +646,11 @@ def test_execute_fetches_row_counts_from_information_schema():
     assert not any(s.startswith("SELECT count(*)") for s in cursor.executed)
 
     by_key = {e.asset_key: e for e in events if isinstance(e, MaterializeResult)}
+    # pyrefly: ignore [unsupported-operation]
     row_count = by_key[AssetKey(["customers"])].metadata["dagster/row_count"]
     assert getattr(row_count, "value", row_count) == 42
     # The view was not counted.
+    # pyrefly: ignore [not-iterable]
     assert "dagster/row_count" not in by_key[AssetKey(["stg_customers"])].metadata
 
 
@@ -694,10 +700,13 @@ def test_execute_fetches_column_schema_and_lineage_from_information_schema():
         if isinstance(e, MaterializeResult) and e.asset_key == AssetKey(["customers"])
     )
     # Column schema is attached from INFORMATION_SCHEMA.COLUMNS.
+    # pyrefly: ignore [not-iterable]
     assert "dagster/column_schema" in cust.metadata
     # Column-level lineage was derived from the compiled SQL via sqlglot.
+    # pyrefly: ignore [unsupported-operation]
     lineage = cust.metadata["dagster/column_lineage"]
     lineage = getattr(lineage, "value", lineage)
+    # pyrefly: ignore [missing-attribute]
     id_deps = lineage.deps_by_column["id"]
     assert id_deps[0].asset_key == AssetKey(["stg_customers"])
     assert id_deps[0].column_name == "id"
@@ -754,8 +763,10 @@ def test_execute_extracts_compiled_sql_from_zip_for_lineage():
         for e in events
         if isinstance(e, MaterializeResult) and e.asset_key == AssetKey(["customers"])
     )
+    # pyrefly: ignore [unsupported-operation]
     lineage = cust.metadata["dagster/column_lineage"]
     lineage = getattr(lineage, "value", lineage)
+    # pyrefly: ignore [missing-attribute]
     assert lineage.deps_by_column["id"][0].asset_key == AssetKey(["stg_customers"])
 
 
@@ -792,6 +803,7 @@ def test_column_metadata_merges_warehouse_types_and_dbt_descriptions():
 
     schema = md["dagster/column_schema"]
     schema = getattr(schema, "value", schema)
+    # pyrefly: ignore [missing-attribute]
     cols = {c.name: c for c in schema.columns}
     assert cols["id"].type == "NUMBER"  # warehouse type wins over the dbt-documented type
     assert cols["id"].description == "Customer identifier"  # dbt doc description merged in

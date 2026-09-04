@@ -594,6 +594,7 @@ class TableauComponent(StateBackedComponent, Resolvable):
 
         for workbook_id, specs in refreshable_specs_by_workbook_id.items():
             assets_defs.append(
+                # pyrefly: ignore [bad-argument-type]
                 self.build_refreshable_embedded_data_sources_asset_definition(workbook_id, specs)
             )
 

@@ -23,6 +23,7 @@ def test_input_manager_override():
         return MyIOManager()
 
     class MyInputManager(MyIOManager):
+        # pyrefly: ignore [bad-override]
         def load_input(self, context):
             if context.upstream_output is None:
                 assert False, "upstream output should not be None"
@@ -67,6 +68,7 @@ def test_input_manager_root_input():
         return MyIOManager()
 
     class MyInputManager(MyIOManager):
+        # pyrefly: ignore [bad-override]
         def load_input(self, context):
             if context.upstream_output is None:
                 return 4
@@ -208,6 +210,7 @@ def test_input_manager_decorator():
         return MyIOManager()
 
     class MyInputManager(MyIOManager):
+        # pyrefly: ignore [bad-override]
         def load_input(self, context):
             if context.upstream_output is None:
                 assert False, "upstream output should not be None"

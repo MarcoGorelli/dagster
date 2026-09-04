@@ -145,6 +145,7 @@ class EvalContext(NamedTuple):
             self.get_merged_ns(),
             local_ns,
         )
+        # pyrefly: ignore [bad-return]
         return local_ns[fn_name]
 
 
@@ -267,6 +268,7 @@ def _process_annotated(ttype, args, eval_ctx: EvalContext):
     target_type = args[0]
     # 3.9+: args[1:] has Annotated args, 3.8: its in __metadata__
     annotated_args = getattr(ttype, "__metadata__", args[1:])
+    # pyrefly: ignore [not-iterable]
     for arg in annotated_args:
         if isinstance(arg, ImportFrom):
             if isinstance(target_type, ForwardRef):

@@ -34,6 +34,7 @@ def _execute(
             with freeze_time(evaluation_time):
                 _execute_ticks(
                     context,
+                    # pyrefly: ignore [bad-argument-type]
                     executor,
                     {
                         crash_location: get_terminate_signal() if terminate else Exception("Oops!"),
@@ -173,6 +174,7 @@ def _execute_job_scenario(
             with freeze_time(evaluation_time):
                 _execute_ticks(
                     context,
+                    # pyrefly: ignore [bad-argument-type]
                     executor,
                     {crash_location: Exception("Oops!")} if crash_location else None,
                 )

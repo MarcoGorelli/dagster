@@ -84,6 +84,7 @@ def _add_defs_yaml_metadata(
 
     return {
         **metadata,
+        # pyrefly: ignore [invalid-argument]
         **CodeReferencesMetadataSet(
             code_references=CodeReferencesMetadataValue(
                 code_references=[

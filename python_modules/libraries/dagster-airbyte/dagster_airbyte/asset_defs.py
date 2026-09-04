@@ -154,6 +154,7 @@ def _build_airbyte_asset_defn_metadata(
         metadata_by_output_name=(
             {
                 table: {
+                    # pyrefly: ignore [invalid-argument]
                     **TableMetadataSet(
                         column_schema=schema_by_table_name.get(table),
                         table_name=table_names.get(table),
@@ -324,6 +325,7 @@ def build_airbyte_assets(
             key=AssetKey([*asset_key_prefix, table]),
             metadata=(
                 {
+                    # pyrefly: ignore [invalid-argument]
                     **TableMetadataSet(
                         column_schema=schema_by_table_name.get(table),
                         table_name=table_names.get(table),
@@ -350,6 +352,7 @@ def build_airbyte_assets(
 
     # All non-normalization tables depend on any user-provided upstream assets
     for table in destination_tables:
+        # pyrefly: ignore [unsupported-operation]
         internal_deps[table] = set(upstream_deps) if upstream_deps else set()
 
     @multi_asset(

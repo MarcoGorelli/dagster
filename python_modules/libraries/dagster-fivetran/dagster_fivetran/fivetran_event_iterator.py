@@ -54,6 +54,7 @@ def _fetch_column_metadata(
         )
 
         columns = check.dict_elem(table_conn_data, "columns")
+        # pyrefly: ignore [invalid-argument]
         metadata = {**TableMetadataSet(column_schema=get_column_schema_for_columns(columns))}
     except Exception as e:
         client._log.warning(  # noqa

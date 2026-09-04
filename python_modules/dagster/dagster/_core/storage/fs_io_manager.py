@@ -251,6 +251,7 @@ class PickledObjectFilesystemIOManager(UPathIOManager):
         **kwargs: additional keyword arguments for `universal_pathlib.UPath`.
     """
 
+    # pyrefly: ignore [bad-override-mutable-attribute]
     extension: str = ""  # TODO: maybe change this to .pickle? Leaving blank for compatibility.
 
     def __init__(self, base_dir=None, **kwargs):
@@ -314,6 +315,7 @@ class CustomPathPickledObjectFilesystemIOManager(IOManager):
     def _get_path(self, path: str) -> str:
         return os.path.join(self.base_dir, path)  # type: ignore  # (possible none)
 
+    # pyrefly: ignore [bad-override]
     def handle_output(self, context: OutputContext, obj: object):
         """Pickle the data and store the object to a custom file path.
 

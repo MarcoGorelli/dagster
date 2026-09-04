@@ -339,24 +339,37 @@ class AssetSpec(IHasInternalInit, IHaveNew, LegacyNamedTupleMixin):
         }
         with disable_dagster_warnings():
             return self.dagster_internal_init(
+                # pyrefly: ignore [bad-argument-type]
                 key=key if key is not ... else self.key,
+                # pyrefly: ignore [bad-argument-type]
                 deps=deps if deps is not ... else self.deps,
+                # pyrefly: ignore [bad-argument-type]
                 description=description if description is not ... else self.description,
+                # pyrefly: ignore [bad-argument-type]
                 metadata=metadata if metadata is not ... else self.metadata,
+                # pyrefly: ignore [bad-argument-type]
                 skippable=skippable if skippable is not ... else self.skippable,
+                # pyrefly: ignore [bad-argument-type]
                 group_name=group_name if group_name is not ... else self.group_name,
+                # pyrefly: ignore [bad-argument-type]
                 code_version=code_version if code_version is not ... else self.code_version,
                 legacy_freshness_policy=self.legacy_freshness_policy,
                 freshness_policy=freshness_policy
                 if freshness_policy is not ...
                 else self.freshness_policy,
+                # pyrefly: ignore [bad-argument-type]
                 automation_condition=automation_condition
                 if automation_condition is not ...
                 else self.automation_condition,
+                # pyrefly: ignore [bad-argument-type]
                 owners=owners if owners is not ... else self.owners,
+                # pyrefly: ignore [bad-argument-type]
                 tags=tags if tags is not ... else current_tags_without_kinds,
+                # pyrefly: ignore [bad-argument-type]
                 kinds=kinds if kinds is not ... else self.kinds,
+                # pyrefly: ignore [bad-argument-type]
                 partitions_def=partitions_def if partitions_def is not ... else self.partitions_def,
+                # pyrefly: ignore [bad-argument-type]
                 is_virtual=is_virtual if is_virtual is not ... else self.is_virtual,
             )
 
@@ -393,8 +406,10 @@ class AssetSpec(IHasInternalInit, IHaveNew, LegacyNamedTupleMixin):
         with disable_dagster_warnings():
             return self.dagster_internal_init(
                 key=self.key,
+                # pyrefly: ignore [not-iterable]
                 deps=[*self.deps, *(deps if deps is not ... else [])],
                 description=self.description,
+                # pyrefly: ignore [invalid-argument]
                 metadata={**self.metadata, **(metadata if metadata is not ... else {})},
                 skippable=self.skippable,
                 group_name=self.group_name,
@@ -402,8 +417,11 @@ class AssetSpec(IHasInternalInit, IHaveNew, LegacyNamedTupleMixin):
                 legacy_freshness_policy=self.legacy_freshness_policy,
                 freshness_policy=self.freshness_policy,
                 automation_condition=self.automation_condition,
+                # pyrefly: ignore [not-iterable]
                 owners=[*self.owners, *(owners if owners is not ... else [])],
+                # pyrefly: ignore [invalid-argument]
                 tags={**current_tags_without_kinds, **(tags if tags is not ... else {})},
+                # pyrefly: ignore [not-iterable]
                 kinds={*self.kinds, *(kinds if kinds is not ... else {})},
                 partitions_def=self.partitions_def,
                 is_virtual=self.is_virtual,

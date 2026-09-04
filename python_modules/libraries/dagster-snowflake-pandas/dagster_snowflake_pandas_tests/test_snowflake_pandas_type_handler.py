@@ -489,6 +489,7 @@ def test_static_partitioned_asset(io_manager):
         )
 
         with snowflake_conn.get_connection() as conn:
+            # pyrefly: ignore [missing-attribute]
             out_df = (
                 conn.cursor().execute(f"SELECT * FROM {snowflake_table_path}")
             ).fetch_pandas_all()  # ty: ignore[unresolved-attribute]
@@ -502,6 +503,7 @@ def test_static_partitioned_asset(io_manager):
         )
 
         with snowflake_conn.get_connection() as conn:
+            # pyrefly: ignore [missing-attribute]
             out_df = (
                 conn.cursor().execute(f"SELECT * FROM {snowflake_table_path}")
             ).fetch_pandas_all()  # ty: ignore[unresolved-attribute]
@@ -515,6 +517,7 @@ def test_static_partitioned_asset(io_manager):
         )
 
         with snowflake_conn.get_connection() as conn:
+            # pyrefly: ignore [missing-attribute]
             out_df = (
                 conn.cursor().execute(f"SELECT * FROM {snowflake_table_path}")
             ).fetch_pandas_all()  # ty: ignore[unresolved-attribute]
@@ -581,6 +584,7 @@ def test_multi_partitioned_asset(io_manager):
         )
 
         with snowflake_conn.get_connection() as conn:
+            # pyrefly: ignore [missing-attribute]
             out_df = (
                 conn.cursor().execute(f"SELECT * FROM {snowflake_table_path}")
             ).fetch_pandas_all()  # ty: ignore[unresolved-attribute]
@@ -594,6 +598,7 @@ def test_multi_partitioned_asset(io_manager):
         )
 
         with snowflake_conn.get_connection() as conn:
+            # pyrefly: ignore [missing-attribute]
             out_df = (
                 conn.cursor().execute(f"SELECT * FROM {snowflake_table_path}")
             ).fetch_pandas_all()  # ty: ignore[unresolved-attribute]
@@ -607,6 +612,7 @@ def test_multi_partitioned_asset(io_manager):
         )
 
         with snowflake_conn.get_connection() as conn:
+            # pyrefly: ignore [missing-attribute]
             out_df = (
                 conn.cursor().execute(f"SELECT * FROM {snowflake_table_path}")
             ).fetch_pandas_all()  # ty: ignore[unresolved-attribute]
@@ -620,6 +626,7 @@ def test_multi_partitioned_asset(io_manager):
         )
 
         with snowflake_conn.get_connection() as conn:
+            # pyrefly: ignore [missing-attribute]
             out_df = (
                 conn.cursor().execute(f"SELECT * FROM {snowflake_table_path}")
             ).fetch_pandas_all()  # ty: ignore[unresolved-attribute]
@@ -685,6 +692,7 @@ def test_dynamic_partitions(io_manager):
 
             with snowflake_conn.get_connection() as conn:
                 out_df = (
+                    # pyrefly: ignore [missing-attribute]
                     conn.cursor()
                     .execute(
                         f"SELECT * FROM {snowflake_table_path}",
@@ -705,6 +713,7 @@ def test_dynamic_partitions(io_manager):
 
             with snowflake_conn.get_connection() as conn:
                 out_df = (
+                    # pyrefly: ignore [missing-attribute]
                     conn.cursor()
                     .execute(
                         f"SELECT * FROM {snowflake_table_path}",
@@ -723,6 +732,7 @@ def test_dynamic_partitions(io_manager):
 
             with snowflake_conn.get_connection() as conn:
                 out_df = (
+                    # pyrefly: ignore [missing-attribute]
                     conn.cursor()
                     .execute(
                         f"SELECT * FROM {snowflake_table_path}",

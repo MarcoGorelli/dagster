@@ -23,6 +23,7 @@ def test_table_metadata_set() -> None:
     assert isinstance(dict_table_metadata["dagster/column_schema"], dg.TableSchema)
     dg.AssetMaterialization(asset_key="a", metadata=dict_table_metadata)
 
+    # pyrefly: ignore [invalid-argument]
     splat_table_metadata = {**table_metadata}
     assert splat_table_metadata == {"dagster/column_schema": column_schema}
     assert isinstance(splat_table_metadata["dagster/column_schema"], dg.TableSchema)
@@ -59,6 +60,7 @@ def test_row_count() -> None:
     assert dict_table_metadata == {"dagster/row_count": 67}
     dg.AssetMaterialization(asset_key="a", metadata=dict_table_metadata)
 
+    # pyrefly: ignore [invalid-argument]
     splat_table_metadata = {**table_metadata}
     assert splat_table_metadata == {"dagster/row_count": 67}
     dg.AssetMaterialization(asset_key="a", metadata=splat_table_metadata)
@@ -128,6 +130,7 @@ def test_column_lineage() -> None:
     extracted_table_metadata = TableMetadataSet.extract(materialization.metadata)
     assert extracted_table_metadata.column_lineage == expected_column_lineage
 
+    # pyrefly: ignore [invalid-argument]
     splat_table_metadata = {**table_metadata}
     assert splat_table_metadata == expected_metadata
 

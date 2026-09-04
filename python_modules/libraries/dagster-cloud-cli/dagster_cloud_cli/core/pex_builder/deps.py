@@ -166,6 +166,7 @@ def get_deps_requirements(
         [] if any("--hash" in line for line in deps_lines) else _EXTRA_BUILD_CONSTRAINTS
     )
 
+    # pyrefly: ignore [no-matching-overload]
     deps_requirements_text = "\n".join(
         sorted(set(deps_lines) | set(extra_constraints)) + [""]
     )  # empty string adds trailing newline

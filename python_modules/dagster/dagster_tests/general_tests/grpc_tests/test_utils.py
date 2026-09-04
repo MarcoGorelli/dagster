@@ -11,9 +11,13 @@ from dagster._grpc.utils import (
 def test_default_grpc_timeouts():
     with environ(
         {  # ty: ignore[invalid-argument-type]
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_SCHEDULE_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_SENSOR_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_REPOSITORY_GRPC_TIMEOUT_SECONDS": None,
         }
     ):
@@ -28,8 +32,11 @@ def test_override_grpc_timeouts():
     with environ(
         {  # ty: ignore[invalid-argument-type]
             "DAGSTER_GRPC_TIMEOUT_SECONDS": "120",
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_SCHEDULE_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_SENSOR_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_REPOSITORY_GRPC_TIMEOUT_SECONDS": None,
         }
     ):
@@ -42,8 +49,11 @@ def test_override_grpc_timeouts():
     with environ(
         {  # ty: ignore[invalid-argument-type]
             "DAGSTER_GRPC_TIMEOUT_SECONDS": "240",
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_SCHEDULE_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_SENSOR_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_REPOSITORY_GRPC_TIMEOUT_SECONDS": None,
         }
     ):
@@ -55,9 +65,12 @@ def test_override_grpc_timeouts():
 
     with environ(
         {  # ty: ignore[invalid-argument-type]
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_GRPC_TIMEOUT_SECONDS": None,
             "DAGSTER_SCHEDULE_GRPC_TIMEOUT_SECONDS": "45",
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_SENSOR_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_REPOSITORY_GRPC_TIMEOUT_SECONDS": None,
         }
     ):
@@ -69,9 +82,12 @@ def test_override_grpc_timeouts():
 
     with environ(
         {  # ty: ignore[invalid-argument-type]
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_SCHEDULE_GRPC_TIMEOUT_SECONDS": None,
             "DAGSTER_SENSOR_GRPC_TIMEOUT_SECONDS": "45",
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_REPOSITORY_GRPC_TIMEOUT_SECONDS": None,
         }
     ):
@@ -86,6 +102,7 @@ def test_override_grpc_timeouts():
             "DAGSTER_GRPC_TIMEOUT_SECONDS": "75",
             "DAGSTER_SCHEDULE_GRPC_TIMEOUT_SECONDS": "120",
             "DAGSTER_SENSOR_GRPC_TIMEOUT_SECONDS": "400",
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_REPOSITORY_GRPC_TIMEOUT_SECONDS": None,
         }
     ):
@@ -97,8 +114,11 @@ def test_override_grpc_timeouts():
 
     with environ(
         {  # ty: ignore[invalid-argument-type]
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_SCHEDULE_GRPC_TIMEOUT_SECONDS": None,
+            # pyrefly: ignore [bad-assignment]
             "DAGSTER_SENSOR_GRPC_TIMEOUT_SECONDS": None,
             "DAGSTER_REPOSITORY_GRPC_TIMEOUT_SECONDS": "300",
         }

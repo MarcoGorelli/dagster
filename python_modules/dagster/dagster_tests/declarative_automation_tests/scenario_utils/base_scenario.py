@@ -225,7 +225,7 @@ class AssetReconciliationScenario(
         test_time = self.current_time or get_current_datetime()
 
         with freeze_time(test_time):
-
+            # pyrefly: ignore [bad-argument-type]
             @dg.repository
             def repo():
                 return self.assets
@@ -286,7 +286,7 @@ class AssetReconciliationScenario(
                 instance.add_backfill(backfill)
 
             if self.cursor_from is not None:
-
+                # pyrefly: ignore [bad-argument-type]
                 @dg.repository
                 def prior_repo():
                     return self.cursor_from.assets  # ty: ignore[unresolved-attribute]
@@ -748,5 +748,6 @@ def with_implicit_auto_materialize_policies(
                 assets_def.with_attributes(automation_condition=automation_conditions_by_key)
             )
         else:
+            # pyrefly: ignore [bad-argument-type]
             ret.append(assets_def)
     return ret

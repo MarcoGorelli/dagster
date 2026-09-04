@@ -75,6 +75,7 @@ def metadata_for_table(
     if database and schema and table:
         table_name = ".".join([database, schema, table])
     metadata = {
+        # pyrefly: ignore [invalid-argument]
         **TableMetadataSet(
             column_schema=column_schema, table_name=table_name, storage_kind=service
         ),

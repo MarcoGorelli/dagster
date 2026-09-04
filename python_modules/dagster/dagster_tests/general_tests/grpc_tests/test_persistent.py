@@ -108,6 +108,7 @@ def test_python_environment_args():
                 socket=None,
                 loadable_target_origin=loadable_target_origin,
             )
+            # pyrefly: ignore [bad-index]
             assert process.args[:5] == [sys.executable, "-m", "dagster", "api", "grpc"]
         finally:
             if process:
@@ -176,6 +177,7 @@ def test_empty_executable_args():
                 socket=None,
                 loadable_target_origin=loadable_target_origin,
             )
+            # pyrefly: ignore [bad-index]
             assert process.args[:5] == [sys.executable, "-m", "dagster", "api", "grpc"]
 
             client = DagsterGrpcClient(port=port, host="localhost")

@@ -51,6 +51,7 @@ def test_can_run_in_async():
 
 def test_aio_resource():
     class AioResource(dg.ConfigurableResource):
+        # pyrefly: ignore [bad-class-definition]
         _loop = PrivateAttr()
 
         @property
@@ -58,6 +59,7 @@ def test_aio_resource():
             return self._loop
 
         @asynccontextmanager
+        # pyrefly: ignore [bad-override]
         async def yield_for_execution(self, context):
             await asyncio.sleep(0)
             self._loop = asyncio.get_running_loop()

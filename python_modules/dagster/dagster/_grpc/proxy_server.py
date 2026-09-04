@@ -163,6 +163,7 @@ class DagsterProxyApiServicer(DagsterApiServicer):
             )
             self._client_heartbeat_thread.start()
 
+    # pyrefly: ignore [bad-override]
     def ReloadCode(self, request, context):
         with self._reload_lock:  # can only call this method once at a time
             old_heartbeat_shutdown_event = self._client_heartbeat_shutdown_event
@@ -182,6 +183,7 @@ class DagsterProxyApiServicer(DagsterApiServicer):
 
         return dagster_api_pb2.ReloadCodeReply()
 
+    # pyrefly: ignore [bad-override]
     def RefreshComponentState(self, request, context):
         if self._load_error:
             return dagster_api_pb2.RefreshComponentStateReply(
@@ -193,6 +195,7 @@ class DagsterProxyApiServicer(DagsterApiServicer):
             defs_state_keys=list(request.defs_state_keys),
         )
 
+    # pyrefly: ignore [bad-override]
     def ReloadCodeWithState(self, request, context):
         # Forward into the long-lived inner code server so the in-process
         # incremental reload happens there. Unlike ReloadCode, this does not
@@ -273,6 +276,7 @@ class DagsterProxyApiServicer(DagsterApiServicer):
     def ExecutionPlanSnapshot(self, request, context):
         return self._query("ExecutionPlanSnapshot", request, context)
 
+    # pyrefly: ignore [bad-override]
     def ListRepositories(self, request, context):
         if self._load_error:
             return dagster_api_pb2.ListRepositoriesReply(
@@ -283,6 +287,7 @@ class DagsterProxyApiServicer(DagsterApiServicer):
     def Ping(self, request, context):
         return self._query("Ping", request, context)
 
+    # pyrefly: ignore [bad-override]
     def GetServerId(self, request, context) -> dagster_api_pb2.GetServerIdReply:
         return (
             dagster_api_pb2.GetServerIdReply(server_id=self._fixed_server_id)
@@ -298,6 +303,7 @@ class DagsterProxyApiServicer(DagsterApiServicer):
             "StreamingExternalRepository", request, context, timeout=DEFAULT_REPOSITORY_GRPC_TIMEOUT
         )
 
+    # pyrefly: ignore [bad-override]
     def Heartbeat(self, request, context):
         self.__last_heartbeat_time = time.time()
         echo = request.echo
@@ -362,6 +368,7 @@ class DagsterProxyApiServicer(DagsterApiServicer):
             sensor_execution_args.timeout or DEFAULT_SENSOR_GRPC_TIMEOUT,
         )
 
+    # pyrefly: ignore [bad-override]
     def ShutdownServer(self, request, context):
         try:
             self._shutdown_once_executions_finish_event.set()
@@ -383,6 +390,7 @@ class DagsterProxyApiServicer(DagsterApiServicer):
                 )
             )
 
+    # pyrefly: ignore [bad-override]
     def CancelExecution(self, request, context):
         try:
             cancel_execution_request = deserialize_value(
@@ -413,6 +421,7 @@ class DagsterProxyApiServicer(DagsterApiServicer):
     def CanCancelExecution(self, request, context):
         return self._query("CanCancelExecution", request, context)
 
+    # pyrefly: ignore [bad-override]
     def StartRun(self, request, context):
         if self._shutdown_once_executions_finish_event.is_set():
             return dagster_api_pb2.StartRunReply(

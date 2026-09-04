@@ -945,10 +945,10 @@ def test_launch_asset_backfill_with_upstream_anchor_asset():
             asset_graph = repo.asset_graph
             assert target_subset == AssetGraphSubset(
                 partitions_subsets_by_asset_key={
-                    AssetKey("hourly"): asset_graph.get(
+                    AssetKey("hourly"): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                         AssetKey("hourly")
                     ).partitions_def.subset_with_partition_keys(hourly_partitions),  # ty: ignore[unresolved-attribute]
-                    AssetKey("daily"): asset_graph.get(
+                    AssetKey("daily"): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                         AssetKey("daily")
                     ).partitions_def.subset_with_partition_keys(["2020-01-02", "2020-01-03"]),  # ty: ignore[unresolved-attribute]
                 },
@@ -1010,13 +1010,13 @@ def test_launch_asset_backfill_with_two_anchor_assets():
             asset_graph = repo.asset_graph
             assert target_subset == AssetGraphSubset(
                 partitions_subsets_by_asset_key={
-                    AssetKey("hourly1"): asset_graph.get(
+                    AssetKey("hourly1"): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                         AssetKey("hourly1")
                     ).partitions_def.subset_with_partition_keys(hourly_partitions),  # ty: ignore[unresolved-attribute]
-                    AssetKey("hourly2"): asset_graph.get(
+                    AssetKey("hourly2"): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                         AssetKey("hourly2")
                     ).partitions_def.subset_with_partition_keys(hourly_partitions),  # ty: ignore[unresolved-attribute]
-                    AssetKey("daily"): asset_graph.get(
+                    AssetKey("daily"): asset_graph.get(  # pyrefly: ignore [missing-attribute]
                         AssetKey("daily")
                     ).partitions_def.subset_with_partition_keys(["2020-01-02", "2020-01-03"]),  # ty: ignore[unresolved-attribute]
                 },
@@ -1066,12 +1066,12 @@ def test_launch_asset_backfill_with_upstream_anchor_asset_and_non_partitioned_as
                 non_partitioned_asset_keys={AssetKey("non_partitioned")},
                 partitions_subsets_by_asset_key={
                     AssetKey("hourly"): (
-                        asset_graph.get(AssetKey("hourly"))
+                        asset_graph.get(AssetKey("hourly"))  # pyrefly: ignore [missing-attribute]
                         .partitions_def.empty_subset()  # ty: ignore[unresolved-attribute]
                         .with_partition_keys(hourly_partitions)
                     ),
                     AssetKey("daily"): (
-                        asset_graph.get(AssetKey("daily"))
+                        asset_graph.get(AssetKey("daily"))  # pyrefly: ignore [missing-attribute]
                         .partitions_def.empty_subset()  # ty: ignore[unresolved-attribute]
                         .with_partition_keys(["2020-01-02", "2020-01-03"])
                     ),

@@ -215,11 +215,13 @@ class DagsterPowerBITranslator:
             ),
             deps=report_keys,
             metadata={
+                # pyrefly: ignore [invalid-argument]
                 **PowerBIMetadataSet(
                     web_url=MetadataValue.url(url) if url else None,
                     name=data.properties.get("displayName"),
                 )
             },
+            # pyrefly: ignore [invalid-argument]
             tags={**PowerBITagSet(asset_type="dashboard")},
             kinds={"powerbi", "dashboard"},
         )
@@ -252,11 +254,13 @@ class DagsterPowerBITranslator:
             key=AssetKey(["report", _clean_asset_name(data.properties["name"])]),
             deps=[dataset_key] if dataset_key else None,
             metadata={
+                # pyrefly: ignore [invalid-argument]
                 **PowerBIMetadataSet(
                     web_url=MetadataValue.url(url) if url else None,
                     name=data.properties.get("name"),
                 )
             },
+            # pyrefly: ignore [invalid-argument]
             tags={**PowerBITagSet(asset_type="report")},
             kinds={"powerbi", "report"},
             owners=[owner] if owner and is_valid_owner(owner) else None,
@@ -305,13 +309,16 @@ class DagsterPowerBITranslator:
             key=AssetKey(["semantic_model", _clean_asset_name(data.properties["name"])]),
             deps=source_keys,
             metadata={
+                # pyrefly: ignore [invalid-argument]
                 **PowerBIMetadataSet(
                     web_url=MetadataValue.url(url) if url else None,
                     id=data.properties["id"],
                     name=data.properties.get("name"),
                 ),
+                # pyrefly: ignore [invalid-argument]
                 **table_meta,
             },
+            # pyrefly: ignore [invalid-argument]
             tags={**PowerBITagSet(asset_type="semantic_model")},
             kinds={"powerbi", "semantic_model"},
             owners=[owner] if owner and is_valid_owner(owner) else None,
@@ -332,6 +339,7 @@ class DagsterPowerBITranslator:
 
         return AssetSpec(
             key=asset_key,
+            # pyrefly: ignore [invalid-argument]
             tags={**PowerBITagSet(asset_type="data_source")},
             kinds={"powerbi"},
         )

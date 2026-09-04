@@ -300,6 +300,7 @@ class K8sRunLauncher(RunLauncher, ConfigurableClass):
         # Set docker/image tag here, as it can also be provided by `user_defined_k8s_config`.
         self._instance.add_run_tags(
             run.run_id,
+            # pyrefly: ignore [missing-attribute]
             {DOCKER_IMAGE_TAG: job.spec.template.spec.containers[0].image},
         )
 
@@ -349,6 +350,7 @@ class K8sRunLauncher(RunLauncher, ConfigurableClass):
             return None
         return self._instance.count_resume_run_attempts(run.run_id)
 
+    # pyrefly: ignore [bad-override]
     def terminate(self, run_id):
         check.str_param(run_id, "run_id")
         run = self._instance.get_run_by_id(run_id)
@@ -416,6 +418,7 @@ class K8sRunLauncher(RunLauncher, ConfigurableClass):
             )
 
         else:
+            # pyrefly: ignore [bad-argument-type]
             job_debug_info = self._api_client.get_job_debug_info(job_name, namespace=namespace)
             full_msg = (
                 full_msg
@@ -435,6 +438,7 @@ class K8sRunLauncher(RunLauncher, ConfigurableClass):
         )
         try:
             status = self._api_client.get_job_status(
+                # pyrefly: ignore [bad-argument-type]
                 namespace=container_context.namespace,
                 job_name=job_name,
             )

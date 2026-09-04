@@ -172,6 +172,7 @@ class LegacyRunStorage(RunStorage, ConfigurableClass):
         return self._inst_data
 
     @property
+    # pyrefly: ignore [bad-override]
     def _instance(self) -> Optional["DagsterInstance"]:
         return self._storage._instance  # noqa: SLF001
 
@@ -396,6 +397,7 @@ class LegacyEventLogStorage(EventLogStorage, ConfigurableClass):
         return LegacyEventLogStorage(storage, inst_data=inst_data)
 
     @property
+    # pyrefly: ignore [bad-override]
     def _instance(self) -> Optional["DagsterInstance"]:
         return self._storage._instance  # noqa: SLF001
 
@@ -811,6 +813,7 @@ class LegacyScheduleStorage(ScheduleStorage, ConfigurableClass):
         return LegacyScheduleStorage(storage, inst_data=inst_data)
 
     @property
+    # pyrefly: ignore [bad-override]
     def _instance(self) -> Optional["DagsterInstance"]:
         return self._storage._instance  # noqa: SLF001
 

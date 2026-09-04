@@ -2,6 +2,7 @@ import dagster as dg
 import pytest
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out=dg.DynamicOut())
 def dynamic_numbers(_):
     yield dg.DynamicOutput(1, mapping_key="1")

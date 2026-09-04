@@ -393,6 +393,7 @@ def test_multi_materialization():
         def __init__(self):
             self.values = {}
 
+        # pyrefly: ignore [bad-override]
         def handle_output(self, context, obj):
             keys = tuple(context.get_identifier())
             self.values[keys] = obj
@@ -450,6 +451,7 @@ def test_different_io_managers():
     assert my_job.execute_in_process().success
 
 
+# pyrefly: ignore [no-matching-overload]
 @dg.io_manager
 def my_io_manager():
     pass
@@ -503,6 +505,7 @@ def test_fan_in_skip():
 
 
 def test_configured():
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(
         config_schema={"base_dir": str},
         description="abc",
@@ -643,6 +646,7 @@ def test_error_boundary_with_gen():
         def load_input(self, context):
             pass
 
+        # pyrefly: ignore [bad-override]
         def handle_output(self, context, obj):
             yield dg.AssetMaterialization(asset_key="a")
             raise ValueError("handle output error")
@@ -821,6 +825,7 @@ def test_context_logging_metadata():
             def __init__(self):
                 self.values = {}
 
+            # pyrefly: ignore [bad-override]
             def handle_output(self, context, obj):
                 keys = tuple(context.get_identifier())
                 self.values[keys] = obj
@@ -844,17 +849,20 @@ def test_context_logging_metadata():
     assert result.success
 
     output_event = result.all_node_events[4]
+    # pyrefly: ignore [missing-attribute]
     metadata = output_event.event_specific_data.metadata
     # Ensure that ordering is preserved among yields and calls to log
     assert set(metadata.keys()) == {"foo", "baz", "bar"}
 
     materialization_event = result.all_node_events[2]
+    # pyrefly: ignore [missing-attribute]
     metadata = materialization_event.event_specific_data.materialization.metadata
 
     assert len(metadata) == 3
     assert set(metadata.keys()) == {"foo", "baz", "bar"}
 
     implicit_materialization_event = result.all_node_events[3]
+    # pyrefly: ignore [missing-attribute]
     metadata = implicit_materialization_event.event_specific_data.materialization.metadata
     assert len(metadata) == 3
     assert set(metadata.keys()) == {"foo", "baz", "bar"}
@@ -907,6 +915,7 @@ def test_metadata_dynamic_outputs():
         def __init__(self):
             self.values = {}
 
+        # pyrefly: ignore [bad-override]
         def handle_output(self, context, obj):
             keys = tuple(context.get_identifier())
             self.values[keys] = obj
@@ -917,6 +926,7 @@ def test_metadata_dynamic_outputs():
             keys = tuple(context.upstream_output.get_identifier())
             return self.values[keys]
 
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def the_op():
         yield dg.DynamicOutput(1, mapping_key="one", metadata={"one": "blah"})
@@ -1082,6 +1092,7 @@ def test_instance_set_on_asset_loader():
 
 def test_telemetry_custom_io_manager():
     class MyIOManager(dg.IOManager):
+        # pyrefly: ignore [bad-override]
         def handle_output(self, context, obj):
             return {}
 
@@ -1097,6 +1108,7 @@ def test_telemetry_custom_io_manager():
 
 def test_telemetry_dagster_io_manager():
     class MyIOManager(dg.IOManager):
+        # pyrefly: ignore [bad-override]
         def handle_output(self, context, obj):
             return {}
 

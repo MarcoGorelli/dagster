@@ -110,6 +110,7 @@ class AssetNode(BaseAssetNode):
         return self.assets_def.specs_by_key[self.key].partitions_def
 
     @property
+    # pyrefly: ignore [bad-override]
     def partition_mappings(self) -> Mapping[AssetKey, PartitionMapping]:
         return self._spec.partition_mappings
 

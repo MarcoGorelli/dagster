@@ -84,17 +84,22 @@ def test_open_typing_tuple_input_fail():
 def test_typed_python_tuple_directly():
     int_str_tuple = create_typed_tuple(int, str)
 
+    # pyrefly: ignore [bad-argument-type]
     int_str_tuple.type_check(None, (1, "foo"))
 
+    # pyrefly: ignore [bad-argument-type]
     res = int_str_tuple.type_check(None, None)
     assert not res.success
 
+    # pyrefly: ignore [bad-argument-type]
     res = int_str_tuple.type_check(None, "bar")
     assert not res.success
 
+    # pyrefly: ignore [bad-argument-type]
     res = int_str_tuple.type_check(None, (1, 2, 3))
     assert not res.success
 
+    # pyrefly: ignore [bad-argument-type]
     res = int_str_tuple.type_check(None, ("1", 2))
     assert not res.success
 
@@ -104,14 +109,18 @@ def test_nested_python_tuple_directly():
 
     nested_tuple = create_typed_tuple(bool, list, int_str_tuple_kls)
 
+    # pyrefly: ignore [bad-argument-type]
     nested_tuple.type_check(None, (True, [1], (1, "foo")))
 
+    # pyrefly: ignore [bad-argument-type]
     res = nested_tuple.type_check(None, None)
     assert not res.success
 
+    # pyrefly: ignore [bad-argument-type]
     res = nested_tuple.type_check(None, "bar")
     assert not res.success
 
+    # pyrefly: ignore [bad-argument-type]
     res = nested_tuple.type_check(None, (True, [1], (1, 2)))
     assert not res.success
 

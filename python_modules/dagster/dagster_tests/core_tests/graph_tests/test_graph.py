@@ -377,6 +377,7 @@ def test_logger_defs():
     def my_graph():
         my_op()
 
+    # pyrefly: ignore [no-matching-overload]
     @dg.logger
     def my_logger(_):
         pass
@@ -1315,6 +1316,7 @@ def test_graph_definition_input_mappings():
 
 
 def test_graph_with_mapped_out():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def dyn_vals():
         for i in range(3):

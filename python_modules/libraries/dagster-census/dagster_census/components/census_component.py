@@ -47,7 +47,9 @@ def resolve_sync_selector(
 ) -> Callable[[CensusSync], bool] | None:
     if isinstance(model, str):
         resolved = context.resolve_value(model)
+        # pyrefly: ignore [bad-specialization]
         resolved = check.callable_param(resolved, "unknown")
+        # pyrefly: ignore [bad-return]
         return resolved
     if isinstance(model, CensusSyncSelectorByName.model()):
         resolved = resolve_fields(model, CensusSyncSelectorByName.model(), context)  # ty: ignore[invalid-argument-type]
@@ -132,10 +134,12 @@ class CensusComponent(StateBackedComponent, dg.Resolvable):
     def get_asset_spec(self, sync: CensusSync) -> dg.AssetSpec:
         """Returns the :py:class:`AssetSpec` representing a given Census sync."""
         metadata = {
+            # pyrefly: ignore [invalid-argument]
             **TableMetadataSet(
                 column_schema=generate_table_schema(sync.mappings),
                 table_name=sync.name,
             ),
+            # pyrefly: ignore [invalid-argument]
             **CensusMetadataSet(
                 sync_id=sync.id,
                 sync_name=sync.name,

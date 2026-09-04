@@ -15,6 +15,8 @@ from beacon_hq.assets.reports import (
 )
 from beacon_hq.sensors import _orchestration_date_for_run, beacon_after_upstream_success_sensor
 from shared.io_managers import make_duckdb_io_manager
+
+# pyrefly: ignore [missing-import]
 from tests.fakes import MockLLMResource
 
 

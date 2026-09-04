@@ -88,6 +88,7 @@ def list_all_components_schema(
                     __config__=ConfigDict(extra="forbid"),
                 )
             )
+    # pyrefly: ignore [not-a-type]
     union_type = Union[tuple(model_cls_list)]  # noqa: UP007
     return TypeAdapter(union_type).json_schema()
 

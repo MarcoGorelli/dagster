@@ -14,6 +14,7 @@ from dagster_k8s.pipes import PipesK8sClient, PipesK8sPodLogsMessageReader
 from dagster_pipes import PipesContextData, PipesDefaultContextLoader
 from dagster_test.test_project import get_test_project_docker_image
 
+# pyrefly: ignore [missing-import]
 from tests.utils import BUSYBOX_IMAGE
 
 POLL_INTERVAL = 0.5

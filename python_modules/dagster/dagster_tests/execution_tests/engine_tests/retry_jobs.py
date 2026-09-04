@@ -19,6 +19,7 @@ def get_dynamic_job_resource_init_failure(
     # initializations that have already occurred within an external file
     # (count.pkl) so that state can be shared. In multiprocessing case, race
     # conditions are avoided by setting max concurrency to 1.
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut(), config_schema={"num_dynamic_steps": int})
     def source(context):
         for i in range(context.op_config["num_dynamic_steps"]):
@@ -73,6 +74,7 @@ def get_dynamic_job_op_failure(
     # within an external file (count.pkl) so that state can be shared. In
     # multiprocessing case, race conditions are avoided by setting max
     # concurrency to 1.
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def source():
         for i in range(3):

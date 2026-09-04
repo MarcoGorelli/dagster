@@ -7,6 +7,7 @@ from dagster_tests.execution_tests.engine_tests.test_step_delegating_executor im
 )
 
 
+# pyrefly: ignore [bad-argument-type, missing-argument]
 @dg.op(out=dg.DynamicOut(str))
 def dynamic():
     for x in ["a", "b"]:
@@ -33,6 +34,7 @@ def define_dynamic_skipping_job():
     return dynamic_skipping_job
 
 
+# pyrefly: ignore [bad-argument-type, missing-argument]
 @dg.op(out=dg.DynamicOut(int))
 def dynamic_output_op():
     for x in range(10):

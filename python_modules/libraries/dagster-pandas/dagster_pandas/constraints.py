@@ -525,9 +525,11 @@ class MultiColumnConstraintWithMetadata(ColumnConstraintWithMetadata):
                     result = new_validator.validate(
                         DataFrame(data[column]), column, *args, **kwargs
                     )
+                    # pyrefly: ignore [missing-attribute]
                     result_val = result.success
                     if result_val:
                         continue
+                    # pyrefly: ignore [missing-attribute]
                     result_dict = result.metadata[CONSTRAINT_METADATA_KEY].data
                     truthparam = truthparam and result_val
                     for key in result_dict.keys():
@@ -726,6 +728,7 @@ def column_range_validation_factory(minim=None, maxim=None, ignore_missing_vals=
     def in_range_validation_fn(x):
         if ignore_missing_vals and pd.isnull(x):
             return True, {}
+        # pyrefly: ignore [unsupported-operation]
         return (isinstance(x, (type(minim), type(maxim)))) and (x <= maxim) and (x >= minim), {}
 
     in_range_validation_fn.__doc__ = f"checks whether values are between {minim} and {maxim}"

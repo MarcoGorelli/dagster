@@ -176,6 +176,7 @@ def test_fs_io_manager_handles_assets():
         io_manager_def = fs_io_manager.configured({"base_dir": tmpdir_path})
         job_def = get_assets_job(io_manager_def)
 
+        # pyrefly: ignore [missing-attribute]
         result = job_def.execute_in_process()
         assert result.success
 
@@ -207,6 +208,7 @@ def test_fs_io_manager_partitioned():
             partitions_def=dg.DailyPartitionsDefinition(start_date="2020-02-01"),
         )
 
+        # pyrefly: ignore [missing-attribute]
         result = job_def.execute_in_process(partition_key="2020-05-03")
         assert result.success
 

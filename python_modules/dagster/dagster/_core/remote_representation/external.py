@@ -447,6 +447,7 @@ class RemoteRepository:
     def get_schedules_targeting(self, asset_key: AssetKey) -> AbstractSet["RemoteSchedule"]:
         asset_snap = self.get_asset_node_snap(asset_key)
         if not asset_snap:
+            # pyrefly: ignore [bad-return]
             return _empty_set
 
         schedules = set()

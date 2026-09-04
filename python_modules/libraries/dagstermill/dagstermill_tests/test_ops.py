@@ -119,7 +119,9 @@ def test_reexecute_result_notebook():
         for materialization_event in materialization_events:
             result_path = get_path(materialization_event)
 
+        # pyrefly: ignore [missing-attribute, unbound-name]
         if result_path.endswith(".ipynb"):
+            # pyrefly: ignore [no-matching-overload]
             with open(result_path, encoding="utf8") as fd:
                 original = nbformat.read(fd, as_version=4)
             # ExecutePreprocessor raises if any cell fails to re-execute, which is
@@ -129,9 +131,12 @@ def test_reexecute_result_notebook():
             # and papermill metadata carries timestamps); compare cell sources
             # only as a structural sanity check.
             reexecuted = copy.deepcopy(original)
+            # pyrefly: ignore [bad-argument-type]
             ExecutePreprocessor().preprocess(reexecuted)
+            # pyrefly: ignore [bad-index]
             assert [c["source"] for c in reexecuted["cells"]] == [
-                c["source"] for c in original["cells"]
+                c["source"]
+                for c in original["cells"]  # pyrefly: ignore [bad-index]
             ]
 
 
@@ -365,6 +370,7 @@ def test_resources_notebook_with_exception():
             assert not result.success
             assert result.all_events[8].event_type.value == "STEP_FAILURE"
             assert (
+                # pyrefly: ignore [missing-attribute]
                 "raise Exception()" in result.all_events[8].event_specific_data.error.cause.message
             )
 
@@ -510,6 +516,7 @@ def test_failure(capsys):
         "failure_job", {"execution": {"config": {"in_process": {}}}}, raise_on_error=False
     ) as result:
         assert (
+            # pyrefly: ignore [missing-attribute]
             result.failure_data_for_node("yield_failure").user_failure_data.description
             == "bad bad notebook"
         )

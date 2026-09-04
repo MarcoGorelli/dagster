@@ -204,7 +204,9 @@ class RemoteRepositoryAssetNode(RemoteAssetNode):
         "AssetNodeSnap",
         ImportFrom("dagster._core.remote_representation.external_data"),
     ]
+    # pyrefly: ignore [bad-override]
     parent_keys: AbstractSet[AssetKey]
+    # pyrefly: ignore [bad-override]
     child_keys: AbstractSet[AssetKey]
     check_keys: AbstractSet[AssetCheckKey]
     execution_set_entity_keys: AbstractSet[AssetOrCheckKey]
@@ -227,6 +229,7 @@ class RemoteRepositoryAssetNode(RemoteAssetNode):
         return self
 
     @property
+    # pyrefly: ignore [bad-override]
     def key(self) -> AssetKey:
         return self.asset_node_snap.asset_key
 
@@ -247,6 +250,7 @@ class RemoteRepositoryAssetNode(RemoteAssetNode):
         return self.asset_node_snap.is_executable
 
     @property
+    # pyrefly: ignore [bad-override]
     def partition_mappings(self) -> Mapping[AssetKey, PartitionMapping]:
         return {
             dep.parent_asset_key: dep.partition_mapping
@@ -306,11 +310,13 @@ class RemoteWorkspaceAssetNode(RemoteAssetNode):
 
     ##### COMMON ASSET NODE INTERFACE
     @cached_property
+    # pyrefly: ignore [bad-override]
     def key(self) -> AssetKey:
         return self.repo_scoped_asset_infos[0].asset_node.asset_node_snap.asset_key
 
     ### KEEP THIS IN SYNC WITH THE JS CODE THAT MERGES THE SDA DEFINITIONS: https://github.com/dagster-io/dagster/blob/22e79ea7024bd13b197e3a2f66401197badceb75/js_modules/dagster-ui/packages/ui-core/src/assets/useAllAssets.tsx#L239-L256
     @property
+    # pyrefly: ignore [bad-override]
     def parent_keys(self) -> AbstractSet[AssetKey]:
         # combine deps from all nodes
         keys = set()
@@ -319,6 +325,7 @@ class RemoteWorkspaceAssetNode(RemoteAssetNode):
         return keys
 
     @property
+    # pyrefly: ignore [bad-override]
     def child_keys(self) -> AbstractSet[AssetKey]:
         # combine deps from all nodes
         keys = set()
@@ -364,6 +371,7 @@ class RemoteWorkspaceAssetNode(RemoteAssetNode):
         return pools
 
     @property
+    # pyrefly: ignore [bad-override]
     def partition_mappings(self) -> Mapping[AssetKey, PartitionMapping]:
         if self.is_materializable:
             return {
@@ -511,6 +519,7 @@ class RemoteAssetGraph(BaseAssetGraph[TRemoteAssetNode], ABC, Generic[TRemoteAss
     # their graphs (e.g. the cloud server workspace graph), which do not surface job
     # entity nodes yet.
     @property
+    # pyrefly: ignore [bad-override]
     def _asset_job_nodes_by_key(self) -> Mapping[AssetJobKey, BaseAssetJobNode]:  # pyright: ignore[reportIncompatibleVariableOverride]
         return {}
 
@@ -545,6 +554,7 @@ class RemoteAssetGraph(BaseAssetGraph[TRemoteAssetNode], ABC, Generic[TRemoteAss
 
     ##### COMMON ASSET GRAPH INTERFACE
     @cached_property
+    # pyrefly: ignore [bad-override]
     def _asset_check_nodes_by_key(self) -> Mapping[AssetCheckKey, AssetCheckNode]:
         return {
             k: self._get_asset_check_node_from_remote_asset_check_node(v)
@@ -679,6 +689,7 @@ class RemoteRepositoryAssetGraph(RemoteAssetGraph[RemoteRepositoryAssetNode]):
     remote_asset_job_nodes_by_key: Mapping[AssetJobKey, RemoteAssetJobNode]
 
     @property
+    # pyrefly: ignore [bad-override]
     def _asset_nodes_by_key(self) -> Mapping[AssetKey, RemoteRepositoryAssetNode]:
         return self.remote_asset_nodes_by_key
 
@@ -811,6 +822,7 @@ class RemoteWorkspaceAssetGraph(RemoteAssetGraph[RemoteWorkspaceAssetNode]):
         return self._remote_asset_job_nodes_by_key
 
     @property
+    # pyrefly: ignore [bad-override]
     def _asset_nodes_by_key(self) -> Mapping[AssetKey, RemoteWorkspaceAssetNode]:
         return self.remote_asset_nodes_by_key
 
@@ -958,8 +970,10 @@ def _warn_on_duplicate_nodes(
             elif snap.is_materializable:
                 materializable_locations.append(location)
         if len(observable_locations) > 1:
+            # pyrefly: ignore [unsupported-operation]
             observable_duplicates[node.key] = observable_locations
         if len(materializable_locations) > 1:
+            # pyrefly: ignore [unsupported-operation]
             materializable_duplicates[node.key] = materializable_locations
 
     # It is possible for multiple nodes to exist that share the same key. This is invalid if

@@ -70,7 +70,9 @@ class ClickhousePolarsTypeHandler(DbTypeHandler[pl.DataFrame]):
 
         return {
             **(
-                TableMetadataSet(partition_row_count=obj.height, storage_kind="clickhouse")
+                TableMetadataSet(  # pyrefly: ignore [invalid-argument]
+                    partition_row_count=obj.height, storage_kind="clickhouse"
+                )
                 if context.has_partition_key
                 else TableMetadataSet(row_count=obj.height, storage_kind="clickhouse")
             ),

@@ -96,8 +96,8 @@ def test_failing_type_eval_column():
     column_const_data = output_metadata["columns-constraint-metadata"].data  # ty: ignore[unresolved-attribute]
     assert column_const_data["expected"] == {
         "foo": {
-            "in_range_validation_fn": in_range_validator.__doc__.strip(),
-            "dtype_in_set_validation_fn": dtype_is_num_validator.__doc__.strip(),
+            "in_range_validation_fn": in_range_validator.__doc__.strip(),  # pyrefly: ignore [missing-attribute]
+            "dtype_in_set_validation_fn": dtype_is_num_validator.__doc__.strip(),  # pyrefly: ignore [missing-attribute]
         }
     }
     assert column_const_data["offending"] == {
@@ -207,8 +207,8 @@ def test_failing_type_eval_multi_error():
     column_const_data = output_metadata["columns-constraint-metadata"].data  # ty: ignore[unresolved-attribute]
     assert column_const_data["expected"] == {
         "foo": {
-            "in_range_validation_fn": in_range_validator.__doc__.strip(),
-            "dtype_in_set_validation_fn": dtype_is_num_validator.__doc__.strip(),
+            "in_range_validation_fn": in_range_validator.__doc__.strip(),  # pyrefly: ignore [missing-attribute]
+            "dtype_in_set_validation_fn": dtype_is_num_validator.__doc__.strip(),  # pyrefly: ignore [missing-attribute]
         }
     }
     assert column_const_data["offending"] == {

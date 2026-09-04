@@ -43,6 +43,7 @@ class OutputManagerDefinition(ResourceDefinition, IOutputManagerDefinition):
         )
 
     @property
+    # pyrefly: ignore [bad-override]
     def output_config_schema(self):
         return self._output_config_schema
 

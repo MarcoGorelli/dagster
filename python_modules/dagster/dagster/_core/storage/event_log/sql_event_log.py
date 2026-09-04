@@ -1437,6 +1437,7 @@ class SqlEventLogStorage(EventLogStorage):
             should_query = bool(has_more) and bool(limit) and len(result) < cast("int", limit)
 
         is_partial_query = asset_keys is not None or bool(prefix) or bool(limit) or bool(cursor)
+        # pyrefly: ignore [unbound-name]
         if not is_partial_query and self._can_mark_assets_as_migrated(rows):
             self.enable_secondary_index(ASSET_KEY_INDEX_COLS)
 
@@ -1588,6 +1589,7 @@ class SqlEventLogStorage(EventLogStorage):
         )
         with self.index_connection() as conn:
             backcompat_rows = db_fetch_mappings(conn, backcompat_query)
+        # pyrefly: ignore [bad-return]
         return {
             AssetKey.from_db_string(row["asset_key"]): row["timestamp"] for row in backcompat_rows
         }  # type: ignore
@@ -1791,10 +1793,11 @@ class SqlEventLogStorage(EventLogStorage):
         if (
             not isinstance(event_or_materialization, EventLogEntry)
             or not event_or_materialization.is_dagster_event
-            or not event_or_materialization.dagster_event.asset_key
+            or not event_or_materialization.dagster_event.asset_key  # pyrefly: ignore [missing-attribute]
         ):
             return None
 
+        # pyrefly: ignore [missing-attribute]
         return event_or_materialization.dagster_event.step_materialization_data.materialization
 
     def _get_asset_key_values_on_wipe(self) -> Mapping[str, Any]:
@@ -3424,6 +3427,7 @@ class SqlEventLogStorage(EventLogStorage):
         return infos
 
     @property
+    # pyrefly: ignore [bad-override]
     def supports_asset_checks(self):
         return self.has_table(AssetCheckExecutionsTable.name)
 

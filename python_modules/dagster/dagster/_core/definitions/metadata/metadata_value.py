@@ -538,6 +538,7 @@ class TextMetadataValue(MetadataValue[str]):
         text (Optional[str]): The text data.
     """
 
+    # pyrefly: ignore [bad-override]
     text: PublicAttr[str | None] = ""
 
     @public
@@ -557,6 +558,7 @@ class UrlMetadataValue(MetadataValue[str]):
         url (Optional[str]): The URL as a string.
     """
 
+    # pyrefly: ignore [bad-override]
     url: PublicAttr[str | None] = ""
 
     @public
@@ -593,6 +595,7 @@ class PathMetadataValue(MetadataValue[str], IHaveNew):
 
     @public
     @property
+    # pyrefly: ignore [bad-override]
     def path(self) -> str:
         """str: The wrapped path."""
         return self.fspath
@@ -625,6 +628,7 @@ class NotebookMetadataValue(MetadataValue[str], IHaveNew):
 
     @public
     @property
+    # pyrefly: ignore [bad-override]
     def path(self) -> str:
         """str: The wrapped path to the notebook as a string."""
         return self.fspath
@@ -966,6 +970,7 @@ class TableColumnLineageMetadataValue(
 
     @public
     @property
+    # pyrefly: ignore [bad-override]
     def column_lineage(self) -> TableColumnLineage:
         """TableColumnLineage: The wrapped column lineage."""
         return self.lineage
@@ -1022,6 +1027,7 @@ class PoolMetadataValue(
 
     @public
     @property
+    # pyrefly: ignore [bad-override]
     def pool(self) -> str:
         return self.name
 

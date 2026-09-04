@@ -872,6 +872,7 @@ class WorkspaceRequestContext(BaseWorkspaceRequestContext):
         return self._source
 
     @property
+    # pyrefly: ignore [bad-override]
     def loaders(self) -> dict[type, DataLoader]:
         return self._loaders
 

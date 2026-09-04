@@ -44,6 +44,7 @@ def test_output_values():
 
 
 def test_dynamic_output_values():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def two_outs():
         yield dg.DynamicOutput(1, "a")
@@ -295,6 +296,7 @@ def test_dagster_run():
 
 
 def test_dynamic_output_for_node():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def fanout():
         for i in range(3):
@@ -367,7 +369,7 @@ def test_retries_exceeded():
     assert not result.success
     assert (
         "Exception: I have failed"
-        in result.filter_events(lambda evt: evt.is_step_failure)[
+        in result.filter_events(lambda evt: evt.is_step_failure)[  # pyrefly: ignore [missing-attribute]
             0
         ].event_specific_data.error_display_string  # ty: ignore[unresolved-attribute]
     )

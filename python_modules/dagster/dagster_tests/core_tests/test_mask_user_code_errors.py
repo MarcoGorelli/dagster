@@ -110,6 +110,7 @@ def test_masking_nested_user_code_err_boundaries_reraise(enable_masking_user_cod
         exc_info = sys.exc_info()
         err_info = serializable_error_info_from_exc_info(exc_info)
 
+    # pyrefly: ignore [unbound-name]
     assert "hunter2" not in str(err_info)
 
 

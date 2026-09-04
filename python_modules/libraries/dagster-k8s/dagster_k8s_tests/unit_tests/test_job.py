@@ -116,16 +116,22 @@ def test_construct_dagster_k8s_job_with_mounts():
     )
     job = construct_dagster_k8s_job(cfg, ["foo", "bar"], "job123").to_dict()
 
+    # pyrefly: ignore [bad-index]
     assert len(job["spec"]["template"]["spec"]["volumes"]) == 1
     foo_volumes = [
-        volume for volume in job["spec"]["template"]["spec"]["volumes"] if volume["name"] == "foo"
+        volume
+        # pyrefly: ignore [bad-index]
+        for volume in job["spec"]["template"]["spec"]["volumes"]
+        if volume["name"] == "foo"
     ]
     assert len(foo_volumes) == 1
     assert foo_volumes[0]["config_map"]["name"] == "settings-cm"
 
+    # pyrefly: ignore [bad-index]
     assert len(job["spec"]["template"]["spec"]["containers"][0]["volume_mounts"]) == 1
     foo_volumes_mounts = [
         volume
+        # pyrefly: ignore [bad-index]
         for volume in job["spec"]["template"]["spec"]["containers"][0]["volume_mounts"]
         if volume["name"] == "foo"
     ]
@@ -147,9 +153,13 @@ def test_construct_dagster_k8s_job_with_mounts():
         ],
     )
     job = construct_dagster_k8s_job(cfg, ["foo", "bar"], "job123").to_dict()
+    # pyrefly: ignore [bad-index]
     assert len(job["spec"]["template"]["spec"]["volumes"]) == 1
     foo_volumes = [
-        volume for volume in job["spec"]["template"]["spec"]["volumes"] if volume["name"] == "foo"
+        volume
+        # pyrefly: ignore [bad-index]
+        for volume in job["spec"]["template"]["spec"]["volumes"]
+        if volume["name"] == "foo"
     ]
     assert len(foo_volumes) == 1
     assert foo_volumes[0]["secret"]["secret_name"] == "settings-secret"
@@ -182,6 +192,7 @@ def test_construct_dagster_k8s_job_with_env():
     with environ({"ENV_VAR_1": "one"}):
         job = construct_dagster_k8s_job(cfg, ["foo", "bar"], "job").to_dict()
 
+        # pyrefly: ignore [bad-index]
         env = job["spec"]["template"]["spec"]["containers"][0]["env"]
         env_mapping = {env_var["name"]: env_var for env_var in env}
 
@@ -230,6 +241,7 @@ def test_construct_dagster_k8s_job_with_user_defined_env_camelcase():
         cfg, ["foo", "bar"], "job", user_defined_k8s_config=user_defined_k8s_config
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     env = job["spec"]["template"]["spec"]["containers"][0]["env"]
     env_mapping = remove_none_recursively({env_var["name"]: env_var for env_var in env})
 
@@ -269,6 +281,7 @@ def test_construct_dagster_k8s_job_with_user_defined_command():
         cfg, ["foo", "bar"], "job", user_defined_k8s_config=user_defined_k8s_config
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     command = job["spec"]["template"]["spec"]["containers"][0]["command"]
     assert command == ["echo", "hi"]
 
@@ -318,6 +331,7 @@ def test_construct_dagster_k8s_job_with_user_defined_env_snake_case():
         cfg, ["foo", "bar"], "job", user_defined_k8s_config=user_defined_k8s_config
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     env_from = job["spec"]["template"]["spec"]["containers"][0]["env_from"]
     env_from_mapping = {
         (env_var.get("config_map_ref") or env_var.get("secret_ref")).get("name"): env_var
@@ -377,6 +391,7 @@ def test_construct_dagster_k8s_job_with_user_defined_env_from():
         cfg, ["foo", "bar"], "job", user_defined_k8s_config=user_defined_k8s_config
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     env_from = job["spec"]["template"]["spec"]["containers"][0]["env_from"]
     env_from_mapping = {
         (env_var.get("config_map_ref") or env_var.get("secret_ref")).get("name"): env_var
@@ -434,6 +449,7 @@ def test_construct_dagster_k8s_job_with_user_defined_volume_mounts_snake_case():
         cfg, ["foo", "bar"], "job", user_defined_k8s_config=user_defined_k8s_config
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     volume_mounts = job["spec"]["template"]["spec"]["containers"][0]["volume_mounts"]
     volume_mounts_mapping = {volume_mount["name"]: volume_mount for volume_mount in volume_mounts}
 
@@ -484,6 +500,7 @@ def test_construct_dagster_k8s_job_with_user_defined_volume_mounts_camel_case():
         cfg, ["foo", "bar"], "job", user_defined_k8s_config=user_defined_k8s_config
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     volume_mounts = job["spec"]["template"]["spec"]["containers"][0]["volume_mounts"]
     volume_mounts_mapping = {volume_mount["name"]: volume_mount for volume_mount in volume_mounts}
 
@@ -521,6 +538,7 @@ def test_construct_dagster_k8s_job_with_user_defined_service_account_name_snake_
         cfg, ["foo", "bar"], "job", user_defined_k8s_config=user_defined_k8s_config
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     service_account_name = job["spec"]["template"]["spec"]["service_account_name"]
     assert service_account_name == "this-should-take-precedence"
 
@@ -553,6 +571,7 @@ def test_construct_dagster_k8s_job_with_user_defined_service_account_name():
         cfg, ["foo", "bar"], "job", user_defined_k8s_config=user_defined_k8s_config
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     service_account_name = job["spec"]["template"]["spec"]["service_account_name"]
     assert service_account_name == "this-should-take-precedence"
 
@@ -609,6 +628,7 @@ def test_construct_dagster_k8s_job_with_ttl_snake_case():
     )
     job = construct_dagster_k8s_job(cfg, [], "job123").to_dict()
 
+    # pyrefly: ignore [bad-index]
     assert job["spec"]["ttl_seconds_after_finished"] == DEFAULT_K8S_JOB_TTL_SECONDS_AFTER_FINISHED
 
     # Setting ttl_seconds_after_finished still works
@@ -618,6 +638,7 @@ def test_construct_dagster_k8s_job_with_ttl_snake_case():
     job = construct_dagster_k8s_job(
         cfg, [], "job123", user_defined_k8s_config=user_defined_cfg
     ).to_dict()
+    # pyrefly: ignore [bad-index]
     assert job["spec"]["ttl_seconds_after_finished"] == 0
 
 
@@ -629,6 +650,7 @@ def test_construct_dagster_k8s_job_with_ttl():
     )
     job = construct_dagster_k8s_job(cfg, [], "job123").to_dict()
 
+    # pyrefly: ignore [bad-index]
     assert job["spec"]["ttl_seconds_after_finished"] == DEFAULT_K8S_JOB_TTL_SECONDS_AFTER_FINISHED
 
     user_defined_cfg = UserDefinedDagsterK8sConfig(
@@ -637,6 +659,7 @@ def test_construct_dagster_k8s_job_with_ttl():
     job = construct_dagster_k8s_job(
         cfg, [], "job123", user_defined_k8s_config=user_defined_cfg
     ).to_dict()
+    # pyrefly: ignore [bad-index]
     assert job["spec"]["ttl_seconds_after_finished"] == 0
 
 
@@ -648,6 +671,7 @@ def test_construct_dagster_k8s_job_with_sidecar_container():
     )
     job = construct_dagster_k8s_job(cfg, [], "job123").to_dict()
 
+    # pyrefly: ignore [bad-index]
     assert job["spec"]["ttl_seconds_after_finished"] == DEFAULT_K8S_JOB_TTL_SECONDS_AFTER_FINISHED
 
     user_defined_cfg = UserDefinedDagsterK8sConfig(
@@ -659,6 +683,7 @@ def test_construct_dagster_k8s_job_with_sidecar_container():
         cfg, [], "job123", user_defined_k8s_config=user_defined_cfg
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     containers = job["spec"]["template"]["spec"]["containers"]
 
     assert len(containers) == 2
@@ -731,7 +756,9 @@ def test_construct_dagster_k8s_job_with_labels():
         **user_defined_labels,
     }
 
+    # pyrefly: ignore [bad-index]
     assert job1["metadata"]["labels"] == expected_labels1
+    # pyrefly: ignore [bad-index]
     assert job1["spec"]["template"]["metadata"]["labels"] == expected_template_labels1
 
     job2 = construct_dagster_k8s_job(
@@ -754,7 +781,9 @@ def test_construct_dagster_k8s_job_with_labels():
             "dagster/run_id": "long_run_id_64______0123456789012345678901234567890123456789012",
         },
     )
+    # pyrefly: ignore [bad-index]
     assert job2["metadata"]["labels"] == expected_labels2
+    # pyrefly: ignore [bad-index]
     assert job2["spec"]["template"]["metadata"]["labels"] == expected_labels2
 
 
@@ -784,10 +813,14 @@ def test_construct_dagster_k8s_job_with_label_precedence():
         ),
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     assert job["metadata"]["labels"]["a"] == "job a"
+    # pyrefly: ignore [bad-index]
     assert job["metadata"]["labels"]["b"] == "job b"
 
+    # pyrefly: ignore [bad-index]
     assert job["spec"]["template"]["metadata"]["labels"]["a"] == "user a"
+    # pyrefly: ignore [bad-index]
     assert job["spec"]["template"]["metadata"]["labels"]["b"] == "job b"
 
 
@@ -815,6 +848,7 @@ def test_construct_dagster_k8s_job_with_user_defined_image():
         cfg, [], "job", user_defined_k8s_config=user_defined_k8s_config
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     image = job["spec"]["template"]["spec"]["containers"][0]["image"]
     assert image == expected_image
 
@@ -836,7 +870,9 @@ def test_sanitize_labels():
         },
     ).to_dict()
 
+    # pyrefly: ignore [bad-index]
     assert job["metadata"]["labels"]["dagster/op"] == "get_f-o.o-bar-0"
+    # pyrefly: ignore [bad-index]
     assert job["metadata"]["labels"]["my_label"] == "WhatsUP"
 
 
@@ -860,6 +896,7 @@ def test_construct_dagster_k8s_job_with_raw_env():
             ],
         ).to_dict()
 
+        # pyrefly: ignore [bad-index]
         env = job["spec"]["template"]["spec"]["containers"][0]["env"]
         env_mapping = {env_var["name"]: env_var for env_var in env}
 

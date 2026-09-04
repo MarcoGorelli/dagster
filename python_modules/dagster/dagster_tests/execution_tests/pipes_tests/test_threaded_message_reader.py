@@ -60,6 +60,7 @@ class PipesFileMessageReader(PipesThreadedMessageReader):
     def get_params(self) -> Iterator[PipesParams]:
         yield {PipesDefaultMessageWriter.STDIO_KEY: PipesDefaultMessageWriter.STDOUT}
 
+    # pyrefly: ignore [bad-override]
     def download_messages(self, cursor: int | None, params: PipesParams) -> tuple[int, str] | None:
         if cursor is None:
             cursor = 0

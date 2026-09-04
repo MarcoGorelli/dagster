@@ -78,6 +78,7 @@ def test_asset_check_decorator_name() -> None:
 
 
 def test_asset_check_decorator_docstring_description() -> None:
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset="asset1")
     def check1():
         """Docstring."""
@@ -92,6 +93,7 @@ def test_asset_check_decorator_docstring_description() -> None:
 
 
 def test_asset_check_decorator_parameter_description() -> None:
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset="asset1", description="parameter")
     def check1():
         """Docstring."""

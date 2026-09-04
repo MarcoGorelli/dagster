@@ -111,6 +111,7 @@ def test_bad_target():
             " or RepositoryDefinition. Got None."
         ),
     ):
+        # pyrefly: ignore [bad-argument-type]
         dg.reconstructable(not_the_pipeline)
 
 

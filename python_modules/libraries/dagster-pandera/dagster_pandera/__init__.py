@@ -139,12 +139,15 @@ def pandera_schema_to_dagster_type(
         if isinstance(schema, type) and issubclass(schema, VALID_SCHEMA_MODEL_CLASSES)
         else schema
     )
+    # pyrefly: ignore [bad-argument-type]
     tschema = _pandera_schema_to_table_schema(norm_schema)
+    # pyrefly: ignore [bad-argument-type]
     type_check_fn = _pandera_schema_to_type_check_fn(norm_schema, tschema)
 
     return DagsterType(
         type_check_fn=type_check_fn,
         name=name,
+        # pyrefly: ignore [missing-attribute]
         description=norm_schema.description,
         metadata={
             "schema": MetadataValue.table_schema(tschema),

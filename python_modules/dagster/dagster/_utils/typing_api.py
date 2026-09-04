@@ -179,4 +179,5 @@ def _flatten_unions_inner(ttype: type | UnionType) -> typing.Iterable[type]:
         for arg in get_args(ttype):
             yield from flatten_unions(arg)
     else:
+        # pyrefly: ignore [invalid-yield]
         yield ttype

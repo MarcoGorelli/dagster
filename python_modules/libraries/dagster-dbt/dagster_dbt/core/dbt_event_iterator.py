@@ -90,6 +90,7 @@ def _fetch_column_metadata(
             schema_metadata = default_metadata_from_dbt_resource_props(col_data)
         except Exception as e:
             logger.warning(
+                # pyrefly: ignore [unbound-name]
                 "An error occurred while building column schema metadata from data"
                 f" `{col_data}` for the dbt resource"
                 f" `{dbt_resource_props['original_file_path']}`."
@@ -120,6 +121,7 @@ def _fetch_column_metadata(
 
                 lineage_metadata = _build_column_lineage_metadata(
                     event_history_metadata=EventHistoryMetadata(
+                        # pyrefly: ignore [unbound-name]
                         columns=column_schema_data,
                         parents=parents,
                     ),
@@ -189,6 +191,7 @@ def _fetch_row_count_metadata(
         # to index by position
         row_count = query_result_table[0][0]
         adapter_type = invocation.manifest.get("metadata", {}).get("adapter_type")
+        # pyrefly: ignore [invalid-argument]
         return {**TableMetadataSet(row_count=row_count, storage_kind=adapter_type)}
 
     except Exception as e:

@@ -60,7 +60,9 @@ class DuckDBPandasTypeHandler(DbTypeHandler[pd.DataFrame]):
                 # output object may be a slice/partition, so we output different metadata keys based on
                 # whether this output represents an entire table or just a slice/partition
                 **(
-                    TableMetadataSet(partition_row_count=obj.shape[0], storage_kind="duckdb")
+                    TableMetadataSet(  # pyrefly: ignore [invalid-argument]
+                        partition_row_count=obj.shape[0], storage_kind="duckdb"
+                    )
                     if context.has_partition_key
                     else TableMetadataSet(row_count=obj.shape[0], storage_kind="duckdb")
                 ),

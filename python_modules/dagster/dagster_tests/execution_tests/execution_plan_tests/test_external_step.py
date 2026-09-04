@@ -110,6 +110,7 @@ def _define_dynamic_job(launch_initial, launch_final):
         local_external_step_launcher if launch_final else ResourceDefinition.mock_resource()
     )
 
+    # pyrefly: ignore [bad-argument-type, missing-argument]
     @dg.op(required_resource_keys={"initial_launcher"}, out=dg.DynamicOut(int))
     def dynamic_outs():
         for i in range(0, 3):

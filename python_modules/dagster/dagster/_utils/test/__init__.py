@@ -261,6 +261,7 @@ class FilesystemTestScheduler(Scheduler, ConfigurableClass):
         self._inst_data = inst_data
 
     @property
+    # pyrefly: ignore [bad-override]
     def inst_data(self) -> object:
         return self._inst_data
 

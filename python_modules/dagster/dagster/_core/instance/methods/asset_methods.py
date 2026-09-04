@@ -620,6 +620,7 @@ class AssetMethods:
                 elif partition_key in materialized_partitions:
                     status_by_partition[partition_key] = AssetPartitionStatus.MATERIALIZED
                 else:
+                    # pyrefly: ignore [unsupported-operation]
                     status_by_partition[partition_key] = None
 
             return status_by_partition

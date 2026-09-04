@@ -159,6 +159,7 @@ class K8sContainerContext(
             container_config["volume_mounts"] = volume_mounts
 
         if resources:
+            # pyrefly: ignore [unsupported-operation]
             container_config["resources"] = resources
 
         if image_pull_secrets:
@@ -174,9 +175,11 @@ class K8sContainerContext(
             service_metadata["labels"] = labels
 
         if image_pull_policy:
+            # pyrefly: ignore [unsupported-operation]
             container_config["image_pull_policy"] = image_pull_policy
 
         if service_account_name:
+            # pyrefly: ignore [unsupported-operation]
             pod_spec_config["service_account_name"] = service_account_name
 
         env_from = [{"config_map_ref": {"name": config_map}} for config_map in env_config_maps]
@@ -199,9 +202,11 @@ class K8sContainerContext(
             container_config["env"] = container_config_env
 
         if scheduler_name:
+            # pyrefly: ignore [unsupported-operation]
             pod_spec_config["scheduler_name"] = scheduler_name
 
         if security_context:
+            # pyrefly: ignore [unsupported-operation]
             container_config["security_context"] = security_context
 
         return UserDefinedDagsterK8sConfig(
@@ -231,6 +236,7 @@ class K8sContainerContext(
         else:
             merged_dict = {
                 key: (
+                    # pyrefly: ignore [invalid-argument]
                     {**onto_dict[key], **from_dict[key]}
                     if isinstance(onto_dict[key], dict)
                     else from_dict[key]
@@ -449,8 +455,10 @@ class K8sContainerContext(
             )
 
         if self.namespace:
+            # pyrefly: ignore [unsupported-operation]
             used_fields["namespace"] = True
 
+        # pyrefly: ignore [bad-return]
         return used_fields
 
     @staticmethod

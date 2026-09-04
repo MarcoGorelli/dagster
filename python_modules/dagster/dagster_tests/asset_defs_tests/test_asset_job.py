@@ -1842,6 +1842,7 @@ def test_transitive_resource_deps_provided():
 @ignore_warning("Class `SourceAsset` is deprecated and will be removed in 2.0.0.")
 @ignore_warning("Parameter `io_manager_def` .* is currently in beta")
 def test_transitive_io_manager_dep_not_provided():
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(required_resource_keys={"foo"})
     def the_manager():
         pass
@@ -2582,8 +2583,10 @@ def test_subset_cycle_resolution_complex():
             d = y + 1
             yield dg.Output(d, "d")
         if "e" in context.op_execution_context.selected_output_names:
+            # pyrefly: ignore [unbound-name]
             yield dg.Output(c + 1, "e")
         if "f" in context.op_execution_context.selected_output_names:
+            # pyrefly: ignore [unbound-name]
             yield dg.Output(d + 1, "f")
 
     @dg.asset

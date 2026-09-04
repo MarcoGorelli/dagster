@@ -876,7 +876,9 @@ def test_metadata_logging():
     assert result.success
     assert result.output_for_node("basic") == "baz"
     events = result.events_for_node("basic")
+    # pyrefly: ignore [missing-attribute]
     assert len(events[1].event_specific_data.metadata) == 1
+    # pyrefly: ignore [bad-index]
     assert events[1].event_specific_data.metadata["foo"].text == "bar"
 
 
@@ -890,8 +892,11 @@ def test_metadata_logging_multiple_entries():
     result = execute_op_in_graph(basic)
     assert result.success
     events = result.events_for_node("basic")
+    # pyrefly: ignore [missing-attribute]
     assert len(events[1].event_specific_data.metadata) == 2
+    # pyrefly: ignore [bad-index]
     assert events[1].event_specific_data.metadata["foo"].text == "second_value"
+    # pyrefly: ignore [bad-index]
     assert events[1].event_specific_data.metadata["boo"].text == "bot"
 
 
@@ -923,7 +928,9 @@ def test_log_metadata_multi_output():
     first_output_event = events[1]
     second_output_event = events[3]
 
+    # pyrefly: ignore [missing-attribute]
     assert "foo" in first_output_event.event_specific_data.metadata
+    # pyrefly: ignore [missing-attribute]
     assert "bar" in second_output_event.event_specific_data.metadata
 
 
@@ -944,6 +951,7 @@ def test_log_metadata_after_output():
 
 
 def test_log_metadata_multiple_dynamic_outputs():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out={"out1": dg.DynamicOut(), "out2": dg.DynamicOut()})
     def the_op(context):
         context.add_output_metadata({"one": "one"}, output_name="out1", mapping_key="one")
@@ -959,20 +967,29 @@ def test_log_metadata_multiple_dynamic_outputs():
     assert result.success
     events = result.all_node_events
     output_event_one = events[1]
+    # pyrefly: ignore [missing-attribute]
     assert output_event_one.event_specific_data.mapping_key == "one"
+    # pyrefly: ignore [missing-attribute]
     assert "one" in output_event_one.event_specific_data.metadata
     output_event_two = events[3]
+    # pyrefly: ignore [missing-attribute]
     assert output_event_two.event_specific_data.mapping_key == "two"
+    # pyrefly: ignore [missing-attribute]
     assert "two" in output_event_two.event_specific_data.metadata
     output_event_three = events[5]
+    # pyrefly: ignore [missing-attribute]
     assert output_event_three.event_specific_data.mapping_key == "three"
+    # pyrefly: ignore [missing-attribute]
     assert "three" in output_event_three.event_specific_data.metadata
     output_event_four = events[7]
+    # pyrefly: ignore [missing-attribute]
     assert output_event_four.event_specific_data.mapping_key == "four"
+    # pyrefly: ignore [missing-attribute]
     assert "four" in output_event_four.event_specific_data.metadata
 
 
 def test_log_metadata_after_dynamic_output():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def the_op(context):
         yield dg.DynamicOutput(1, mapping_key="one")
@@ -1226,6 +1243,7 @@ def test_generic_dynamic_output_type_mismatch():
 
 
 def test_generic_dynamic_output_mix_with_regular():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out={"regular": dg.Out(), "dynamic": dg.DynamicOut()})
     def basic() -> tuple[dg.Output[int], list[dg.DynamicOutput[str]]]:
         return (
@@ -1252,6 +1270,7 @@ def test_generic_dynamic_output_mix_with_regular():
 
 
 def test_generic_dynamic_output_mix_with_regular_type_mismatch():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out={"regular": dg.Out(), "dynamic": dg.DynamicOut()})
     def basic() -> tuple[dg.Output[int], list[dg.DynamicOutput[str]]]:
         return (  # ty: ignore[invalid-return-type]
@@ -1306,6 +1325,7 @@ def test_generic_dynamic_output_name_not_provided():
 
 
 def test_generic_dynamic_output_name_mismatch():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out={"the_name": dg.DynamicOut()})
     def basic() -> list[dg.DynamicOutput[int]]:
         return [dg.DynamicOutput(value=5, mapping_key="blah", output_name="bad_name")]
@@ -1388,6 +1408,7 @@ def test_generic_dynamic_output_empty():
     result = basic()
     assert isinstance(result, list)
 
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def dynamic_op_no_return_or_yield():
         pass
@@ -1413,6 +1434,7 @@ def test_generic_dynamic_output_empty():
 
 
 def test_dynamic_output_yields_no_outputs():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def the_op():
         yield dg.AssetMaterialization("third")
@@ -1434,6 +1456,7 @@ def test_generic_dynamic_output_empty_with_type():
     # Equivalent behavior in the dynamic yield case. is_required doesn't
     # actually do anything on a DynamicOut right now:
     # https://github.com/dagster-io/dagster/issues/5948#issuecomment-997037163
+    # pyrefly: ignore [bad-argument-type, missing-argument]
     @dg.op(out=dg.DynamicOut(dagster_type=str, is_required=False))
     def basic_yield():
         pass
@@ -1461,6 +1484,7 @@ def test_generic_dynamic_output_empty_with_type():
 
 
 def test_generic_dynamic_multiple_outputs_empty():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out={"out1": dg.Out(), "out2": dg.DynamicOut()})
     def basic() -> tuple[dg.Output, list[dg.DynamicOutput]]:
         return (dg.Output(5), [])
@@ -1533,6 +1557,7 @@ def test_dynamic_output_bad_list_entry():
     ):
         basic()
 
+    # pyrefly: ignore [missing-argument]
     @dg.op(out={"out1": dg.Out(), "out2": dg.DynamicOut()})
     def basic_multi_output() -> tuple[dg.Output[int], list[dg.DynamicOutput[str]]]:
         return (5, ["foo"])  # type: ignore
@@ -1570,6 +1595,7 @@ def test_list_out_op():
 
 
 def test_dynamic_list_out_no_annotation():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def the_op():
         return [dg.DynamicOutput(5, mapping_key="foo")]

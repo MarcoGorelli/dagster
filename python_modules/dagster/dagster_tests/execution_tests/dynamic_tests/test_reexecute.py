@@ -29,6 +29,7 @@ def emit_ten(_):
     return 10
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out=dg.DynamicOut())
 def emit(_):
     for i in range(3):
@@ -155,6 +156,7 @@ def adder(ls: list[int]) -> int:
     return sum(ls)
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out=dg.DynamicOut())
 def dynamic_op():
     for i in range(10):
@@ -162,6 +164,7 @@ def dynamic_op():
 
 
 def dynamic_with_optional_output_job():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut(is_required=False))
     def dynamic_optional_output_op(context):
         for i in range(10):
@@ -358,6 +361,7 @@ def fail_once(context: OpExecutionContext, x):
     raise Exception("failed (just this once)")
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out=dg.DynamicOut())
 def fan_out(y: str):
     for letter in y:
@@ -461,6 +465,7 @@ def test_branching():
             assert result_3.output_for_node("final") == [["a", "b", "c"], []]
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out=dg.DynamicOut())
 def emit_nums():
     for i in range(4):
@@ -683,6 +688,7 @@ def maybe_trigger(context: OpExecutionContext, b):
     return 1
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out=dg.DynamicOut())
 def dyn_bool():
     for i in range(2):

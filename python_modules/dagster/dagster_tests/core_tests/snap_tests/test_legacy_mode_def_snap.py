@@ -12,6 +12,7 @@ def test_mode_snap(snapshot):
     def no_config_resource(_):
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.logger(config_schema={"bar": str})
     def a_logger(_):
         pass

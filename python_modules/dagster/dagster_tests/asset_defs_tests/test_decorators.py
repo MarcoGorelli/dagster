@@ -657,10 +657,12 @@ def test_multi_asset_resource_defs():
     def baz_resource():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(required_resource_keys={"baz"})
     def foo_manager():
         pass
 
+    # pyrefly: ignore [no-matching-overload]
     @dg.io_manager
     def bar_manager():
         pass
@@ -688,10 +690,12 @@ def test_multi_asset_resource_defs_specs() -> None:
     def baz_resource():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(required_resource_keys={"baz"})
     def foo_manager():
         pass
 
+    # pyrefly: ignore [no-matching-overload]
     @dg.io_manager
     def bar_manager():
         pass
@@ -732,6 +736,7 @@ def test_multi_asset_code_versions():
 @ignore_warning("Parameter `io_manager_def` .* is currently in beta")
 @ignore_warning("Parameter `resource_defs` .* is currently in beta")
 def test_asset_io_manager_def():
+    # pyrefly: ignore [no-matching-overload]
     @dg.io_manager
     def the_manager():
         pass

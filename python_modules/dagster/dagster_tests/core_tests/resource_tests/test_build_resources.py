@@ -96,6 +96,7 @@ def test_context_manager_resource():
 
     with dg.build_resources({"cm_resource": cm_resource}) as resources:
         assert isinstance(resources, IContainsGenerator)
+        # pyrefly: ignore [missing-attribute]
         assert resources.cm_resource == "foo"
 
     assert tore_down == ["yes"]

@@ -63,6 +63,7 @@ class DaskResource:
         if self.cluster:
             self.cluster.close()
 
+        # pyrefly: ignore [bad-assignment]
         self._client, self._cluster = None, None
 
 

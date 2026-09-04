@@ -3,6 +3,7 @@ from dagster._core.test_utils import environ
 
 def test_def_can_load():
     with environ({"DAGSTER_IS_DEV_CLI": "1"}):
+        # pyrefly: ignore [missing-import]
         from assets_dbt_python.definitions import defs
 
         assert defs.resolve_job_def("everything_everywhere_job")

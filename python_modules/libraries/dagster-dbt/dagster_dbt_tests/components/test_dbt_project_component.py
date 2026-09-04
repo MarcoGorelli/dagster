@@ -127,6 +127,7 @@ def test_python_params(dbt_path: Path, backfill_policy: str | None) -> None:
     elif backfill_policy == "multi_run":
         backfill_policy_arg["backfill_policy"] = {"type": "multi_run"}
     elif backfill_policy == "multi_run_with_max_partitions":
+        # pyrefly: ignore [bad-assignment]
         backfill_policy_arg["backfill_policy"] = {"type": "multi_run", "max_partitions_per_run": 3}
 
     defs = build_component_defs_for_test(

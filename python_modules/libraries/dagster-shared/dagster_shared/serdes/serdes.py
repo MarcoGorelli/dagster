@@ -398,6 +398,7 @@ def _whitelist_for_serdes(
                 field_serializers=field_serializers,
                 kwargs_fields=kwargs_fields,
             )
+            # pyrefly: ignore [bad-return]
             return klass  # (NamedTuple quirk)
 
         elif is_dataclass(klass) and (
@@ -1253,6 +1254,7 @@ def _unpack_object(val: dict, whitelist_map: WhitelistMap, context: UnpackContex
 
     if "__set__" in val:
         items = cast("list[JsonSerializableValue]", val["__set__"])
+        # pyrefly: ignore [bad-return]
         return set(items)
 
     if "__frozenset__" in val:

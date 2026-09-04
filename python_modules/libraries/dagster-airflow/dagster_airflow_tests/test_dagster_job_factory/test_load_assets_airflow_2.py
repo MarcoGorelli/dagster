@@ -47,6 +47,7 @@ def test_load_assets_from_airflow_dag():
         asset_dag = dag_bag.get_dag(dag_id="asset_dag")
 
         assets = load_assets_from_airflow_dag(
+            # pyrefly: ignore [bad-argument-type]
             dag=asset_dag,
             task_ids_by_asset_key={
                 AssetKey("foo_asset"): {"foo"},
@@ -60,6 +61,7 @@ def test_load_assets_from_airflow_dag():
         )
         other_dag = dag_bag.get_dag(dag_id="other_dag")
         other_assets = load_assets_from_airflow_dag(
+            # pyrefly: ignore [bad-argument-type]
             dag=other_dag,
         )
 

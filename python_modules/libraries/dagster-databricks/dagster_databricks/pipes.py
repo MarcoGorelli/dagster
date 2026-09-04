@@ -136,9 +136,11 @@ class BasePipesDatabricksClient(PipesClient):
 
         run = self.client.jobs.get_run(run_id)
 
+        # pyrefly: ignore [unsupported-operation]
         metadata["Databricks Job Run ID"] = str(run_id)
 
         if run_page_url := run.run_page_url:
+            # pyrefly: ignore [unsupported-operation]
             metadata["Databricks Job Run URL"] = UrlMetadataValue(run_page_url)
 
         return metadata
@@ -497,6 +499,7 @@ class PipesDbfsContextInjector(PipesContextInjector):
         self.dbfs_client = files.DbfsAPI(client.api_client)
 
     @contextmanager
+    # pyrefly: ignore [bad-override-param-name]
     def inject_context(self, context: "PipesContextData") -> Iterator[PipesParams]:
         """Inject context to external environment by writing it to an automatically-generated
         DBFS temporary file as JSON and exposing the path to the file.
@@ -559,7 +562,9 @@ class PipesDbfsMessageReader(PipesBlobStoreMessageReader):
     def get_params(self) -> Iterator[PipesParams]:
         with ExitStack() as stack:
             params: PipesParams = {}
+            # pyrefly: ignore [unsupported-operation]
             params["path"] = stack.enter_context(dbfs_tempdir(self.dbfs_client))
+            # pyrefly: ignore [unsupported-operation]
             params[PipesBlobStoreMessageWriter.INCLUDE_STDIO_IN_MESSAGES_KEY] = (
                 self.include_stdio_in_messages
             )
@@ -941,6 +946,7 @@ class PipesUnityCatalogVolumesContextInjector(PipesContextInjector):
         self.volume_path = volume_path
 
     @contextmanager
+    # pyrefly: ignore [bad-override-param-name]
     def inject_context(self, context: "PipesContextData") -> Iterator[PipesParams]:
         """Inject context to external environment by writing it to an automatically-generated
         Unity Catalog Volumes temporary file as JSON and exposing the path to the file.
@@ -999,9 +1005,11 @@ class PipesUnityCatalogVolumesMessageReader(PipesBlobStoreMessageReader):
     def get_params(self) -> Iterator[PipesParams]:
         with ExitStack() as stack:
             params: PipesParams = {}
+            # pyrefly: ignore [unsupported-operation]
             params["path"] = stack.enter_context(
                 volumes_tempdir(self.files_client, self.volume_path)
             )
+            # pyrefly: ignore [unsupported-operation]
             params[PipesBlobStoreMessageWriter.INCLUDE_STDIO_IN_MESSAGES_KEY] = (
                 self.include_stdio_in_messages
             )

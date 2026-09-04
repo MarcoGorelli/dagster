@@ -161,6 +161,7 @@ class UPathIOManager(IOManager):
         from upath import UPath
 
         if isinstance(self._base_path, UPath):
+            # pyrefly: ignore [missing-attribute]
             return self._base_path._kwargs.copy()  # noqa
         elif isinstance(self._base_path, Path):
             return {}

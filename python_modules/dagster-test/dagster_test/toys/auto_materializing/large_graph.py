@@ -46,6 +46,7 @@ def build_assets(
                     # each asset connects to n_upstreams_per_asset assets from the above layer, chosen
                     # in a round-robin manner
                     non_argument_deps = {
+                        # pyrefly: ignore [bad-index]
                         layers[-1][(parent_index + j) % len(layers[-1])].key
                         for j in range(layer_config.n_upstreams_per_asset)
                     }
@@ -81,6 +82,7 @@ def build_assets(
                 layer.append(_asset)
             layers.append(layer)
 
+    # pyrefly: ignore [bad-argument-type]
     return list(itertools.chain(*layers))
 
 

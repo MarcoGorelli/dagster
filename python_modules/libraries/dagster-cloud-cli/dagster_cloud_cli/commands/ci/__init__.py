@@ -1182,6 +1182,7 @@ def _deploy(
         else:
             metrics.instrument_add_tags([CliEventTags.server_strategy.docker])
             if isinstance(build_output, state.DockerBuildOutput) and build_output.pex_bundle:
+                # pyrefly: ignore [unsupported-operation]
                 location_args["pex_bundle"] = True
 
         locations_document.append(

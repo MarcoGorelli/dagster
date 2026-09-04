@@ -1108,6 +1108,7 @@ def _validate_in_mappings(
                     f'"{maps_to.node_name}.{maps_to.input_name}" index {maps_to.fan_in_index} in '
                     "the MultiDependencyDefinition is not a MappedInputPlaceholder"
                 )
+            # pyrefly: ignore [missing-attribute]
             mapping_keys.add(f"{maps_to.node_name}.{maps_to.input_name}.{maps_to.fan_in_index}")
             target_input_types_by_graph_input_name[mapping.graph_input_name].add(
                 target_input_def.dagster_type.get_inner_type_for_fan_in()
@@ -1120,6 +1121,7 @@ def _validate_in_mappings(
                     "is already satisfied by output"
                 )
 
+            # pyrefly: ignore [missing-attribute]
             mapping_keys.add(f"{mapping.maps_to.node_name}.{mapping.maps_to.input_name}")
             target_input_types_by_graph_input_name[mapping.graph_input_name].add(
                 target_input_def.dagster_type

@@ -239,6 +239,7 @@ class ExecutionStepInputSnap(
             check.sequence_param(
                 upstream_output_handles, "upstream_output_handles", of_type=StepOutputHandle
             ),
+            # pyrefly: ignore [missing-attribute]
             check.opt_inst_param(source, "source", StepInputSourceUnion.__args__),
         )
 

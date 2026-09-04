@@ -103,6 +103,7 @@ def invoke_compute_fn(
     args_to_pass = {**kwargs}
     if config_arg_cls:
         # config_arg_cls is either a Config class or a primitive type
+        # pyrefly: ignore [bad-argument-type]
         if issubclass(config_arg_cls, Config):
             args_to_pass["config"] = construct_config_from_context(
                 config_arg_cls, context.op_execution_context

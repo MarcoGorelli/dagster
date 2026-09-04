@@ -167,8 +167,10 @@ class SigmaOrganization(ConfigurableResource):
     @property
     def api_token(self) -> str:
         if self._api_token is None:
+            # pyrefly: ignore [read-only]
             self._api_token = self._fetch_api_token()
 
+        # pyrefly: ignore [bad-return]
         return self._api_token
 
     async def _fetch_json_async(

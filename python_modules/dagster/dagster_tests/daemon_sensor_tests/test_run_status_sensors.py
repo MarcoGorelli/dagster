@@ -714,7 +714,9 @@ def test_run_status_sensor_interleave(storage_config_fn, executor: ThreadPoolExe
                     freeze_datetime,
                     TickStatus.SUCCESS,
                 )
+                # pyrefly: ignore [bad-argument-type]
                 assert len(ticks[0].origin_run_ids) == 1
+                # pyrefly: ignore [unsupported-operation]
                 assert ticks[0].origin_run_ids[0] == run2.run_id
 
             # fail run 1
@@ -739,7 +741,9 @@ def test_run_status_sensor_interleave(storage_config_fn, executor: ThreadPoolExe
                     freeze_datetime,
                     TickStatus.SUCCESS,
                 )
+                # pyrefly: ignore [bad-argument-type]
                 assert len(ticks[0].origin_run_ids) == 1
+                # pyrefly: ignore [unsupported-operation]
                 assert ticks[0].origin_run_ids[0] == run1.run_id
 
 

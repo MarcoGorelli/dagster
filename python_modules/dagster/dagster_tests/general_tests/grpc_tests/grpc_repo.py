@@ -88,6 +88,7 @@ def error_partition_tags_fn(_partition):
     raise Exception("womp womp")
 
 
+# pyrefly: ignore [bad-argument-type]
 @dg.repository
 def bar_repo():
     return {

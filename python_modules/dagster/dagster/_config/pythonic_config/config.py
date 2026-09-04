@@ -73,6 +73,7 @@ class MakeConfigCacheable(BaseModel):
         frozen=True, arbitrary_types_allowed=True, ignored_types=(cached_property,)
     )
 
+    # pyrefly: ignore[bad-class-definition]  # https://github.com/facebook/pyrefly/issues/4768
     def __setattr__(self, name: str, value: Any):
         from dagster._config.pythonic_config.resource import ConfigurableResourceFactory
 
@@ -247,6 +248,7 @@ class Config(MakeConfigCacheable, metaclass=BaseConfigMeta):
             config_key = field.alias if field.alias else field_key
             if field.is_required() and config_key not in modified_data_by_config_key:
                 modified_data_by_config_key[config_key] = (
+                    # pyrefly: ignore [unsupported-operation]
                     field.default if field.default != PydanticUndefined else None
                 )
 
@@ -421,6 +423,7 @@ def infer_schema_from_config_class(
     fields_to_omit: set[str] | None = None,
     default: Any | None = None,
 ) -> DagsterField:
+    # pyrefly: ignore [missing-module-attribute]
     from dagster._config.pythonic_config.config import Config
     from dagster._config.pythonic_config.resource import (
         ConfigurableResourceFactory,

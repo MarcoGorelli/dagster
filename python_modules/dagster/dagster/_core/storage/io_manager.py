@@ -87,6 +87,7 @@ class IOManagerDefinition(ResourceDefinition, IInputManagerDefinition, IOutputMa
         return self._input_config_schema
 
     @property
+    # pyrefly: ignore [bad-override]
     def output_config_schema(self) -> IDefinitionConfigSchema | None:
         return self._output_config_schema
 

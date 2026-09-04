@@ -146,6 +146,7 @@ def ge_validation_op_factory(
         rendered_document_content_list = validation_results_page_renderer.render(
             validation_results=results
         )
+        # pyrefly: ignore [bad-argument-type]
         md_str = "".join(DefaultMarkdownPageView().render(rendered_document_content_list))
 
         yield ExpectationResult(

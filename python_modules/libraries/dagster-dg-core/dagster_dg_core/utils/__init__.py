@@ -653,6 +653,7 @@ def toml_path_from_str(path: str) -> TomlPath:
             if p.startswith("[") and p.endswith("]"):
                 tokens.append(int(p[1:-1]))  # Convert "[1]" to integer 1
             else:
+                # pyrefly: ignore [bad-argument-type]
                 tokens.append(p)
     return tuple(tokens)
 

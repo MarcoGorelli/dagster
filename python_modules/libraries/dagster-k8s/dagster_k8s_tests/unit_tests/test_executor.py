@@ -126,6 +126,7 @@ def bar_with_images():
 
 @job
 def dynamic_producer_consumer_job():
+    # pyrefly: ignore [bad-argument-type, missing-argument]
     @op(out=DynamicOut(int))
     def dyn_producer():
         for i in [3, 4]:
@@ -362,6 +363,7 @@ def test_executor_init(
 
     # env vars from both launcher and the executor
 
+    # pyrefly: ignore [missing-attribute]
     assert executor._step_handler._get_container_context(  # noqa: SLF001
         step_handler_context
     ).run_k8s_config.container_config["env"] == [
@@ -370,6 +372,7 @@ def test_executor_init(
     ]
 
     assert (
+        # pyrefly: ignore [missing-attribute]
         executor._step_handler._get_container_context(  # noqa: SLF001
             step_handler_context
         ).run_k8s_config.container_config["resources"]
@@ -377,6 +380,7 @@ def test_executor_init(
     )
 
     assert (
+        # pyrefly: ignore [missing-attribute]
         executor._step_handler._get_container_context(  # noqa: SLF001
             step_handler_context
         ).run_k8s_config.pod_spec_config["scheduler_name"]
@@ -408,6 +412,7 @@ def test_executor_init_container_context(
 
     # env vars from both launcher and the executor
 
+    # pyrefly: ignore [missing-attribute]
     assert executor._step_handler._get_container_context(  # noqa: SLF001
         step_handler_context
     ).run_k8s_config.container_config["env"] == [
@@ -415,8 +420,10 @@ def test_executor_init_container_context(
         {"name": "BAZ_TEST", "value": "baz_val"},
         {"name": "FOO_TEST", "value": "foo"},
     ]
+    # pyrefly: ignore [missing-attribute]
     assert executor._max_concurrent == 4  # noqa: SLF001
     assert (
+        # pyrefly: ignore [missing-attribute]
         executor._step_handler._get_container_context(  # noqa: SLF001
             step_handler_context
         ).run_k8s_config.container_config["resources"]
@@ -426,6 +433,7 @@ def test_executor_init_container_context(
     )
 
     assert (
+        # pyrefly: ignore [missing-attribute]
         executor._step_handler._get_container_context(  # noqa: SLF001
             step_handler_context
         ).run_k8s_config.pod_spec_config["scheduler_name"]
@@ -726,6 +734,7 @@ def test_step_raw_k8s_config_inheritance(
         executor=executor,
     )
 
+    # pyrefly: ignore [missing-attribute]
     container_context = executor._step_handler._get_container_context(  # noqa: SLF001
         step_handler_context
     )
@@ -787,6 +796,7 @@ def test_per_step_k8s_config(k8s_run_launcher_instance, python_origin_with_conta
         executor=executor,
     )
 
+    # pyrefly: ignore [missing-attribute]
     container_context = executor._step_handler._get_container_context(  # noqa: SLF001
         step_handler_context
     )
@@ -835,6 +845,7 @@ def test_per_step_k8s_config_dynamic_job(k8s_run_launcher_instance: DagsterInsta
         step=f"dyn_sink[{dynamic_step}]",
         known_state=dyn_known_state,
     )
+    # pyrefly: ignore [missing-attribute]
     container_context = executor._step_handler._get_container_context(  # noqa: SLF001
         step_handler_context
     )

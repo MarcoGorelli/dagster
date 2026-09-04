@@ -252,6 +252,7 @@ def derive_model_type(
                     else _Unset
                 )
                 field_infos.append(
+                    # pyrefly: ignore [bad-argument-type]
                     Field(
                         default=default_value,
                         description=field_resolver.description,
@@ -296,6 +297,7 @@ def derive_model_type(
             # label — most visibly in union variant pickers.
             derived.model_config["json_schema_extra"] = {
                 "title": _humanize_class_name(target_type.__name__),
+                # pyrefly: ignore [bad-assignment]
                 "ui:order": list(model_fields.keys()),
                 **schema_extra,
             }

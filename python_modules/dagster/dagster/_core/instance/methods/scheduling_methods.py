@@ -339,6 +339,7 @@ class SchedulingMethods:
     def wipe_all_schedules(self) -> None:
         """Wipe all schedules - moved from DagsterInstance.wipe_all_schedules()."""
         if self._scheduler_impl:
+            # pyrefly: ignore [missing-attribute]
             self._scheduler_impl.wipe(self._instance)
 
         if not self._schedule_storage_impl:

@@ -174,7 +174,9 @@ class EcsRunLauncher(RunLauncher[T_DagsterInstance], ConfigurableClass):
             self.secrets = [
                 {"name": name, "valueFrom": value_from}
                 for name, value_from in get_secrets_from_arns(
-                    self.secrets_manager, self.secrets
+                    self.secrets_manager,
+                    # pyrefly: ignore [bad-argument-type]
+                    self.secrets,
                 ).items()
             ]
 

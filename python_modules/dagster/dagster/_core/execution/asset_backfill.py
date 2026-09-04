@@ -2143,12 +2143,14 @@ def _should_backfill_atomic_asset_graph_subset_unit(
             asset_graph_view.get_subset_from_serializable_subset(passed_serializable_entity_subset)
         )
 
+        # pyrefly: ignore [missing-attribute]
         if entity_subset_to_filter.is_empty:
             break
 
         entity_subset_to_filter, new_failure_subset_values_with_reasons = (
             _should_backfill_atomic_asset_subset_unit(
                 asset_graph_view,
+                # pyrefly: ignore [bad-argument-type]
                 entity_subset_to_filter=entity_subset_to_filter,
                 candidate_asset_graph_subset_unit=candidate_asset_graph_subset_unit,
                 asset_graph_subset_matched_so_far=asset_graph_subset_matched_so_far,
@@ -2186,6 +2188,7 @@ def _should_backfill_atomic_asset_graph_subset_unit(
         failure_asset_graph_subsets_with_reasons.append(
             (
                 AssetGraphSubset.from_entity_subsets(
+                    # pyrefly: ignore [bad-argument-type]
                     entity_subsets=failure_entity_subsets,
                 ),
                 reason,
@@ -2193,6 +2196,7 @@ def _should_backfill_atomic_asset_graph_subset_unit(
         )
 
     return AssetGraphViewBfsFilterConditionResult(
+        # pyrefly: ignore [bad-argument-type]
         passed_asset_graph_subset=AssetGraphSubset.from_entity_subsets(passed_entity_subsets),
         excluded_asset_graph_subsets_and_reasons=failure_asset_graph_subsets_with_reasons,
     )

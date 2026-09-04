@@ -62,9 +62,11 @@ class PolytomicComponent(StateBackedComponent, dg.Model, dg.Resolvable):
                 else None,
                 metadata={
                     _TRANSLATOR_DATA_METADATA_KEY: data,
+                    # pyrefly: ignore [invalid-argument]
                     **PolytomicSchemaMetadataSet.from_enriched_schema(
                         enriched_schema=enriched_schema
                     ),
+                    # pyrefly: ignore [invalid-argument]
                     **TableMetadataSet(
                         table_name=f"{enriched_schema.destination_configuration_schema}.{enriched_schema.id}"
                         if enriched_schema.destination_configuration_schema

@@ -54,6 +54,7 @@ def test_load_assets_from_airflow_dag():
             return 1
 
         assets = load_assets_from_airflow_dag(
+            # pyrefly: ignore [bad-argument-type]
             dag=asset_dag,
             task_ids_by_asset_key={
                 AssetKey("foo_asset"): {"foo"},
@@ -68,6 +69,7 @@ def test_load_assets_from_airflow_dag():
 
         other_dag = dag_bag.get_dag(dag_id="other_dag")
         other_assets = load_assets_from_airflow_dag(
+            # pyrefly: ignore [bad-argument-type]
             dag=other_dag,
         )
 
@@ -98,6 +100,7 @@ def test_load_assets_from_airflow_dag_multiple_tasks_per_asset():
 
         with pytest.raises(CheckError, match="Each asset key must have no more than one task ID"):
             load_assets_from_airflow_dag(
+                # pyrefly: ignore [bad-argument-type]
                 dag=asset_dag,
                 task_ids_by_asset_key={
                     AssetKey("foo_asset"): {"foo", "biz"},

@@ -65,6 +65,7 @@ def define_cacheable_and_uncacheable_assets():
 
 @lazy_repository
 def cacheable_asset_repo():
+    # pyrefly: ignore [bad-argument-type]
     @dg.repository
     def cacheable_asset_repo():
         return [
@@ -191,7 +192,7 @@ def test_resolve_no_resources():
     with scoped_definitions_load_context():
         with pytest.raises(dg.DagsterInvalidDefinitionError):
             try:
-
+                # pyrefly: ignore [bad-argument-type]
                 @dg.repository
                 def resource_dependent_repo_no_resources():
                     return [
@@ -229,6 +230,7 @@ def test_resolve_with_resources():
             == f"{cacheable_assets[0].unique_id}_with_resources"
         )
 
+        # pyrefly: ignore [bad-argument-type]
         @dg.repository
         def resource_dependent_repo_with_resources():
             return [
@@ -324,7 +326,7 @@ def test_multiple_wrapped_cached_assets() -> None:
     ]
 
     with scoped_definitions_load_context():
-
+        # pyrefly: ignore [bad-argument-type]
         @dg.repository
         def resource_dependent_repo_with_resources():
             return [

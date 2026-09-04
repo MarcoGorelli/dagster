@@ -21,7 +21,9 @@ def cleanup_result_notebook(result):
     ]
     for materialization_event in materialization_events:
         result_path = get_path(materialization_event)
+        # pyrefly: ignore [bad-argument-type]
         if os.path.exists(result_path):
+            # pyrefly: ignore [bad-argument-type]
             os.unlink(result_path)
 
 

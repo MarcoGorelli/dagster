@@ -39,6 +39,7 @@ def num_range(context) -> int:
 
 
 @dg.op(
+    # pyrefly: ignore [missing-argument]
     out=dg.DynamicOut(),
     config_schema={
         "fail": dg.Field(bool, is_required=False, default_value=False),
@@ -58,6 +59,7 @@ def sum_numbers(_, nums):
     return sum(nums)
 
 
+# pyrefly: ignore [missing-argument]
 @dg.op(out=dg.DynamicOut())
 def dynamic_echo(_, nums):
     for x in nums:
@@ -409,6 +411,7 @@ def test_bad_step_selection():
 
 
 def define_real_dynamic_job():
+    # pyrefly: ignore [bad-argument-type, missing-argument]
     @dg.op(config_schema=list, out=dg.DynamicOut(int))
     def generate_subtasks(context):
         for num in context.op_config:
@@ -544,6 +547,7 @@ def test_fan_in_skips():
         yield dg.Output([1, 2, 3], output_name="nums")
         yield dg.Output([], output_name="empty")
 
+    # pyrefly: ignore [bad-argument-type, missing-argument]
     @dg.op(out=dg.DynamicOut(int))
     def emit_dyn(vector):
         for i in vector:
@@ -586,6 +590,7 @@ def test_collect_optional():
         if False:
             yield None
 
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut())
     def dynamic_out_op(_in):
         yield dg.DynamicOutput("a", "a")
@@ -663,6 +668,7 @@ def test_blocking_check_missing_result_does_not_skip_downstream(caplog):
 
 
 def test_non_required_dynamic_collect_skips():
+    # pyrefly: ignore [missing-argument]
     @dg.op(out=dg.DynamicOut(is_required=False))
     def producer():
         if False:

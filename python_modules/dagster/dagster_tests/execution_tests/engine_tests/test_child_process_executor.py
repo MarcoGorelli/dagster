@@ -43,12 +43,14 @@ class CrashyCommand(ChildProcessCommand):
 
 
 class SegfaultCommand(ChildProcessCommand):
+    # pyrefly: ignore [bad-override]
     def execute(self):
         # access inner API to simulate hard crash
         segfault()
 
 
 class LongRunningCommand(ChildProcessCommand):
+    # pyrefly: ignore [bad-override]
     def execute(self):
         time.sleep(0.5)
         yield 1

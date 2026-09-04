@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from src.quickstart_etl.definitions import defs
 
 

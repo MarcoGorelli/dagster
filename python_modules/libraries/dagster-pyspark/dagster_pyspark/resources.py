@@ -46,6 +46,7 @@ class PySparkResource(ConfigurableResource):
     """
 
     spark_config: dict[str, Any]
+    # pyrefly: ignore [bad-class-definition]
     _spark_session = PrivateAttr(default=None)
 
     @classmethod
@@ -53,6 +54,7 @@ class PySparkResource(ConfigurableResource):
         return True
 
     def setup_for_execution(self, context: InitResourceContext) -> None:
+        # pyrefly: ignore [bad-assignment]
         self._spark_session = spark_session_from_config(self.spark_config)
 
     @property
@@ -119,6 +121,7 @@ class LazyPySparkResource(ConfigurableResource):
     """
 
     spark_config: dict[str, Any]
+    # pyrefly: ignore [bad-class-definition]
     _spark_session = PrivateAttr(default=None)
 
     @classmethod
@@ -127,6 +130,7 @@ class LazyPySparkResource(ConfigurableResource):
 
     def _init_session(self) -> None:
         if self._spark_session is None:
+            # pyrefly: ignore [bad-assignment]
             self._spark_session = spark_session_from_config(self.spark_config)
 
     @property

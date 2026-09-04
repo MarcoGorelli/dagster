@@ -674,6 +674,7 @@ class CachingInstanceQueryer(DynamicPartitionsStore):
         ]
         child_asset = self.asset_graph.get(child_asset_key)
         if not child_asset.parent_keys:
+            # pyrefly: ignore [no-matching-overload]
             return set(), max(filter(None, [latest_storage_id, *max_storage_ids]), default=None)
 
         child_time_partitions_def = get_time_partitions_def(child_asset.partitions_def)
@@ -812,7 +813,9 @@ class CachingInstanceQueryer(DynamicPartitionsStore):
         # the new latest storage id will be the greatest observed storage id among this asset and
         # its parents
         new_latest_storage_id = max(
-            filter(None, [latest_storage_id, *max_storage_ids]), default=None
+            # pyrefly: ignore [no-matching-overload]
+            filter(None, [latest_storage_id, *max_storage_ids]),
+            default=None,
         )
         return (child_asset_partitions_with_updated_parents, new_latest_storage_id)
 

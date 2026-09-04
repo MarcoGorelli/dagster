@@ -13,6 +13,7 @@ elvis_presley = dg.SourceAsset(key=dg.AssetKey("elvis_presley"))
 
 @dg.asset(
     metadata={
+        # pyrefly: ignore [invalid-argument]
         **CodeReferencesMetadataSet(
             code_references=dg.CodeReferencesMetadataValue(
                 code_references=[dg.LocalFileCodeReference(file_path=__file__, line_number=1)]

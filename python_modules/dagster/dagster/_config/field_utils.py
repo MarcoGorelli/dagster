@@ -189,19 +189,25 @@ class Map(ConfigType):
         check.inst_param(self.key_type, "key_type", ConfigType)
         check.inst_param(self.inner_type, "inner_type", ConfigType)
         check.param_invariant(
-            self.key_type.kind == ConfigTypeKind.SCALAR, "key_type", "Key type must be a scalar"
+            # pyrefly: ignore [missing-attribute]
+            self.key_type.kind == ConfigTypeKind.SCALAR,
+            "key_type",
+            "Key type must be a scalar",
         )
         check.opt_str_param(self.given_name, "name")
 
         super().__init__(
             key="Map.{key_type}.{inner_type}{name_key}".format(
+                # pyrefly: ignore [missing-attribute]
                 key_type=self.key_type.key,
+                # pyrefly: ignore [missing-attribute]
                 inner_type=self.inner_type.key,
                 name_key=f":name: {key_label_name}" if key_label_name else "",
             ),
             # We use the given name field to store the key label name
             # this is used elsewhere to give custom types names
             given_name=key_label_name,
+            # pyrefly: ignore [bad-argument-type]
             type_params=[self.key_type, self.inner_type],
             kind=ConfigTypeKind.MAP,
         )
@@ -213,7 +219,9 @@ class Map(ConfigType):
         return self.given_name
 
     def type_iterator(self) -> Iterator["ConfigType"]:
+        # pyrefly: ignore [missing-attribute]
         yield from self.key_type.type_iterator()
+        # pyrefly: ignore [missing-attribute]
         yield from self.inner_type.type_iterator()
         yield from super().type_iterator()
 

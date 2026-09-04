@@ -297,6 +297,7 @@ def create_docker_task(celery_app, **task_kwargs):
             del container_kwargs["environment"]
 
         try:
+            # pyrefly: ignore [no-matching-overload]
             docker_response = client.containers.run(
                 docker_image,
                 command=execute_step_args.get_command_args(),

@@ -69,6 +69,7 @@ def bfs_filter_asset_graph_view(
         condition_result = condition_fn(candidate_subset, result)
 
         subset_that_meets_condition = condition_result.passed_asset_graph_subset
+        # pyrefly: ignore [missing-attribute]
         failed_reasons.extend(condition_result.excluded_asset_graph_subsets_and_reasons)
 
         result = result | subset_that_meets_condition
@@ -168,6 +169,7 @@ class ToposortedPriorityQueue:
         asset_key = entity_subset.key
 
         if self._include_full_execution_set:
+            # pyrefly: ignore [missing-attribute]
             execution_set_keys = self._asset_graph_view.asset_graph.get(
                 asset_key
             ).execution_set_asset_keys
@@ -194,6 +196,7 @@ class ToposortedPriorityQueue:
             for serializable_entity_subset in serializable_entity_subsets
         ]
 
+        # pyrefly: ignore [bad-argument-type]
         asset_graph_subset = AssetGraphSubset.from_entity_subsets(entity_subsets)
 
         return ToposortedPriorityQueue.QueueItem(

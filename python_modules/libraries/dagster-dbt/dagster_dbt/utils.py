@@ -176,6 +176,7 @@ def _select_unique_ids_from_manifest(
             if manifest_json.get("semantic_models")
             else {}
         ),
+        # pyrefly: ignore [bad-argument-type]
         **(
             {
                 "saved_queries": {
@@ -187,6 +188,7 @@ def _select_unique_ids_from_manifest(
             if manifest_json.get("saved_queries")
             else {}
         ),
+        # pyrefly: ignore [bad-argument-type]
         **(
             {
                 "selectors": {
@@ -197,7 +199,9 @@ def _select_unique_ids_from_manifest(
             if manifest_json.get("selectors")
             else {}
         ),
+        # pyrefly: ignore [bad-argument-type]
         **unit_tests,
+        # pyrefly: ignore [bad-argument-type]
         **functions,
     )
 

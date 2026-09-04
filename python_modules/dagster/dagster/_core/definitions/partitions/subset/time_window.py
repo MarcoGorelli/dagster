@@ -133,6 +133,7 @@ class TimeWindowPartitionsSubset(
                 partitions_def, "partitions_def", TimeWindowPartitionsDefinition
             ),
             num_partitions=check.opt_int_param(num_partitions, "num_partitions"),
+            # pyrefly: ignore [bad-argument-type]
             included_time_windows=check.sequence_param(
                 included_time_windows, "included_time_windows", of_type=PersistedTimeWindow
             ),
@@ -380,11 +381,13 @@ class TimeWindowPartitionsSubset(
             else:
                 if result_windows and window_start_timestamp == result_windows[0].start_timestamp:
                     result_windows[0] = PersistedTimeWindow.from_public_time_window(
+                        # pyrefly: ignore [unbound-name]
                         TimeWindow(window.start, included_window.end),
                         self.partitions_def.timezone,
                     )
                 elif result_windows and window.end.timestamp() == result_windows[0].start_timestamp:
                     result_windows[0] = PersistedTimeWindow.from_public_time_window(
+                        # pyrefly: ignore [unbound-name]
                         TimeWindow(window.start, included_window.end),
                         self.partitions_def.timezone,
                     )

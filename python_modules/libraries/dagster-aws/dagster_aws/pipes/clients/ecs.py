@@ -312,6 +312,7 @@ class PipesECSClient(PipesClient, TreatAsResourceParam):
         task_id = task["taskArn"].split("/")[-1]
         cluster = task["clusterArn"].split("/")[-1]
 
+        # pyrefly: ignore [unsupported-operation]
         metadata["AWS ECS Task URL"] = MetadataValue.url(
             f"https://{region}.console.aws.amazon.com/ecs/v2/clusters/{cluster}/tasks/{task_id}"
         )

@@ -20,6 +20,7 @@ C = TypeVar(  # TypeVar for EMR/EMR Containers configurations
 
 
 @overload
+# pyrefly: ignore [inconsistent-overload]
 def add_emr_configuration(
     configurations: Sequence["EMRConfigurationUnionTypeDef"],
     configuration: "EMRConfigurationUnionTypeDef",
@@ -28,6 +29,7 @@ def add_emr_configuration(
 
 
 @overload
+# pyrefly: ignore [inconsistent-overload]
 def add_emr_configuration(
     configurations: Sequence["EMRContainersConfigurationUnionTypeDef"],
     configuration: "EMRContainersConfigurationUnionTypeDef",

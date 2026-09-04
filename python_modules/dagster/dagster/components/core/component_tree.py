@@ -453,9 +453,10 @@ class ComponentTree(IHaveNew):
             and len(component.components) == 1
         ):
             component = (
+                # pyrefly: ignore [bad-index]
                 component.components[0]
                 if isinstance(component, CompositeYamlComponent)
-                else next(iter(component.components.values()))
+                else next(iter(component.components.values()))  # pyrefly: ignore [missing-attribute]
             )
         if expected_type and not isinstance(component, expected_type):
             raise Exception(f"Component at path {defs_path} is not of type {expected_type}")

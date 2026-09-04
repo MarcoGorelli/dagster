@@ -70,11 +70,13 @@ def test_upstream_same_name_as_asset():
 def test_table_name_match():
     @dg.asset(
         key=dg.AssetKey(["foo", "bar", "baz"]),
+        # pyrefly: ignore [invalid-argument]
         metadata={**TableMetadataSet(table_name="foo.bar.baz")},
     )
     def asset1(): ...
 
     @dg.asset(
+        # pyrefly: ignore [invalid-argument]
         deps=[dg.AssetDep("blah", metadata={**TableMetadataSet(table_name="foo.bar.baz")})],
     )
     def asset2(): ...
@@ -93,12 +95,14 @@ def test_table_name_match():
 def test_table_name_match_with_key_prefix():
     @dg.asset(
         key_prefix=["schema", "tables"],
+        # pyrefly: ignore [invalid-argument]
         metadata={**TableMetadataSet(table_name="schema.tables.users")},
     )
     def users(): ...
 
     @dg.asset(
         deps=[
+            # pyrefly: ignore [invalid-argument]
             dg.AssetDep("unknown", metadata={**TableMetadataSet(table_name="schema.tables.users")})
         ],
     )
@@ -118,17 +122,20 @@ def test_table_name_match_with_key_prefix():
 def test_table_name_match_ambiguous_multiple_matches():
     @dg.asset(
         key=dg.AssetKey(["asset1"]),
+        # pyrefly: ignore [invalid-argument]
         metadata={**TableMetadataSet(table_name="schema.table")},
     )
     def asset1(): ...
 
     @dg.asset(
         key=dg.AssetKey(["asset2"]),
+        # pyrefly: ignore [invalid-argument]
         metadata={**TableMetadataSet(table_name="schema.table")},
     )
     def asset2(): ...
 
     @dg.asset(
+        # pyrefly: ignore [invalid-argument]
         deps=[dg.AssetDep("unknown", metadata={**TableMetadataSet(table_name="schema.table")})],
     )
     def downstream():
@@ -143,16 +150,20 @@ def test_table_name_match_ambiguous_multiple_matches():
 def test_table_name_match_multi_asset():
     @dg.asset(
         key=dg.AssetKey(["upstream"]),
+        # pyrefly: ignore [invalid-argument]
         metadata={**TableMetadataSet(table_name="db.schema.upstream")},
     )
     def upstream(): ...
 
     @dg.multi_asset(
         outs={
+            # pyrefly: ignore [invalid-argument]
             "output1": dg.AssetOut(metadata={**TableMetadataSet(table_name="db.schema.output1")}),
+            # pyrefly: ignore [invalid-argument]
             "output2": dg.AssetOut(metadata={**TableMetadataSet(table_name="db.schema.output2")}),
         },
         deps=[
+            # pyrefly: ignore [invalid-argument]
             dg.AssetDep("unknown", metadata={**TableMetadataSet(table_name="db.schema.upstream")})
         ],
     )
@@ -174,18 +185,22 @@ def test_table_name_match_multi_asset():
 def test_table_name_match_chain():
     @dg.asset(
         key=dg.AssetKey(["first"]),
+        # pyrefly: ignore [invalid-argument]
         metadata={**TableMetadataSet(table_name="db.first")},
     )
     def first(): ...
 
     @dg.asset(
+        # pyrefly: ignore [invalid-argument]
         deps=[dg.AssetDep("first_dep", metadata={**TableMetadataSet(table_name="db.first")})],
+        # pyrefly: ignore [invalid-argument]
         metadata={**TableMetadataSet(table_name="db.second")},
     )
     def second(first_dep):
         del first_dep
 
     @dg.asset(
+        # pyrefly: ignore [invalid-argument]
         deps=[dg.AssetDep("second_dep", metadata={**TableMetadataSet(table_name="db.second")})],
     )
     def third(second_dep):

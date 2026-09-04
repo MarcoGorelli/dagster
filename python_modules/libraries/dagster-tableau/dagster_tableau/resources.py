@@ -999,6 +999,7 @@ class TableauCloudWorkspace(BaseTableauWorkspace):
     pod_name: str = Field(..., description="The pod name of the Tableau Cloud workspace.")
 
     def build_client(self) -> None:
+        # pyrefly: ignore [read-only]
         self._client = TableauCloudClient(
             connected_app_client_id=self.connected_app_client_id,
             connected_app_secret_id=self.connected_app_secret_id,
@@ -1018,6 +1019,7 @@ class TableauServerWorkspace(BaseTableauWorkspace):
     server_name: str = Field(..., description="The server name of the Tableau Server workspace.")
 
     def build_client(self) -> None:
+        # pyrefly: ignore [read-only]
         self._client = TableauServerClient(
             connected_app_client_id=self.connected_app_client_id,
             connected_app_secret_id=self.connected_app_secret_id,

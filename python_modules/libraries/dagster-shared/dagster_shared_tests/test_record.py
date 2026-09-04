@@ -420,6 +420,7 @@ def test_base_class_conflicts() -> None:
         TypeError,
         match="Can't instantiate abstract class DidntImpl",
     ):
+        # pyrefly: ignore [bad-instantiation]
         DidntImpl()  # good job type checker
 
     @record
@@ -437,6 +438,7 @@ def test_base_class_conflicts() -> None:
 
         @record
         class _(ConflictFnBase):
+            # pyrefly: ignore [bad-override]
             some_method: Any
 
     with pytest.raises(check.CheckError, match="will have to override __new__"):

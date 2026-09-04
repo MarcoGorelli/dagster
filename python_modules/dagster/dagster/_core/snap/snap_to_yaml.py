@@ -108,6 +108,7 @@ def default_values_from_type_snap(type_snap: ConfigTypeSnap, snapshot: ConfigSch
                         parsed_default, field_snap, snapshot
                     )
                 else:
+                    # pyrefly: ignore [unsupported-operation]
                     defaults_by_field[field_name] = parsed_default
         # If there is no default value on the field, if the field has child fields, we recurse
         # to assemble the default values for the child fields

@@ -29,6 +29,7 @@ def test_source_metadata_set() -> None:
     )
     dg.AssetMaterialization(asset_key="a", metadata=dict_source_metadata)
 
+    # pyrefly: ignore [invalid-argument]
     splat_source_metadata = {**source_metadata}
     assert splat_source_metadata == {"dagster/code_references": source_metadata.code_references}
     source_data = cast(

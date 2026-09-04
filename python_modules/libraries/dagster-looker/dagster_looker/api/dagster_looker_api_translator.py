@@ -143,6 +143,7 @@ class DagsterLookerApiTranslator:
             deps.append(
                 AssetDep(
                     asset=table_key,
+                    # pyrefly: ignore [invalid-argument]
                     metadata={**TableMetadataSet(table_name=lookml_view.sql_table_name)},
                 )
             )
@@ -196,6 +197,7 @@ class DagsterLookerApiTranslator:
                     table_deps.append(
                         AssetDep(
                             asset=table_key,
+                            # pyrefly: ignore [invalid-argument]
                             metadata={**TableMetadataSet(table_name=lookml_view.sql_table_name)},
                         )
                     )

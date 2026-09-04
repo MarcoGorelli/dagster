@@ -311,6 +311,7 @@ def _get_schedule_evaluation_fn(
                     )
                 ]
 
+    # pyrefly: ignore [bad-return]
     return schedule_fn
 
 

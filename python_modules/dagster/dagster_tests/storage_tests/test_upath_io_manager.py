@@ -83,6 +83,7 @@ def daily(start: datetime):
 @pytest.mark.parametrize("json_data", [0, 0.0, [0, 1, 2], {"a": 0}, [{"a": 0}, {"b": 1}, {"c": 2}]])
 def test_upath_io_manager_with_json(tmp_path: Path, json_data: Any):
     class JSONIOManager(dg.UPathIOManager):
+        # pyrefly: ignore [bad-override-mutable-attribute]
         extension: str = ".json"
 
         def dump_to_path(self, context: OutputContext, obj: Any, path: UPath):
@@ -563,9 +564,11 @@ def test_upath_io_manager_custom_metadata(tmp_path: Path, json_data: Any):
 class AsyncJSONIOManager(dg.ConfigurableIOManager, dg.UPathIOManager):
     base_dir: str = PydanticField(None, description="Base directory for storing files.")  # type: ignore
 
+    # pyrefly: ignore [bad-override]
     _base_path: UPath = PrivateAttr()
 
     def setup_for_execution(self, context: InitResourceContext) -> None:
+        # pyrefly: ignore [read-only]
         self._base_path = UPath(self.base_dir)
 
     def dump_to_path(self, context: OutputContext, obj: Any, path: UPath):

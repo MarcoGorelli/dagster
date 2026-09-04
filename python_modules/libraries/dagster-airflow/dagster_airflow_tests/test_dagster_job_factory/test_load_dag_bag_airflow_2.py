@@ -140,6 +140,7 @@ def test_retry_conversion():
         retry_dag = dag_bag.get_dag(dag_id="retry_dag")
 
         job = make_dagster_job_from_airflow_dag(
+            # pyrefly: ignore [bad-argument-type]
             dag=retry_dag,
         )
         result = job.execute_in_process()

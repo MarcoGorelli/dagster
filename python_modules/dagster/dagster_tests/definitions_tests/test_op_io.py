@@ -125,6 +125,7 @@ def test_iter_out():
 
 
 def test_dynamic():
+    # pyrefly: ignore [bad-argument-type, missing-argument]
     @dg.op(out=dg.DynamicOut(dagster_type=int))
     def dyn_desc(_) -> Iterator[dg.DynamicOutput]:
         """

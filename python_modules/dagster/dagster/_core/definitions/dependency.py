@@ -248,6 +248,7 @@ class Node(ABC):
 
 
 class GraphNode(Node):
+    # pyrefly: ignore [bad-override-mutable-attribute]
     definition: "GraphDefinition"
 
     def __init__(
@@ -284,6 +285,7 @@ class GraphNode(Node):
 
 
 class OpNode(Node):
+    # pyrefly: ignore [bad-override-mutable-attribute]
     definition: "OpDefinition"
 
     def __init__(
