@@ -1013,6 +1013,7 @@ class SensorDefinition(IHasInternalInit):
                 else:
                     check.failed("Expected a single SkipReason: received multiple SkipReasons")
 
+        # pyrefly: ignore [bad-argument-type]
         _check_dynamic_partitions_requests(dynamic_partitions_requests)
 
         run_requests_for_backfill_daemon, run_requests_for_single_runs = split_run_requests(
@@ -1027,6 +1028,7 @@ class SensorDefinition(IHasInternalInit):
                     run_requests_for_single_runs,
                     context,
                     self._asset_selection,
+                    # pyrefly: ignore [bad-argument-type]
                     dynamic_partitions_requests,
                 ),
                 *self.validate_backfill_requests(
@@ -1140,10 +1142,7 @@ class SensorDefinition(IHasInternalInit):
             if run_request.asset_graph_subset:
                 asset_keys = run_request.asset_graph_subset.asset_keys
             else:
-                check.invariant(
-                    False,
-                    "RunRequest must have an asset_graph_subset to launch a backfill.",
-                )
+                check.failed("RunRequest must have an asset_graph_subset to launch a backfill.")
 
             unexpected_asset_keys = (AssetSelection.keys(*asset_keys) - asset_selection).resolve(
                 check.not_none(context.repository_def).asset_graph

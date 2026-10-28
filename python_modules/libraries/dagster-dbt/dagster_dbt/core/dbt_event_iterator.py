@@ -85,6 +85,8 @@ def _fetch_column_metadata(
             return {}
 
         schema_metadata = {}
+        column_schema_data = {}
+        col_data = {}
         try:
             column_schema_data = {col.name: {"data_type": col.data_type} for col in cols}
             col_data = {"columns": column_schema_data}

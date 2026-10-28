@@ -22,6 +22,7 @@ from typing import (
 )
 
 import click
+import dagster_shared.check as check
 from click.core import ParameterSource
 from dagster_shared.match import match_type
 from dagster_shared.merger import deep_merge_dicts
@@ -223,6 +224,8 @@ class DgConfig:
         user_config: Optional["DgRawCliConfig"] = None,
     ) -> Self:
         cli_partials: list[DgRawCliConfig] = []
+        project_config: DgProjectConfig | None = None
+        workspace_config: DgWorkspaceConfig | None = None
 
         if container_workspace_file_config:
             if "cli" in container_workspace_file_config:
@@ -242,6 +245,8 @@ class DgConfig:
                 project_config = DgProjectConfig.from_raw(root_file_config["project"])
                 if not container_workspace_file_config:
                     workspace_config = None
+            else:
+                check.failed(f"Unrecognized file config directory_type: {root_file_config!r}")
 
         else:
             project_config = None
@@ -289,10 +294,12 @@ class DgCliConfig:
         merged = cast("DgRawCliConfig", functools.reduce(lambda acc, x: {**acc, **x}, partials))
         return cls(
             verbose=merged.get("verbose", DgCliConfig.verbose),
+            # pyrefly: ignore [bad-argument-type]
             use_component_modules=merged.get(
                 "use_component_modules",
                 cls.__dataclass_fields__["use_component_modules"].default_factory(),  # ty: ignore[call-non-callable]
             ),
+            # pyrefly: ignore [bad-argument-type]
             suppress_warnings=merged.get(
                 "suppress_warnings",
                 cls.__dataclass_fields__["suppress_warnings"].default_factory(),  # ty: ignore[call-non-callable]
@@ -722,6 +729,7 @@ class _DgConfigValidator:
         self._validate_file_config_setting(
             raw_dict,
             "directory_type",
+            # pyrefly: ignore [invalid-annotation]
             Required[Literal["workspace", "project"]],
         )
         self._validate_dg_config_file_cli_section(raw_dict.get("cli", {}))

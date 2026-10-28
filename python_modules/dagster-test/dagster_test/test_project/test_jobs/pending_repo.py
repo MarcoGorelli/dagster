@@ -45,6 +45,7 @@ def define_demo_execution_repo():
     from dagster_aws.s3 import s3_pickle_io_manager, s3_resource
     from dagster_docker import docker_executor
 
+    # pyrefly: ignore [bad-argument-type]
     @repository
     def demo_execution_repo():
         return [

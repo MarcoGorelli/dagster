@@ -47,7 +47,9 @@ def resolve_sync_selector(
 ) -> Callable[[CensusSync], bool] | None:
     if isinstance(model, str):
         resolved = context.resolve_value(model)
+        # pyrefly: ignore [bad-specialization]
         resolved = check.callable_param(resolved, "unknown")
+        # pyrefly: ignore [bad-return]
         return resolved
     if isinstance(model, CensusSyncSelectorByName.model()):
         resolved = resolve_fields(model, CensusSyncSelectorByName.model(), context)  # ty: ignore[invalid-argument-type]

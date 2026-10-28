@@ -26,6 +26,8 @@ from dagster._core.errors import DagsterInvariantViolationError
 if TYPE_CHECKING:
     from dagster import AssetKey
 
+    from dagster_dbt.dagster_dbt_translator import DagsterDbtTranslator
+
 from dagster._symbol_annotations.lifecycle import superseded
 
 from dagster_dbt.asset_utils import (
@@ -94,7 +96,8 @@ def build_freshness_checks_from_dbt_assets(
     dbt_assets = check.sequence_param(dbt_assets, "dbt_assets", AssetsDefinition)
     ensure_no_duplicate_assets(dbt_assets)
     asset_key_to_assets_def: dict[AssetKey, AssetsDefinition] = {}
-    asset_key_to_resource_props: Mapping[AssetKey, Mapping[str, Any]] = {}
+    asset_key_to_resource_props: dict[AssetKey, Mapping[str, Any]] = {}
+    asset_key_to_translator: dict[AssetKey, DagsterDbtTranslator] = {}
     for assets_def in dbt_assets:
         manifest, translator, _ = get_manifest_and_translator_from_dbt_assets([assets_def])
         asset_key_to_resource_props_for_def = get_asset_keys_to_resource_props(manifest, translator)
@@ -105,9 +108,11 @@ def build_freshness_checks_from_dbt_assets(
                 )
             asset_key_to_assets_def[asset_key] = assets_def
             asset_key_to_resource_props[asset_key] = asset_key_to_resource_props_for_def[asset_key]
+            asset_key_to_translator[asset_key] = translator
     for asset_key in assets_to_keys(dbt_assets):
         dbt_resource_props = asset_key_to_resource_props[asset_key]
         assets_def = asset_key_to_assets_def[asset_key]
+        translator = asset_key_to_translator[asset_key]
         dagster_metadata = dbt_resource_props.get("meta", {}).get("dagster", {})
         freshness_check_config = dagster_metadata.get("freshness_check", {})
         if not freshness_check_config:

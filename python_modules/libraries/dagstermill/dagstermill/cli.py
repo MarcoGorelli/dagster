@@ -76,6 +76,7 @@ def retroactively_scaffold_notebook(notebook: str):
 def execute_retroactive_scaffold(notebook_path: str):
     nb = load_notebook_node(notebook_path)
     new_nb = copy.deepcopy(nb)
+    # pyrefly: ignore [missing-attribute]
     new_nb.cells = [get_import_cell(), get_parameters_cell()] + nb.cells
     write_ipynb(new_nb, notebook_path)
 

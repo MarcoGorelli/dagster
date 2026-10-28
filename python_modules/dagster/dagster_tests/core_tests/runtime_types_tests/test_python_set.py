@@ -85,15 +85,20 @@ def test_open_typing_set_input_fail():
 def test_runtime_set_of_int():
     set_dagster_type = create_typed_runtime_set(int)
 
+    # pyrefly: ignore [bad-argument-type]
     set_dagster_type.type_check(None, {1})
+    # pyrefly: ignore [bad-argument-type]
     set_dagster_type.type_check(None, set())
 
+    # pyrefly: ignore [bad-argument-type]
     res = set_dagster_type.type_check(None, None)
     assert not res.success
 
+    # pyrefly: ignore [bad-argument-type]
     res = set_dagster_type.type_check(None, "nope")
     assert not res.success
 
+    # pyrefly: ignore [bad-argument-type]
     res = set_dagster_type.type_check(None, {"nope"})
     assert not res.success
 

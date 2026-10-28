@@ -113,6 +113,7 @@ def test_tags_multi_dimensional_partitions():
         asset2_records = instance.fetch_materializations(asset2.key, limit=1000).records
         materializations = sorted(
             [*asset1_records, *asset2_records],
+            # pyrefly: ignore[missing-attribute]
             key=lambda x: x.event_log_entry.dagster_event.asset_key,
         )
         assert len(materializations) == 2

@@ -566,9 +566,11 @@ def test_asset_check():
     def my_asset():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=my_asset)
     def my_asset_check(): ...
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=my_asset)
     def my_asset_check_2(): ...
 
@@ -595,6 +597,7 @@ def test_asset_check_in_asset_op():
     def my_asset():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=my_asset)
     def my_asset_check(): ...
 
@@ -621,6 +624,7 @@ def test_asset_check_multiple_jobs():
     def my_asset():
         pass
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.asset_check(asset=my_asset)
     def my_asset_check(): ...
 

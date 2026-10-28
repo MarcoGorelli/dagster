@@ -542,7 +542,10 @@ def _helm_chart_helper(
             )
 
             pod_names = [
-                p.metadata.name for p in pods.items if CELERY_WORKER_NAME_PREFIX in p.metadata.name
+                p.metadata.name
+                # pyrefly: ignore [missing-attribute]
+                for p in pods.items
+                if CELERY_WORKER_NAME_PREFIX in p.metadata.name
             ]
             if helm_config.get("runLauncher").get("type") == "CeleryK8sRunLauncher":
                 worker_queues = (
@@ -565,6 +568,7 @@ def _helm_chart_helper(
                     if labels:
                         target_deployments = [
                             item
+                            # pyrefly: ignore [missing-attribute]
                             for item in deployments.items
                             if queue.get("name") in item.metadata.name
                         ]
@@ -1059,6 +1063,7 @@ def _port_forward_dagster_webserver(namespace):
     kube_api = kubernetes.client.CoreV1Api()
 
     pods = kube_api.list_namespaced_pod(namespace=namespace)
+    # pyrefly: ignore [missing-attribute]
     pod_names = [p.metadata.name for p in pods.items if "webserver" in p.metadata.name]
 
     if not pod_names:

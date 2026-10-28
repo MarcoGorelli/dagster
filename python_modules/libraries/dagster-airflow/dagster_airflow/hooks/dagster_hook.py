@@ -97,7 +97,9 @@ class DagsterHook(BaseHook):
             )
 
     def set_hook_for_cloud(self, conn: Connection):
+        # pyrefly: ignore [bad-assignment]
         self.organization_id = conn.description
+        # pyrefly: ignore [bad-assignment]
         self.deployment_name = conn.host
         self.user_token = conn.get_password()
         base_url = conn.login if conn.login else "https://dagster.cloud/"

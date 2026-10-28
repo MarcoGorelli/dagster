@@ -85,6 +85,7 @@ def test_masking_nested_user_code_err_boundaries(enable_masking_user_code_errors
 
 
 def test_masking_nested_user_code_err_boundaries_reraise(enable_masking_user_code_errors):
+    err_info = None
     try:
         try:
             with user_code_error_boundary(

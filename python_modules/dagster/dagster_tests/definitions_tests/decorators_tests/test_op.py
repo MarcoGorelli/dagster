@@ -876,7 +876,9 @@ def test_metadata_logging():
     assert result.success
     assert result.output_for_node("basic") == "baz"
     events = result.events_for_node("basic")
+    # pyrefly: ignore [missing-attribute]
     assert len(events[1].event_specific_data.metadata) == 1
+    # pyrefly: ignore [bad-index]
     assert events[1].event_specific_data.metadata["foo"].text == "bar"
 
 
@@ -890,8 +892,11 @@ def test_metadata_logging_multiple_entries():
     result = execute_op_in_graph(basic)
     assert result.success
     events = result.events_for_node("basic")
+    # pyrefly: ignore [missing-attribute]
     assert len(events[1].event_specific_data.metadata) == 2
+    # pyrefly: ignore [bad-index]
     assert events[1].event_specific_data.metadata["foo"].text == "second_value"
+    # pyrefly: ignore [bad-index]
     assert events[1].event_specific_data.metadata["boo"].text == "bot"
 
 
@@ -923,7 +928,9 @@ def test_log_metadata_multi_output():
     first_output_event = events[1]
     second_output_event = events[3]
 
+    # pyrefly: ignore [missing-attribute]
     assert "foo" in first_output_event.event_specific_data.metadata
+    # pyrefly: ignore [missing-attribute]
     assert "bar" in second_output_event.event_specific_data.metadata
 
 
@@ -959,16 +966,24 @@ def test_log_metadata_multiple_dynamic_outputs():
     assert result.success
     events = result.all_node_events
     output_event_one = events[1]
+    # pyrefly: ignore [missing-attribute]
     assert output_event_one.event_specific_data.mapping_key == "one"
+    # pyrefly: ignore [missing-attribute]
     assert "one" in output_event_one.event_specific_data.metadata
     output_event_two = events[3]
+    # pyrefly: ignore [missing-attribute]
     assert output_event_two.event_specific_data.mapping_key == "two"
+    # pyrefly: ignore [missing-attribute]
     assert "two" in output_event_two.event_specific_data.metadata
     output_event_three = events[5]
+    # pyrefly: ignore [missing-attribute]
     assert output_event_three.event_specific_data.mapping_key == "three"
+    # pyrefly: ignore [missing-attribute]
     assert "three" in output_event_three.event_specific_data.metadata
     output_event_four = events[7]
+    # pyrefly: ignore [missing-attribute]
     assert output_event_four.event_specific_data.mapping_key == "four"
+    # pyrefly: ignore [missing-attribute]
     assert "four" in output_event_four.event_specific_data.metadata
 
 

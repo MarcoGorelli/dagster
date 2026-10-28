@@ -13,6 +13,7 @@ def db_select(items: Iterable):
     if not IS_SQLALCHEMY_VERSION_1:
         return db.select(*items)
 
+    # pyrefly: ignore[no-matching-overload]
     return db.select(items)
 
 
@@ -21,6 +22,7 @@ def db_case(items: Iterable, else_: Any | None = None):
     if not IS_SQLALCHEMY_VERSION_1:
         return db.case(*items, else_=else_)
 
+    # pyrefly: ignore[bad-argument-type]
     return db.case(items, else_=else_)
 
 

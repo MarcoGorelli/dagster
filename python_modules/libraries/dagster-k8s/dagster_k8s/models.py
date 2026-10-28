@@ -84,6 +84,7 @@ def _k8s_parse_value(data: Any, classname: str, attr_name: str) -> Any:
     elif klass == object:
         return data
     elif klass == datetime.date:
+        # pyrefly: ignore [missing-attribute]
         return parse(data).date()
     elif klass == datetime.datetime:
         return parse(data)

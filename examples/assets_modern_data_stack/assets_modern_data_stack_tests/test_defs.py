@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from assets_modern_data_stack.definitions import defs
 
 

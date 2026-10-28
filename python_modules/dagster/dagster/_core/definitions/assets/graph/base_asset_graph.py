@@ -553,6 +553,7 @@ class BaseAssetGraph(ABC, Generic[T_AssetNode]):
     ) -> PartitionMapping:
         node = self.get(key)  # ty: ignore[no-matching-overload]
         return infer_partition_mapping(
+            # pyrefly: ignore[bad-argument-type]
             node.partition_mappings.get(parent_asset_key),
             node.partitions_def,
             self.get(parent_asset_key).partitions_def,

@@ -238,6 +238,7 @@ class SnowflakeResource(ConfigurableResource, IAttachDifferentObjectToOpContext,
         ),
     )
 
+    # pyrefly: ignore [no-matching-overload]
     connector: str | None = Field(
         default=None,
         description=(

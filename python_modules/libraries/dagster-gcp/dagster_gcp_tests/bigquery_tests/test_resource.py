@@ -62,6 +62,7 @@ def test_old_resource_authenticate_via_config():
         passed = result.success
 
         assert os.getenv("GOOGLE_APPLICATION_CREDENTIALS") is None
+        # pyrefly: ignore [bad-argument-type]
         assert not os.path.exists(asset_info["gcp_creds_file"])
     finally:
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = old_gcp_creds_file
@@ -105,6 +106,7 @@ def test_pythonic_resource_authenticate_via_config():
         passed = result.success
 
         assert os.getenv("GOOGLE_APPLICATION_CREDENTIALS") is None
+        # pyrefly: ignore [bad-argument-type]
         assert not os.path.exists(asset_info["gcp_creds_file"])
     finally:
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = old_gcp_creds_file

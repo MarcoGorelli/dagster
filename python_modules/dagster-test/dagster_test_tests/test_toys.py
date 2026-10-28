@@ -92,7 +92,9 @@ def test_longitudinal_job(executor_def):
         result = longitudinal.to_job(
             resource_defs={"io_manager": fs_io_manager},
             executor_def=executor_def,
+            # pyrefly: ignore [missing-attribute]
             config=longitudinal_schedule().job.partitioned_config,
+            # pyrefly: ignore [missing-attribute]
         ).execute_in_process(partition_key=partitions_def.get_partition_keys()[0])
         assert result.success
     except IntentionalRandomFailure:

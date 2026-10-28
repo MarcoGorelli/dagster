@@ -56,11 +56,13 @@ from dagster_airlift_tests.unit_tests.conftest import (
 )
 
 
+# pyrefly: ignore [no-matching-overload]
 @executor
 def nonstandard_executor(init_context):
     pass
 
 
+# pyrefly: ignore [no-matching-overload]
 @logger
 def nonstandard_logger(init_context):
     pass
@@ -84,6 +86,7 @@ def a():
 b_spec = AssetSpec(key="b")
 
 
+# pyrefly: ignore [bad-argument-type]
 @asset_check(asset=a)
 def a_check():
     pass

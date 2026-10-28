@@ -18,6 +18,7 @@ def test_str_regex() -> None:
     try:
 
         class AStringConfig(dg.Config):
+            # pyrefly: ignore [no-matching-overload]
             a_str: str = Field(regex=r"^(foo)+$")
 
     except:
@@ -37,8 +38,10 @@ def test_int_gtlt() -> None:
 
     AnIntConfig(an_int=5)
     with pytest.raises(ValidationError, match=" less than 10"):
+        # pyrefly: ignore [bad-argument-type]
         AnIntConfig(an_int=10)
     with pytest.raises(ValidationError, match=" greater than 0"):
+        # pyrefly: ignore [bad-argument-type]
         AnIntConfig(an_int=0)
 
 
@@ -50,8 +53,10 @@ def test_int_gele() -> None:
     AnIntConfig(an_int=10)
     AnIntConfig(an_int=0)
     with pytest.raises(ValidationError, match=" less than or equal to 10"):
+        # pyrefly: ignore [bad-argument-type]
         AnIntConfig(an_int=11)
     with pytest.raises(ValidationError, match=" greater than or equal to 0"):
+        # pyrefly: ignore [bad-argument-type]
         AnIntConfig(an_int=-1)
 
 
@@ -75,8 +80,10 @@ def test_float_gtlt() -> None:
 
     AnFloatConfig(a_float=5)
     with pytest.raises(ValidationError, match=" less than 10"):
+        # pyrefly: ignore [bad-argument-type]
         AnFloatConfig(a_float=10)
     with pytest.raises(ValidationError, match=" greater than 0"):
+        # pyrefly: ignore [bad-argument-type]
         AnFloatConfig(a_float=0)
 
 
@@ -88,8 +95,10 @@ def test_float_gele() -> None:
     AnFloatConfig(a_float=10)
     AnFloatConfig(a_float=0)
     with pytest.raises(ValidationError, match=" less than or equal to 10"):
+        # pyrefly: ignore [bad-argument-type]
         AnFloatConfig(a_float=11)
     with pytest.raises(ValidationError, match=" greater than or equal to 0"):
+        # pyrefly: ignore [bad-argument-type]
         AnFloatConfig(a_float=-1)
 
 
@@ -108,6 +117,7 @@ def test_float_multiple() -> None:
 
 def test_list_length() -> None:
     class AListConfig(dg.Config):
+        # pyrefly: ignore [no-matching-overload]
         a_list: list[int] = Field(min_items=2, max_items=10)
 
     AListConfig(a_list=[1, 2])

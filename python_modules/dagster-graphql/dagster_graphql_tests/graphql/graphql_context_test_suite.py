@@ -329,7 +329,7 @@ class EnvironmentManagers:
                     )
                     if loadable_target_origin.python_file
                     else ModuleTarget(
-                        module_name=loadable_target_origin.module_name,
+                        module_name=loadable_target_origin.module_name,  # pyrefly: ignore [bad-argument-type]
                         attribute=loadable_target_origin.attribute,
                         working_directory=loadable_target_origin.working_directory,
                         location_name=location_name,
@@ -362,6 +362,7 @@ class EnvironmentManagers:
                     GrpcServerTarget(
                         port=api_client.port,
                         socket=api_client.socket,
+                        # pyrefly: ignore [bad-argument-type]
                         host=api_client.host,
                         location_name=location_name,
                     ),
@@ -382,6 +383,7 @@ class EnvironmentManagers:
         def _mgr_fn(instance, read_only):
             loadable_target_origin = target or get_main_loadable_target_origin()
             with safe_tempfile_path() as socket:
+                # pyrefly: ignore [unsupported-operation]
                 subprocess_args = [
                     "dagster",
                     "code-server",

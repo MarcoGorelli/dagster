@@ -509,6 +509,7 @@ class InstanceRef(
                 return v
             return ConfigurableClassData(*v)
 
+        # pyrefly: ignore [bad-argument-type]
         return InstanceRef(**{k: value_for_ref_item(k, v) for k, v in instance_ref_dict.items()})
 
     @property

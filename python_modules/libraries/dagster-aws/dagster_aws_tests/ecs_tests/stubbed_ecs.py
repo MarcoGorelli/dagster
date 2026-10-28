@@ -506,6 +506,7 @@ class StubbedEcs:
                 service_response={},
                 expected_params={**kwargs},
             )
+            # pyrefly: ignore [unsupported-operation]
             self.storage.tags[arn] = tags
         else:
             self.stubber.add_client_error(method="tag_resource", expected_params={**kwargs})

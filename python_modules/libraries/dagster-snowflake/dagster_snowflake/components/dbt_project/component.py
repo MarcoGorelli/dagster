@@ -947,6 +947,7 @@ class SnowflakeDbtProjectComponent(StateBackedComponent, dg.Resolvable):
                 # dbt may build models outside the Dagster subset (e.g. via indirect selection
                 # or graph operators in a user-provided `select`); yielding results for
                 # unselected assets would fail the step, so drop them (as for checks below).
+                # pyrefly: ignore [missing-attribute]
                 if op_mode and asset_key not in context.selected_asset_keys:
                     continue
                 metadata = {
@@ -987,6 +988,7 @@ class SnowflakeDbtProjectComponent(StateBackedComponent, dg.Resolvable):
                 )
                 if asset_check_key is None:
                     continue
+                # pyrefly: ignore [missing-attribute]
                 if op_mode and asset_check_key not in context.selected_asset_check_keys:
                     continue
                 metadata = {
@@ -1353,6 +1355,7 @@ class SnowflakeDbtProjectComponentTranslator(
         settings: DagsterDbtComponentTranslatorSettings | None,
     ):
         self._component = component
+        # pyrefly: ignore [bad-argument-type]
         super().__init__(settings)
 
     def get_asset_spec(

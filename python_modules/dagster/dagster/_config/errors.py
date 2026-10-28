@@ -93,6 +93,7 @@ ERROR_DATA_UNION: TypeAlias = (
     | FieldAliasCollisionErrorData
 )
 
+# pyrefly: ignore [missing-attribute]
 ERROR_DATA_TYPES = ERROR_DATA_UNION.__args__
 
 

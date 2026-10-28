@@ -149,6 +149,7 @@ def define_circular_dependency_job():
     )
 
 
+# pyrefly: ignore [bad-argument-type]
 @repository
 def the_test_repository():
     return {"jobs": {"circular_dependency_job": define_circular_dependency_job}}

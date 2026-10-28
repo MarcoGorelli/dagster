@@ -20,6 +20,7 @@ def test_load_input_handle_output():
             assert False, "should not be called"
 
     class MyInputManager(MyIOManager):
+        # pyrefly: ignore [bad-override]
         def load_input(self, context):
             if context.upstream_output is None:
                 assert False, "upstream output should not be None"
@@ -211,6 +212,7 @@ def test_pythonic_fs_io_manager_runtime_config() -> None:
 
 def test_config_schemas() -> None:
     # Decorator-based IO manager definition
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(
         config_schema={"base_dir": dg.StringSource},
         output_config_schema={"path": dg.StringSource},
@@ -476,6 +478,7 @@ def test_observable_source_asset_io_manager_def() -> None:
 
 def test_telemetry_custom_io_manager():
     class MyIOManager(dg.ConfigurableIOManager):
+        # pyrefly: ignore [bad-override]
         def handle_output(self, context, obj):
             return {}
 
@@ -491,6 +494,7 @@ def test_telemetry_dagster_io_manager():
         def _is_dagster_maintained(cls) -> bool:
             return True
 
+        # pyrefly: ignore [bad-override]
         def handle_output(self, context, obj):
             return {}
 
@@ -502,6 +506,7 @@ def test_telemetry_dagster_io_manager():
 
 def test_telemetry_custom_io_manager_factory():
     class MyIOManager(dg.IOManager):
+        # pyrefly: ignore [bad-override]
         def handle_output(self, context, obj):
             return {}
 
@@ -517,6 +522,7 @@ def test_telemetry_custom_io_manager_factory():
 
 def test_telemetry_dagster_io_manager_factory():
     class MyIOManager(dg.IOManager):
+        # pyrefly: ignore [bad-override]
         def handle_output(self, context, obj):
             return {}
 
@@ -561,6 +567,7 @@ def test_inherited_io_config_schemas() -> None:
 
         @classmethod
         def output_config_schema(cls) -> MyIOManagerOutputConfigSchema:  # ty: ignore[invalid-method-override]
+            # pyrefly: ignore [bad-return]
             return MyIOManagerOutputConfigSchema
 
     @dg.op

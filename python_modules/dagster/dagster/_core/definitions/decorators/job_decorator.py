@@ -123,6 +123,7 @@ def job(compose_fn: Callable[..., Any]) -> JobDefinition: ...
 
 
 @overload
+# pyrefly: ignore [inconsistent-overload-default]
 def job(
     *,
     name: str | None = ...,

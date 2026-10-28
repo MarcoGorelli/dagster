@@ -277,6 +277,7 @@ def test_server_down():
                     location_name="test",
                     port=api_client.port,
                     socket=api_client.socket,
+                    # pyrefly: ignore [bad-argument-type]
                     host=api_client.host,
                 ),
             ) as workspace_process_context:

@@ -44,6 +44,7 @@ def test_fs_io_manager():
         assert len(handled_output_events) == 2
 
         filepath_a = os.path.join(tmpdir_path, result.run_id, "op_a", "result")
+        # pyrefly: ignore[missing-attribute]
         metadata = handled_output_events[0].event_specific_data.metadata
         assert metadata["path"] == MetadataValue.path(filepath_a)
         assert os.path.isfile(filepath_a)
@@ -51,11 +52,14 @@ def test_fs_io_manager():
             assert pickle.load(read_obj) == [1, 2, 3]
 
         loaded_input_events = list(filter(lambda evt: evt.is_loaded_input, result.all_events))
+        # pyrefly: ignore[missing-attribute]
         metadata = loaded_input_events[0].event_specific_data.metadata
         assert len(loaded_input_events) == 1
+        # pyrefly: ignore[missing-attribute]
         assert loaded_input_events[0].event_specific_data.upstream_step_key == "op_a"
 
         filepath_b = os.path.join(tmpdir_path, result.run_id, "op_b", "result")
+        # pyrefly: ignore[missing-attribute]
         metadata = handled_output_events[1].event_specific_data.metadata
         assert metadata["path"] == MetadataValue.path(filepath_b)
         assert os.path.isfile(filepath_b)
@@ -176,6 +180,7 @@ def test_fs_io_manager_handles_assets():
         io_manager_def = fs_io_manager.configured({"base_dir": tmpdir_path})
         job_def = get_assets_job(io_manager_def)
 
+        # pyrefly: ignore [missing-attribute]
         result = job_def.execute_in_process()
         assert result.success
 
@@ -207,6 +212,7 @@ def test_fs_io_manager_partitioned():
             partitions_def=dg.DailyPartitionsDefinition(start_date="2020-02-01"),
         )
 
+        # pyrefly: ignore [missing-attribute]
         result = job_def.execute_in_process(partition_key="2020-05-03")
         assert result.success
 
@@ -369,6 +375,7 @@ def test_fs_io_manager_partitioned_graph_backed_asset():
 
         loaded_input_events = list(filter(lambda evt: evt.is_loaded_input, result.all_node_events))
         assert len(loaded_input_events) == 3
+        # pyrefly: ignore[missing-attribute]
         assert loaded_input_events[0].event_specific_data.upstream_step_key.endswith("one")
 
         filepath_b = os.path.join(tmpdir_path, "four", "A")
@@ -517,6 +524,7 @@ def test_fs_io_manager_none_value_no_metadata():
             filter(lambda evt: evt.is_handled_output, result.all_node_events)
         )
         assert len(handled_output_events) == 1
+        # pyrefly: ignore[missing-attribute]
         metadata = handled_output_events[0].event_specific_data.metadata
         assert "path" not in metadata
 

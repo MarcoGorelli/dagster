@@ -133,6 +133,7 @@ class PipesK8sPodLogsMessageReader(PipesMessageReader):
 
             try:
                 for log_item in _process_log_stream(
+                    # pyrefly: ignore [bad-argument-type]
                     core_api.read_namespaced_pod_log(
                         pod_name,
                         namespace,
@@ -203,6 +204,7 @@ class PipesK8sPodLogsMessageReader(PipesMessageReader):
         handler = check.not_none(
             self._handler, "can only consume logs within scope of context manager"
         )
+        # pyrefly: ignore [missing-attribute]
         pods = core_api.list_namespaced_pod(
             namespace=namespace, field_selector=f"metadata.name={pod_name}"
         ).items

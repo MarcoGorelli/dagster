@@ -44,6 +44,7 @@ class DataprocClient:
     def dataproc_clusters(self):
         return (
             # Google APIs dynamically genned, so pylint pukes
+            # pyrefly: ignore [missing-attribute]
             self.dataproc.projects().regions().clusters()
         )
 
@@ -51,6 +52,7 @@ class DataprocClient:
     def dataproc_jobs(self):
         return (
             # Google APIs dynamically genned, so pylint pukes
+            # pyrefly: ignore [missing-attribute]
             self.dataproc.projects().regions().jobs()
         )
 

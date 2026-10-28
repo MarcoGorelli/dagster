@@ -95,6 +95,7 @@ def test_status_enums_match_dbt_core() -> None:
     for enum_cls, expected in expected_by_enum:
         for name, value in expected.items():
             if name in enum_cls.__members__:
+                # pyrefly: ignore[unsupported-operation]
                 assert enum_cls[name].value == value
 
     if DBT_PYTHON_VERSION is not None:
@@ -105,6 +106,7 @@ def test_status_enums_match_dbt_core() -> None:
     for enum_cls, expected in expected_by_enum:
         assert set(expected) <= set(enum_cls.__members__)
         for name, value in expected.items():
+            # pyrefly: ignore[unsupported-operation]
             assert str(enum_cls[name]) == value
 
 

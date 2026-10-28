@@ -39,6 +39,7 @@ def _construct_keyword_constraints(non_nullable, unique, ignore_missing_vals):
     if non_nullable:
         constraints.append(NonNullableColumnConstraint())
     if unique:
+        # pyrefly: ignore [bad-argument-type]
         constraints.append(UniqueColumnConstraint(ignore_missing_vals=ignore_missing_vals))
     return constraints
 

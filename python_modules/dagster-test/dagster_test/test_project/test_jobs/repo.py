@@ -554,6 +554,7 @@ def foo_op():
 
 
 def define_demo_execution_repo():
+    # pyrefly: ignore [bad-argument-type]
     @repository
     def demo_execution_repo():
         return {

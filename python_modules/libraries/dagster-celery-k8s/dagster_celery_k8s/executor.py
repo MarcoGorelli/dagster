@@ -409,6 +409,7 @@ def create_k8s_job_task(celery_app, **task_kwargs):
         events = []
 
         # Post event for starting execution
+        # pyrefly: ignore [missing-attribute]
         job_name = job.metadata.name
         engine_event = instance.report_engine_event(
             f'Executing step "{step_key}" in Kubernetes job {job_name}.',

@@ -123,6 +123,7 @@ def execute_dagster_graphql_subscription(
 
     async def _process():
         payload_aiter = await subscription
+        # pyrefly: ignore [not-iterable]
         async for res in payload_aiter:
             results.append(res)
             # first payload should have it all

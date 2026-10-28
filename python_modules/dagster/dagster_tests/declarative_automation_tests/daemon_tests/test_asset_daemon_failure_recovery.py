@@ -108,6 +108,7 @@ def test_old_tick_not_resumed(daemon_not_paused_instance):
         seconds=MAX_TIME_TO_RESUME_TICK_SECONDS + 1
     )
 
+    # pyrefly: ignore [bad-argument-type]
     with freeze_time(execution_time):
         error_asset_scenario.do_daemon_scenario(
             instance,
@@ -129,6 +130,7 @@ def test_old_tick_not_resumed(daemon_not_paused_instance):
         seconds=MAX_TIME_TO_RESUME_TICK_SECONDS - 1
     )
 
+    # pyrefly: ignore [bad-argument-type]
     with freeze_time(execution_time):
         error_asset_scenario.do_daemon_scenario(
             instance,
@@ -165,6 +167,7 @@ def test_error_loop_before_cursor_written(daemon_not_paused_instance, crash_loca
 
     for trial_num in range(3):
         test_time = execution_time + datetime.timedelta(seconds=15 * trial_num)  # ty: ignore[unsupported-operator]
+        # pyrefly: ignore [bad-argument-type]
         with freeze_time(test_time):
             debug_crash_flags = {crash_location: Exception(f"Oops {trial_num}")}
 
@@ -181,7 +184,9 @@ def test_error_loop_before_cursor_written(daemon_not_paused_instance, crash_loca
 
             assert len(ticks) == trial_num + 1
             assert ticks[0].status == TickStatus.FAILURE
+            # pyrefly: ignore [missing-attribute]
             assert ticks[0].timestamp == test_time.timestamp()
+            # pyrefly: ignore [missing-attribute]
             assert ticks[0].tick_data.end_timestamp == test_time.timestamp()
             assert ticks[0].automation_condition_evaluation_id == 1
 
@@ -203,6 +208,7 @@ def test_error_loop_before_cursor_written(daemon_not_paused_instance, crash_loca
             assert not cursor.evaluation_id
 
     test_time = test_time + datetime.timedelta(seconds=45)
+    # pyrefly: ignore [bad-argument-type]
     with freeze_time(test_time):
         # Next successful tick recovers
         error_asset_scenario.do_daemon_scenario(
@@ -217,7 +223,9 @@ def test_error_loop_before_cursor_written(daemon_not_paused_instance, crash_loca
 
     assert len(ticks) == 4
     assert ticks[0].status == TickStatus.SUCCESS
+    # pyrefly: ignore [missing-attribute]
     assert ticks[0].timestamp == test_time.timestamp()
+    # pyrefly: ignore [missing-attribute]
     assert ticks[0].tick_data.end_timestamp == test_time.timestamp()
     assert ticks[0].automation_condition_evaluation_id == 1  # finally finishes
 
@@ -228,6 +236,7 @@ def test_error_loop_before_cursor_written(daemon_not_paused_instance, crash_loca
     assert len(runs) == 5
 
     test_time = test_time + datetime.timedelta(seconds=45)
+    # pyrefly: ignore [bad-argument-type]
     with freeze_time(test_time):
         # Next successful tick recovers
         error_asset_scenario.do_daemon_scenario(
@@ -243,6 +252,7 @@ def test_error_loop_before_cursor_written(daemon_not_paused_instance, crash_loca
 
     assert len(ticks) == 5
     assert ticks[0].status == TickStatus.SKIPPED
+    # pyrefly: ignore [missing-attribute]
     assert ticks[0].timestamp == test_time.timestamp()
 
     assert ticks[0].tick_data.failure_count == 0
@@ -272,6 +282,7 @@ def test_error_loop_after_cursor_written(daemon_not_paused_instance, crash_locat
 
     # User code error retries but does not increment the retry count
     test_time = execution_time + datetime.timedelta(seconds=15)  # ty: ignore[unsupported-operator]
+    # pyrefly: ignore [bad-argument-type]
     with freeze_time(test_time):
         debug_crash_flags = {crash_location: DagsterUserCodeUnreachableError("WHERE IS THE CODE")}
 
@@ -287,7 +298,9 @@ def test_error_loop_after_cursor_written(daemon_not_paused_instance, crash_locat
 
         assert len(ticks) == 1
         assert ticks[0].status == TickStatus.FAILURE
+        # pyrefly: ignore [missing-attribute]
         assert ticks[0].timestamp == test_time.timestamp()
+        # pyrefly: ignore [missing-attribute]
         assert ticks[0].tick_data.end_timestamp == test_time.timestamp()
         assert ticks[0].automation_condition_evaluation_id == 1
 
@@ -314,6 +327,7 @@ def test_error_loop_after_cursor_written(daemon_not_paused_instance, crash_locat
 
     for trial_num in range(3):
         test_time = test_time + datetime.timedelta(seconds=15)
+        # pyrefly: ignore [bad-argument-type]
         with freeze_time(test_time):
             debug_crash_flags = {crash_location: Exception(f"Oops {trial_num}")}
 
@@ -330,7 +344,9 @@ def test_error_loop_after_cursor_written(daemon_not_paused_instance, crash_locat
 
             assert len(ticks) == trial_num + 2
             assert ticks[0].status == TickStatus.FAILURE
+            # pyrefly: ignore [missing-attribute]
             assert ticks[0].timestamp == test_time.timestamp()
+            # pyrefly: ignore [missing-attribute]
             assert ticks[0].tick_data.end_timestamp == test_time.timestamp()
             assert ticks[0].automation_condition_evaluation_id == 1
 
@@ -354,6 +370,7 @@ def test_error_loop_after_cursor_written(daemon_not_paused_instance, crash_locat
     # Next tick moves on to use the new cursor / evaluation ID since we have passed the maximum
     # number of retries
     test_time = test_time + datetime.timedelta(seconds=45)
+    # pyrefly: ignore [bad-argument-type]
     with freeze_time(test_time):
         debug_crash_flags = {"RUN_IDS_ADDED_TO_EVALUATIONS": Exception("Oops new tick")}
         error_asset_scenario.do_daemon_scenario(
@@ -369,7 +386,9 @@ def test_error_loop_after_cursor_written(daemon_not_paused_instance, crash_locat
 
         assert len(ticks) == 5
         assert ticks[0].status == TickStatus.FAILURE
+        # pyrefly: ignore [missing-attribute]
         assert ticks[0].timestamp == test_time.timestamp()
+        # pyrefly: ignore [missing-attribute]
         assert ticks[0].tick_data.end_timestamp == test_time.timestamp()
         assert ticks[0].automation_condition_evaluation_id == 5  # advances, skipping a few numbers
 
@@ -383,6 +402,7 @@ def test_error_loop_after_cursor_written(daemon_not_paused_instance, crash_locat
         assert moved_on_cursor != last_cursor
 
     test_time = test_time + datetime.timedelta(seconds=45)
+    # pyrefly: ignore [bad-argument-type]
     with freeze_time(test_time):
         # Next successful tick recovers
         error_asset_scenario.do_daemon_scenario(
@@ -398,13 +418,16 @@ def test_error_loop_after_cursor_written(daemon_not_paused_instance, crash_locat
 
     assert len(ticks) == 6
     assert ticks[0].status != TickStatus.FAILURE
+    # pyrefly: ignore [missing-attribute]
     assert ticks[0].timestamp == test_time.timestamp()
+    # pyrefly: ignore [missing-attribute]
     assert ticks[0].tick_data.end_timestamp == test_time.timestamp()
     assert ticks[0].automation_condition_evaluation_id == 5  # finishes
     assert ticks[0].tick_data.failure_count == 0
     assert ticks[0].tick_data.consecutive_failure_count == 0
 
     test_time = test_time + datetime.timedelta(seconds=45)
+    # pyrefly: ignore [bad-argument-type]
     with freeze_time(test_time):
         # Next successful tick recovers
         error_asset_scenario.do_daemon_scenario(
@@ -420,7 +443,9 @@ def test_error_loop_after_cursor_written(daemon_not_paused_instance, crash_locat
 
     assert len(ticks) == 7
     assert ticks[0].status != TickStatus.FAILURE
+    # pyrefly: ignore [missing-attribute]
     assert ticks[0].timestamp == test_time.timestamp()
+    # pyrefly: ignore [missing-attribute]
     assert ticks[0].tick_data.end_timestamp == test_time.timestamp()
     assert ticks[0].tick_data.failure_count == 0  # resets
     assert ticks[0].tick_data.consecutive_failure_count == 0  # resets
@@ -528,8 +553,9 @@ def test_asset_daemon_crash_recovery(daemon_not_paused_instance, crash_location)
     assert (
         ticks[0].timestamp == scenario.current_time.timestamp()  # ty: ignore[unresolved-attribute]
         if cursor_written
-        else freeze_datetime.timestamp()
+        else freeze_datetime.timestamp()  # pyrefly: ignore [missing-attribute]
     )
+    # pyrefly: ignore [missing-attribute]
     assert ticks[0].tick_data.end_timestamp == freeze_datetime.timestamp()
     assert len(ticks[0].tick_data.run_ids) == 5
     assert ticks[0].automation_condition_evaluation_id == 1
@@ -642,7 +668,9 @@ def test_asset_daemon_exception_recovery(daemon_not_paused_instance, crash_locat
 
     assert ticks[0]
     assert ticks[0].status == TickStatus.SUCCESS
+    # pyrefly: ignore [missing-attribute]
     assert ticks[0].timestamp == freeze_datetime.timestamp()
+    # pyrefly: ignore [missing-attribute]
     assert ticks[0].tick_data.end_timestamp == freeze_datetime.timestamp()
     assert len(ticks[0].tick_data.run_ids) == 5
     assert ticks[0].automation_condition_evaluation_id == 1

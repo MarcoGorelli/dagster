@@ -65,6 +65,7 @@ def make_op(
     )
     def made_op(context):
         partition_date = datetime.strptime(context.op_config["partition"], DEFAULT_DATE_FORMAT)
+        data_size = None
         if data_size_fn:
             data_size = data_size_fn(partition_date)
             sleep_time = sleep_factor * data_size

@@ -490,6 +490,7 @@ class ConfigurableResourceFactory(  # ty: ignore[conflicting-metaclass]
         from dagster._config.post_process import post_process_config
 
         post_processed_config = post_process_config(
+            # pyrefly: ignore [bad-argument-type]
             self._config_schema.config_type,
             self._convert_to_config_dictionary(),
         )
@@ -514,6 +515,7 @@ class ConfigurableResourceFactory(  # ty: ignore[conflicting-metaclass]
         from dagster._config.post_process import post_process_config
 
         post_processed_config = post_process_config(
+            # pyrefly: ignore [bad-argument-type]
             self._config_schema.config_type,
             self._convert_to_config_dictionary(),
         )
@@ -956,7 +958,9 @@ def validate_resource_annotated_function(fn) -> None:
     """
     from dagster import DagsterInvalidDefinitionError
     from dagster._config.pythonic_config.resource import (
+        # pyrefly: ignore [missing-module-attribute]
         ConfigurableResource,
+        # pyrefly: ignore [missing-module-attribute]
         ConfigurableResourceFactory,
     )
     from dagster._config.pythonic_config.type_check_utils import safe_is_subclass
@@ -1029,6 +1033,7 @@ class PartialResourceDependencyRequirement(ResourceRequirement):
     partial_resource: CoercibleToResource
 
     def is_satisfied(self, resource_defs: Mapping[str, "ResourceDefinition"]):
+        # pyrefly: ignore [missing-module-attribute]
         from dagster._config.pythonic_config.resource import coerce_to_resource
 
         return coerce_to_resource(self.partial_resource) in resource_defs.values()

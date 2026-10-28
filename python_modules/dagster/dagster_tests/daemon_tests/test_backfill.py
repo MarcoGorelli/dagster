@@ -2167,6 +2167,7 @@ def test_asset_backfill_forcible_mark_as_canceled_during_canceling_iteration(
     instance.add_backfill(
         # Add some partitions in a "requested" state to mock that certain partitions are hanging
         backfill.with_asset_backfill_data(
+            # pyrefly: ignore [missing-attribute]
             backfill.asset_backfill_data._replace(
                 requested_subset=AssetGraphSubset(
                     non_partitioned_asset_keys={dg.AssetKey("daily_1")}

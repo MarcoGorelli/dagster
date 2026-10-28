@@ -166,6 +166,7 @@ class CeleryK8sRunLauncher(RunLauncher, ConfigurableClass):
         pod_name = job_name
         exc_config = _get_validated_celery_k8s_executor_config(run.run_config)
 
+        # pyrefly: ignore [missing-attribute]
         job_image_from_executor_config = exc_config.get("job_image")
 
         job_origin = cast("JobPythonOrigin", context.job_code_origin)
@@ -232,9 +233,11 @@ class CeleryK8sRunLauncher(RunLauncher, ConfigurableClass):
         # Set docker/image tag here, as it can also be provided by `user_defined_k8s_config`.
         self._instance.add_run_tags(
             run.run_id,
+            # pyrefly: ignore [missing-attribute]
             {DOCKER_IMAGE_TAG: job.spec.template.spec.containers[0].image},
         )
 
+        # pyrefly: ignore [missing-attribute]
         job_namespace = exc_config.get("job_namespace", self.job_namespace)
 
         self._instance.report_engine_event(
@@ -280,6 +283,7 @@ class CeleryK8sRunLauncher(RunLauncher, ConfigurableClass):
             labels=merge_dicts(self._labels, exc_config.get("labels", {})),
         )
 
+    # pyrefly: ignore [bad-override]
     def terminate(self, run_id):
         check.str_param(run_id, "run_id")
 
@@ -330,6 +334,7 @@ class CeleryK8sRunLauncher(RunLauncher, ConfigurableClass):
         dagster_run = self._instance.get_run_by_id(run_id)
         run_config = dagster_run.run_config  # ty: ignore[unresolved-attribute]
         executor_config = _get_validated_celery_k8s_executor_config(run_config)
+        # pyrefly: ignore [missing-attribute]
         return executor_config.get("job_namespace", self.job_namespace)
 
     @property
@@ -337,6 +342,7 @@ class CeleryK8sRunLauncher(RunLauncher, ConfigurableClass):
         return True
 
     def check_run_worker_health(self, run: DagsterRun):
+        # pyrefly: ignore [missing-attribute]
         job_namespace = _get_validated_celery_k8s_executor_config(run.run_config).get(
             "job_namespace", self.job_namespace
         )

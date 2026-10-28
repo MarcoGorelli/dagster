@@ -1892,6 +1892,7 @@ class TestEventLogStorage:
         def _get_counts(result):
             assert isinstance(result, dg.EventRecordsResult)
             return [
+                # pyrefly: ignore [missing-attribute]
                 record.asset_materialization.metadata.get("count").value
                 for record in result.records
             ]
@@ -2047,7 +2048,9 @@ class TestEventLogStorage:
         def _get_counts(result):
             assert isinstance(result, dg.EventRecordsResult)
             return [
-                record.asset_observation.metadata.get("count").value for record in result.records
+                # pyrefly: ignore [missing-attribute]
+                record.asset_observation.metadata.get("count").value
+                for record in result.records
             ]
 
         # results come in descending order, by default

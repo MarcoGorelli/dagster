@@ -219,6 +219,7 @@ class S3ComputeLogManager(TruncatingCloudStorageComputeLogManager, ConfigurableC
             ClientMethod="get_object", Params={"Bucket": self._s3_bucket, "Key": s3_key}
         )
 
+    # pyrefly: ignore [bad-override]
     def display_path_for_type(self, log_key: Sequence[str], io_type: ComputeIOType):
         if not self.is_capture_complete(log_key):
             return None

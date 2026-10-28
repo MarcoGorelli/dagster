@@ -36,6 +36,7 @@ class S3FakeSession:
     def list_objects_v2(self, Bucket, Prefix, *args, **kwargs):
         self.mock_extras.list_objects_v2(*args, **kwargs)
         response = self._list_objects(Bucket, Prefix)
+        # pyrefly: ignore [bad-assignment]
         response["KeyCount"] = len(response["Contents"])
         return response
 

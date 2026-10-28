@@ -76,6 +76,7 @@ def resolve_dbt_project(context: ResolutionContext, model) -> DbtProjectManager:
         else DbtProjectArgs.resolve_from_model(context, model)
     )
     # resolve the project_dir relative to where this component is defined
+    # pyrefly: ignore [bad-argument-type]
     args = replace(args, project_dir=context.resolve_source_relative_path(args.project_dir))
     return DbtProjectArgsManager(args)
 
@@ -469,6 +470,7 @@ class DbtProjectComponentTranslator(
         settings: DagsterDbtComponentTranslatorSettings | None,
     ):
         self._component = component
+        # pyrefly: ignore [bad-argument-type]
         super().__init__(settings)
 
     def get_asset_spec(

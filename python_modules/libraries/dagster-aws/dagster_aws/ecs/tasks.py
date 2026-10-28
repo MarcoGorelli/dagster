@@ -393,6 +393,7 @@ class CurrentEcsTaskMetadata(
 
 
 def get_current_ecs_task_metadata() -> CurrentEcsTaskMetadata:
+    # pyrefly: ignore [unsupported-operation]
     task_metadata_uri = _container_metadata_uri() + "/task"
     response = requests.get(task_metadata_uri).json()
     cluster = response.get("Cluster")
@@ -414,6 +415,7 @@ def _container_metadata_uri():
 
 
 def current_ecs_container_name():
+    # pyrefly: ignore [bad-argument-type]
     return requests.get(_container_metadata_uri()).json()["Name"]
 
 

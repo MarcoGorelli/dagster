@@ -4,6 +4,7 @@ import pytest
 from dagster._core.test_utils import create_test_daemon_workspace_context, instance_for_test
 from dagster._core.workspace.load_target import EmptyWorkspaceTarget
 
+# pyrefly: ignore [missing-import]
 from auto_run_reexecution_tests.utils import workspace_load_target
 
 

@@ -14,6 +14,8 @@ from dagster_k8s_test_infra.cluster import (
 )
 from dagster_k8s_test_infra.helm import LOCALSTACK_IMAGE
 from dagster_test.test_project import build_and_tag_test_image, get_test_project_docker_image
+
+# pyrefly: ignore [missing-import]
 from tests.utils import BUSYBOX_IMAGE
 
 pytest_plugins = ["dagster_k8s_test_infra.helm"]

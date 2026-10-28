@@ -181,6 +181,7 @@ def test_dagster_materializes(
             af_instance.wait_for_run_completion(dag_id=dag_id, run_id=run_id, timeout=60)
             dagster_instance = DagsterInstance.get()
             start_time = get_current_datetime()
+            asset_materialization = None
             while get_current_datetime() - start_time < timedelta(seconds=30):
                 asset_materialization = dagster_instance.get_latest_materialization_event(
                     asset_key=AssetKey([af_instance.name, "dag", dag_id])
@@ -188,4 +189,4 @@ def test_dagster_materializes(
                 if asset_materialization:
                     break
 
-        assert asset_materialization
+            assert asset_materialization

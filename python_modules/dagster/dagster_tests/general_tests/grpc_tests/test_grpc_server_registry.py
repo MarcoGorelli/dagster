@@ -265,9 +265,11 @@ class MockProcessGrpcServerRegistry(GrpcServerRegistry):
             wait_for_processes_on_shutdown=True,
         )
 
+    # pyrefly: ignore [bad-override]
     def supports_origin(self, code_location_origin):
         return isinstance(code_location_origin, RegisteredCodeLocationOrigin)
 
+    # pyrefly: ignore [bad-override]
     def _get_loadable_target_origin(self, code_location_origin):
         return self.mocked_loadable_target_origin
 

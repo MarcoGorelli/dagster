@@ -256,6 +256,7 @@ def record(
 @dataclass_transform(
     kw_only_default=True,
     frozen_default=True,
+    # pyrefly: ignore[unexpected-keyword]
     slots_default=True,
 )
 def record(

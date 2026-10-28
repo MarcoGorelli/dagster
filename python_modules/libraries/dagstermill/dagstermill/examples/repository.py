@@ -303,6 +303,7 @@ def error_job():
 
 if DAGSTER_PANDAS_PRESENT and SKLEARN_PRESENT and MATPLOTLIB_PRESENT:
     # We need type-ignores here because type checkers don't understand the `*_PRESENT` kwargs.
+    # pyrefly: ignore [unbound-name]
     clean_data = test_nb_op("clean_data", outs={DEFAULT_OUTPUT: Out(DataFrame)})
 
     # FIXME add an output to this

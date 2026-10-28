@@ -81,6 +81,7 @@ class PipesPrefectLogsMessageReader(PipesThreadedMessageReader):
     def messages_are_readable(self, params: PipesParams) -> bool:
         return self._run_id is not None
 
+    # pyrefly: ignore[bad-override]
     def download_messages(
         self, cursor: _LogsCursor | None, params: PipesParams
     ) -> tuple[_LogsCursor, str] | None:

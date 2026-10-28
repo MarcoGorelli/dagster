@@ -849,6 +849,7 @@ class ExecutionPlan(
             handle = StepHandle.parse_from_key(key)
             if handle not in step_handles_to_validate_set:
                 step_handles_to_validate_set.add(handle)
+                # pyrefly: ignore [missing-attribute]
                 step_handles_to_validate.append(handle)
 
         step_handles_to_execute: list[StepHandleUnion] = []

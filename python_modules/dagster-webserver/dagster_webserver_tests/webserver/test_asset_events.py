@@ -112,6 +112,7 @@ def test_report_asset_materialization_endpoint(instance: DagsterInstance, test_c
     response = test_client.post(
         f"/report_asset_materialization/{my_asset_key}",
         params={
+            # pyrefly: ignore [bad-assignment]
             "metadata": meta,  # not json encoded
         },  # type: ignore
     )

@@ -123,7 +123,7 @@ class DagsterGrpcClient:
         with (
             grpc.secure_channel(
                 self._server_address,
-                self._ssl_creds,
+                self._ssl_creds,  # pyrefly: ignore [bad-argument-type]
                 options=options,
                 compression=grpc.Compression.Gzip,
             )
@@ -150,6 +150,7 @@ class DagsterGrpcClient:
                 options=options,
                 compression=grpc.Compression.Gzip,
             ) as channel:
+                # pyrefly: ignore [invalid-yield]
                 yield channel
         else:
             async with grpc.aio.insecure_channel(
@@ -157,6 +158,7 @@ class DagsterGrpcClient:
                 options=options,
                 compression=grpc.Compression.Gzip,
             ) as channel:
+                # pyrefly: ignore [invalid-yield]
                 yield channel
 
     def _get_response(
@@ -735,6 +737,7 @@ class DagsterGrpcClient:
     def health_check_query(self):
         try:
             with self._channel() as channel:
+                # pyrefly: ignore [missing-attribute]
                 response = HealthStub(channel).Check(
                     health_pb2.HealthCheckRequest(service="DagsterApi")
                 )

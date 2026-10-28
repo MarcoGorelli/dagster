@@ -132,6 +132,7 @@ def sample_graph():
 
 
 def test_logger_job_def():
+    # pyrefly: ignore [no-matching-overload]
     @dg.logger
     def job_logger(init_context):
         assert init_context.job_def.name == "sample_job"

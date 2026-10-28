@@ -1252,6 +1252,7 @@ class MultiAssetSensorDefinition(SensorDefinition, IHasInternalInit):
         super().__init__(
             name=check_valid_name(name),
             job_name=job_name,
+            # pyrefly: ignore[bad-argument-type]
             evaluation_fn=_wrap_asset_fn(
                 check.callable_param(asset_materialization_fn, "asset_materialization_fn")
             ),

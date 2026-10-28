@@ -31,6 +31,7 @@ class ObjectConfig(Config):
 def s3_file_backup(context: AssetExecutionContext, s3: S3Resource, config: ObjectConfig):
     s3 = context.resources.s3
     context.log.info(f"Reading {config.key}")
+    # pyrefly: ignore[missing-attribute]
     _ = s3.get_object(Bucket=AWS_S3_BUCKET, Key=config.key)  # process object here
 
 

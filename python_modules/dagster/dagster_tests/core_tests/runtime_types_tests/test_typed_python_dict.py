@@ -6,12 +6,14 @@ from dagster._utils.test import wrap_op_in_graph_and_execute
 def test_typed_python_dict():
     int_to_int = dg.Dict[int, int]
 
+    # pyrefly: ignore [bad-argument-type]
     int_to_int.type_check(None, {1: 1})
 
 
 def test_typed_python_dict_failure():
     int_to_int = dg.Dict[int, int]
 
+    # pyrefly: ignore [bad-argument-type]
     res = int_to_int.type_check(None, {1: "1"})
     assert not res.success
 

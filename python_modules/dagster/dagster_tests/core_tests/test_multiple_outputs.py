@@ -98,6 +98,7 @@ def test_multiple_outputs_only_emit_one():
     )
     assert len(output_events) == 1
 
+    # pyrefly: ignore [missing-attribute]
     assert output_events[0].event_specific_data.step_output_handle.output_name == "output_one"
 
     with pytest.raises(dg.DagsterInvariantViolationError):

@@ -736,6 +736,7 @@ class GrapheneRun(graphene.ObjectType):
             return asset_selection
         # asset_selection is an unordered set; sort before truncating so the preview is stable
         # across refreshes and matches the head of the full (client-sorted) list.
+        # pyrefly: ignore[no-matching-overload]
         return sorted(asset_selection, key=lambda asset_key: asset_key.path)[:limit]
 
     def resolve_assetSelectionCount(self, _graphene_info: ResolveInfo):

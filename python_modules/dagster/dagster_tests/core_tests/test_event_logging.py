@@ -45,6 +45,7 @@ def test_empty_job():
     def _event_callback(record):
         assert isinstance(record, dg.EventLogEntry)
         if record.is_dagster_event:
+            # pyrefly: ignore [missing-attribute]
             events[record.dagster_event.event_type].append(record)
 
     job_def = dg.JobDefinition(

@@ -47,6 +47,7 @@ def temporary_snowflake_table(contents: PandasDataFrame) -> Iterator[AssetKey]:
         yield AssetKey([schema, table_name])
     finally:
         with connect_snowflake(snowflake_config) as conn:
+            # pyrefly: ignore[no-matching-overload]
             conn.execute(f"drop table {schema}.{table_name}")
 
 

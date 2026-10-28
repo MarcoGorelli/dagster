@@ -906,7 +906,7 @@ def test_list_in_config_error():
     )
 
     with pytest.raises(dg.DagsterInvalidDefinitionError, match=re.escape(error_msg)):
-
+        # pyrefly: ignore [no-matching-overload]
         @dg.op(config_schema=dg.List[int])
         def _no_runtime_list_in_config(_):
             pass
@@ -1137,7 +1137,7 @@ def test_no_set_in_config_system():
             pass
 
     with pytest.raises(dg.DagsterInvalidDefinitionError, match=set_error_msg):
-
+        # pyrefly: ignore [no-matching-overload]
         @dg.op(config_schema=dg.Set[int])
         def _bare_closed_set(_):
             pass

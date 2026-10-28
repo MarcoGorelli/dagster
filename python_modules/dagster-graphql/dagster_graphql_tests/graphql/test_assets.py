@@ -1168,6 +1168,7 @@ def _create_partitioned_run(
 def _get_sorted_materialization_events(
     graphql_context: WorkspaceRequestContext, run_id: str
 ) -> Sequence[EventLogEntry]:
+    # pyrefly: ignore[no-matching-overload]
     return sorted(
         [
             event

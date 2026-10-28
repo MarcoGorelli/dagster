@@ -94,6 +94,7 @@ def create_defs_and_instance(
 
                     assets.append(_asset)
                 else:
+                    # pyrefly: ignore [bad-argument-type]
                     assets.append(spec)
     if dag_level_asset_overrides:
         for dag_id, asset_keys in dag_level_asset_overrides.items():
@@ -111,6 +112,7 @@ def create_defs_and_instance(
 
                     assets.append(_asset)
                 else:
+                    # pyrefly: ignore [bad-argument-type]
                     assets.append(spec)
     if not seeded_runs:
         runs = (

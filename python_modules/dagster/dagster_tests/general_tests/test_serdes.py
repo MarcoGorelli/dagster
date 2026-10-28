@@ -342,6 +342,7 @@ def test_missing_many_parameters():
 
         @serdes_test_class
         class MissingFieldsInNew(
+            # pyrefly: ignore [bad-class-definition]
             namedtuple("MissingFieldsInNew", "field_one field_two field_three, field_four")
         ):
             def __new__(cls, field_one, field_two):

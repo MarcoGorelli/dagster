@@ -164,6 +164,7 @@ class MultiPartitionKey(str):
 
         return str_key
 
+    # pyrefly: ignore [bad-override]
     def __getnewargs__(self):
         # When this instance is pickled, replace the argument to __new__ with the
         # dimension key mapping instead of the string representation.

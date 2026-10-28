@@ -97,6 +97,7 @@ class RedshiftClient(BaseRedshiftClient):
                     else:
                         raise
 
+    # pyrefly: ignore [bad-override]
     def execute_queries(
         self, queries, fetch_results=False, cursor_factory=None, error_callback=None
     ):
@@ -208,6 +209,7 @@ class FakeRedshiftClient(BaseRedshiftClient):
 
         self.log = log
 
+    # pyrefly: ignore [bad-override]
     def execute_query(self, query, fetch_results=False, cursor_factory=None, error_callback=None):
         """Fake for execute_query; returns [self.QUERY_RESULT].
 
@@ -239,6 +241,7 @@ class FakeRedshiftClient(BaseRedshiftClient):
         if fetch_results:
             return self.QUERY_RESULT
 
+    # pyrefly: ignore [bad-override]
     def execute_queries(
         self, queries, fetch_results=False, cursor_factory=None, error_callback=None
     ):

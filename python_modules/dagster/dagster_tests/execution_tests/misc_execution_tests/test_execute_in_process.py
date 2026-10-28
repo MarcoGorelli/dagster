@@ -367,7 +367,7 @@ def test_retries_exceeded():
     assert not result.success
     assert (
         "Exception: I have failed"
-        in result.filter_events(lambda evt: evt.is_step_failure)[
+        in result.filter_events(lambda evt: evt.is_step_failure)[  # pyrefly: ignore [missing-attribute]
             0
         ].event_specific_data.error_display_string  # ty: ignore[unresolved-attribute]
     )

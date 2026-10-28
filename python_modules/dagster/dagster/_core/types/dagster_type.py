@@ -573,6 +573,7 @@ class PythonObjectDagsterType(DagsterType):
             self.type_str = "Union[{}]".format(
                 ", ".join(python_type.__name__ for python_type in python_type)
             )
+            # pyrefly: ignore [not-a-type]
             typing_type = t.Union[python_type]  # noqa: UP007
 
         else:

@@ -66,8 +66,7 @@ def create_onnx_model():
     # Inspired from https://onnx.ai/sklearn-onnx/
 
     # Train a model.
-    iris = load_iris()
-    X, y = iris.data, iris.target
+    X, y = load_iris(return_X_y=True)
     X_train, X_test, y_train, y_test = train_test_split(X, y)
     clr = RandomForestClassifier()
     clr.fit(X_train, y_train)

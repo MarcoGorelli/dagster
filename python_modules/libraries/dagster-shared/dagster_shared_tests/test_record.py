@@ -437,6 +437,7 @@ def test_base_class_conflicts() -> None:
 
         @record
         class _(ConflictFnBase):
+            # pyrefly: ignore[bad-override]
             some_method: Any
 
     with pytest.raises(check.CheckError, match="will have to override __new__"):

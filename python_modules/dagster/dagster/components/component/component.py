@@ -325,6 +325,7 @@ class Component(ABC):
                 }
             )
             return (
+                # pyrefly: ignore [bad-return]
                 cls.resolve_from_model(
                     context_with_injected_scope.resolution_context.at_path("attributes"),
                     attributes,

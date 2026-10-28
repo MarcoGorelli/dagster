@@ -324,9 +324,11 @@ class DagsterObjectsList:
             if isinstance(dagster_def, CacheableAssetsDefinition):
                 result_list.append(dagster_def.with_prefix_for_all(key_prefix))
             elif isinstance(dagster_def, AssetsDefinition):
+                # pyrefly: ignore [bad-argument-type]
                 result_list.append(replace_keys_in_asset(dagster_def, key_replacements))
             else:
                 # We don't replace the key for SourceAssets or AssetSpec objects (which can be thought of as the SourceAsset, or of course for non-asset objects.
+                # pyrefly: ignore [bad-argument-type]
                 result_list.append(dagster_def)
 
         return DagsterObjectsList(result_list)
@@ -346,6 +348,7 @@ class DagsterObjectsList:
             ):
                 result_list.append(replace_keys_in_asset(dagster_def, key_replacements))
             else:
+                # pyrefly: ignore [bad-argument-type]
                 result_list.append(dagster_def)
         return DagsterObjectsList(result_list)
 
@@ -378,15 +381,18 @@ class DagsterObjectsList:
                     else new_asset
                 )
             elif isinstance(dagster_def, SourceAsset):
+                # pyrefly: ignore [bad-argument-type]
                 return_list.append(dagster_def.with_attributes(group_name=group_name))
             elif isinstance(dagster_def, AssetSpec):
                 return_list.append(
+                    # pyrefly: ignore [bad-argument-type]
                     _spec_mapper_disallow_group_override(group_name, automation_condition)(
                         dagster_def
                     )
                 )
             elif isinstance(dagster_def, CacheableAssetsDefinition):
                 return_list.append(
+                    # pyrefly: ignore [bad-argument-type]
                     dagster_def.with_attributes_for_all(
                         group_name,
                         legacy_freshness_policy=legacy_freshness_policy,
@@ -397,6 +403,7 @@ class DagsterObjectsList:
                     )
                 )
             else:
+                # pyrefly: ignore [bad-argument-type]
                 return_list.append(dagster_def)
         return DagsterObjectsList(return_list)
 

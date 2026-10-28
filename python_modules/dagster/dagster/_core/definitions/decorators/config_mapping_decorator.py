@@ -78,6 +78,7 @@ def config_mapping(
 
 
 @overload
+# pyrefly: ignore [inconsistent-overload-default]
 def config_mapping(
     *,
     config_schema: UserConfigSchema = ...,

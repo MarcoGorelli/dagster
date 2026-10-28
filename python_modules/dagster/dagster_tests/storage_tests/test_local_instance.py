@@ -191,6 +191,7 @@ def test_run_step_stats():
     with tempfile.TemporaryDirectory() as tmpdir_path:
         instance = DagsterInstance.from_ref(InstanceRef.from_dir(tmpdir_path))
         result = simple.execute_in_process(instance=instance, raise_on_error=False)
+        # pyrefly: ignore[no-matching-overload]
         step_stats = sorted(instance.get_run_step_stats(result.run_id), key=lambda x: x.end_time)
         assert len(step_stats) == 2
         assert step_stats[0].step_key == "should_succeed"

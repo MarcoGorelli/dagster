@@ -312,14 +312,17 @@ class PipesEMRClient(PipesClient, TreatAsResourceParam):
         cluster = response["Cluster"]
 
         if cluster_id := cluster.get("Id"):
+            # pyrefly: ignore [unsupported-operation]
             metadata["AWS EMR Cluster ID"] = cluster_id
 
         if log_uri := cluster.get("LogUri"):
             # LogUri originally points to a shared S3 bucket where logs from all clusters are stored
             # which is not very useful
+            # pyrefly: ignore [unsupported-operation]
             metadata["AWS EMR Log URI"] = MetadataValue.path(log_uri + f"{cluster_id}")
 
         if cluster_id:
+            # pyrefly: ignore [unsupported-operation]
             metadata["AWS EMR Cluster"] = MetadataValue.url(
                 f"https://{region}.console.aws.amazon.com/emr/home?region={region}#/clusterDetails/{cluster_id}"
             )

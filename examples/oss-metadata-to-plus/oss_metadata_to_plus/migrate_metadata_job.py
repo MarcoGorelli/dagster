@@ -66,11 +66,12 @@ def migrate_metadata_asset(context: AssetExecutionContext, config: MetadataMigra
         )
         record: EventLogRecord = result.records[0]
         dagster_event = record.event_log_entry.dagster_event
-        if dagster_event is not None:
-            data = dagster_event.event_specific_data.materialization  # ty: ignore[unresolved-attribute]
-            partition_to_report = data.partition
-            metadata_to_report = {key: value.value for key, value in data.metadata.items()}
         cursor = result.cursor
+        if dagster_event is None:
+            continue
+        data = dagster_event.event_specific_data.materialization  # ty: ignore[unresolved-attribute]
+        partition_to_report = data.partition
+        metadata_to_report = {key: value.value for key, value in data.metadata.items()}
         _report_asset_materialization_to_dagster_plus(
             new_organization=new_organization,
             new_deployment=new_deployment,

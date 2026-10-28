@@ -42,6 +42,7 @@ basic_multi_constraint = MultiConstraintWithMetadata(
 
 
 def test_failed_basic():
+    # pyrefly: ignore [missing-attribute]
     assert not basic_confirmation_function.validate([]).success
 
 
@@ -50,6 +51,7 @@ def test_basic():
 
 
 def test_failed_multi():
+    # pyrefly: ignore [missing-attribute]
     mul_val = basic_multi_constraint.validate([]).metadata[CONSTRAINT_METADATA_KEY].data
     assert mul_val["expected"] == {"basic_validation_function": "a DataFrame"}
     assert mul_val["actual"] == {"basic_validation_function": "a list"}
@@ -57,17 +59,21 @@ def test_failed_multi():
 
 def test_success_multi():
     mul_val = basic_multi_constraint.validate(DataFrame())
+    # pyrefly: ignore [missing-attribute]
     assert mul_val.success is True
+    # pyrefly: ignore [missing-attribute]
     assert mul_val.metadata == {}
 
 
 def test_failed_strict():
     strict_column = StrictColumnsWithMetadata(["base_test"], raise_or_typecheck=False)
+    # pyrefly: ignore [missing-attribute]
     assert not strict_column.validate(DataFrame()).success
 
 
 def test_successful_strict():
     strict_column = StrictColumnsWithMetadata([], raise_or_typecheck=False)
+    # pyrefly: ignore [missing-attribute]
     assert strict_column.validate(DataFrame()).success
 
 
@@ -82,6 +88,7 @@ def test_column_constraint():
         ColumnWithMetadataException,
         raise_or_typecheck=False,
     )
+    # pyrefly: ignore [missing-attribute]
     val = column_val.validate(df, *df.columns).metadata[CONSTRAINT_METADATA_KEY].data
     assert {"bar": ["row 0"], "baz": ["row 1"]} == val["offending"]
     assert {"bar": ["a"], "baz": ["a"]} == val["actual"]
@@ -98,6 +105,7 @@ def test_multi_val_constraint():
         ColumnWithMetadataException,
         raise_or_typecheck=False,
     )
+    # pyrefly: ignore [missing-attribute]
     val = column_val.validate(df, *df.columns).metadata[CONSTRAINT_METADATA_KEY].data
     assert {"foo": ["row 0", "row 1"], "bar": ["row 1"], "baz": ["row 0"]} == val["offending"]
     assert {"foo": [1, 2], "bar": [2], "baz": [1]} == val["actual"]
@@ -119,6 +127,7 @@ def test_multi_column_constraint():
         ColumnWithMetadataException,
         raise_or_typecheck=False,
     )
+    # pyrefly: ignore [missing-attribute]
     val = column_val.validate(df).metadata[CONSTRAINT_METADATA_KEY].data
     assert {
         "bar": {
@@ -153,6 +162,7 @@ def test_aggregate_constraint():
         ConstraintWithMetadataException,
         raise_or_typecheck=False,
     )
+    # pyrefly: ignore [missing-attribute]
     val = aggregate_val.validate(df, *df.columns).metadata[CONSTRAINT_METADATA_KEY].data
     assert ["foo"] == val["offending"]
     assert [1, 2] == val["actual"]["foo"]
@@ -179,6 +189,7 @@ def test_multi_agg_constraint():
         ConstraintWithMetadataException,
         raise_or_typecheck=False,
     )
+    # pyrefly: ignore [missing-attribute]
     val = aggregate_val.validate(df).metadata[CONSTRAINT_METADATA_KEY].data
     assert val["expected"] == {
         "bar": {"column_val_2": "Checks column mean equal to 1.5."},
@@ -193,8 +204,10 @@ def test_multi_agg_constraint():
 def test_range_constraint():
     df = DataFrame({"foo": [1, 2], "bar": [3, 2], "baz": [1, 4]})
     range_val = ColumnRangeConstraintWithMetadata(1, 2.5, raise_or_typecheck=False)
+    # pyrefly: ignore [missing-attribute]
     val = range_val.validate(df).metadata[CONSTRAINT_METADATA_KEY].data
     assert {"bar": ["row 0"], "baz": ["row 1"]} == val["offending"]
     assert {"bar": [3], "baz": [4]} == val["actual"]
     range_val = ColumnRangeConstraintWithMetadata(raise_or_typecheck=False)
+    # pyrefly: ignore [missing-attribute]
     assert range_val.validate(df).success

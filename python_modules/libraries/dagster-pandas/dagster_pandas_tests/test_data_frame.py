@@ -140,6 +140,7 @@ def test_execute_summary_stats_null_function():
         lambda value: {"qux": MetadataValue.text("baz")},
     )
     assert len(metadata) == 1
+    # pyrefly: ignore [bad-index]
     assert metadata["qux"] == MetadataValue.text("baz")
 
 

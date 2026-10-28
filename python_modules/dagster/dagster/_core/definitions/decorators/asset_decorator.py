@@ -394,6 +394,7 @@ def resolve_asset_key_and_name_for_decorator(
             # the filter here appears unnecessary per typing, but this exists
             # historically so keeping it here to be conservative in case users
             # can get Nones into the key_prefix_list somehow
+            # pyrefly: ignore [no-matching-overload]
             AssetKey(list(filter(None, [*(key_prefix_list or []), assigned_name])))
             if not key
             else key

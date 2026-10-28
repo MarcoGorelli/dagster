@@ -45,6 +45,7 @@ class DocstringValidationHandler(FileSystemEventHandler):
         if event_path == self.target_file:
             current_time = time.time()
             if current_time - self.last_validation_time > self.debounce_delay:
+                # pyrefly: ignore [bad-assignment]
                 self.last_validation_time = current_time
                 if self.verbose:
                     click.echo(f"[DEBUG] Triggering validation for {event_path}")
@@ -152,6 +153,7 @@ class ChangedFilesWatcher:
         # Debounced git status refresh to update the watcher set
         current_time = time.time()
         if current_time - self.last_git_check > self.git_refresh_debounce:
+            # pyrefly: ignore [bad-assignment]
             self.last_git_check = current_time
             self._refresh_git_status()
 

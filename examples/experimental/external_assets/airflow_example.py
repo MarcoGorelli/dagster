@@ -1,5 +1,7 @@
 # type: ignore
 from airflow import DAG
+
+# pyrefly: ignore [missing-import]
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 from pendulum import datetime
 

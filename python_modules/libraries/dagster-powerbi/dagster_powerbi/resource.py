@@ -250,6 +250,7 @@ class PowerBIWorkspace(ConfigurableResource):
         start_time = now
 
         status = None
+        scan_details = None
         while status != "Succeeded" and now - start_time < ADMIN_SCAN_TIMEOUT:
             scan_details = self._fetch_json(
                 endpoint=f"admin/workspaces/scanStatus/{scan_id}", group_scoped=False

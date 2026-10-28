@@ -56,7 +56,7 @@ def test_additional_deps_overlap():
             "`additional_deps`. It can only be passed to one of these parameters."
         ),
     ):
-
+        # pyrefly: ignore [bad-argument-type]
         @dg.asset_check(asset=asset1, additional_deps=[asset1])
         def check1(asset_1):
             pass
@@ -68,7 +68,7 @@ def test_additional_deps_overlap():
             "`additional_deps`. It can only be passed to one of these parameters."
         ),
     ):
-
+        # pyrefly: ignore [bad-argument-type]
         @dg.asset_check(asset=asset1, additional_deps=[asset1])
         def check2():
             pass
@@ -82,7 +82,7 @@ def test_additional_ins_overlap():
             "`additional_ins`. It can only be passed to one of these parameters."
         ),
     ):
-
+        # pyrefly: ignore [bad-argument-type]
         @dg.asset_check(asset=asset1, additional_ins={"asset_1": dg.AssetIn("asset1")})
         def check1(asset_1):
             pass

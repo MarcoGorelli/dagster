@@ -10,6 +10,7 @@ from dagster._core.definitions.observe import observe
 def test_all_fields():
     dg.StaticPartitionsDefinition(["a", "b", "c", "d"])
 
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(required_resource_keys={"baz"})
     def foo_manager():
         pass

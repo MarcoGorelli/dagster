@@ -147,6 +147,7 @@ class ConfigurableIOManagerFactory(ConfigurableResourceFactory, Generic[TResValu
         return PartialIOManager(resource_cls=cls, data=kwargs)
 
     @cached_method
+    # pyrefly: ignore [bad-override]
     def get_resource_definition(self) -> ConfigurableIOManagerFactoryResourceDefinition:
         return ConfigurableIOManagerFactoryResourceDefinition(
             self.__class__,
@@ -178,6 +179,7 @@ class PartialIOManager(
     Generic[TResValue],
 ):
     @cached_method
+    # pyrefly: ignore [bad-override]
     def get_resource_definition(self) -> ConfigurableIOManagerFactoryResourceDefinition:
         input_config_schema = None
         output_config_schema = None

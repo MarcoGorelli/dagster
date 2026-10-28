@@ -21,8 +21,10 @@ def test_basic():
     bar(1)
     bar(i=1)
     with pytest.raises(CheckError):
+        # pyrefly: ignore [bad-argument-type]
         bar("1")
     with pytest.raises(CheckError):
+        # pyrefly: ignore [bad-argument-type]
         bar(i="1")
 
 
@@ -81,6 +83,7 @@ def test_many():
             percent=0.5,
             o_s="x",
             o_n=3,
+            # pyrefly: ignore [bad-argument-type]
             o_f="surprise_not_float",
             o_b=None,
             foos=[],
@@ -105,6 +108,7 @@ def test_star():
 
     baz(i=1)
     with pytest.raises(CheckError):
+        # pyrefly: ignore [bad-argument-type]
         baz(i="1")
 
 
@@ -140,14 +144,17 @@ def test_class():
 
     f.yell("HI")
     with pytest.raises(CheckError):
+        # pyrefly: ignore [bad-argument-type]
         f.yell(3)
 
     Foo.holler("hi")
     with pytest.raises(CheckError):
+        # pyrefly: ignore [bad-argument-type]
         Foo.holler(3)
 
     Foo.scream("hi")
     with pytest.raises(CheckError):
+        # pyrefly: ignore [bad-argument-type]
         Foo.scream(3)
 
 

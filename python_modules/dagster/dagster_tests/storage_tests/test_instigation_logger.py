@@ -61,6 +61,7 @@ def test_instigation_logger_log_failure(capsys):
         }
     ) as instance:
         with InstigationLogger(log_key="foo", instance=instance) as logger:
+            # pyrefly: ignore [missing-attribute]
             mock_write_stream = logger._capture_handler._write_stream  # noqa
             mock_write_stream.write.side_effect = Exception("OOPS")
 

@@ -1,6 +1,9 @@
 from dagster import Definitions
 
+# pyrefly: ignore [missing-import]
 from .existing_definitions import my_daily_partitioned_asset, my_partitioned_schedule
+
+# pyrefly: ignore [missing-import]
 from .migrate_metadata_job import migrate_metadata_asset, migrate_metadata_job
 
 defs = Definitions(

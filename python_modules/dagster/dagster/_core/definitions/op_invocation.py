@@ -212,11 +212,16 @@ def direct_invocation_result(
         # _type_check_output_wrapper)
 
         input_dict = _resolve_inputs(
-            op_def, input_args, input_kwargs, bound_context
+            op_def,
+            input_args,
+            input_kwargs,
+            # pyrefly: ignore [bad-argument-type]
+            bound_context,
         )  # (pyright bug)
 
         result = invoke_compute_fn(
             fn=compute_fn.decorated_fn,
+            # pyrefly: ignore [bad-argument-type]
             context=bound_context,  # (pyright bug)
             kwargs=input_dict,
             context_arg_provided=compute_fn.has_context_arg(),
@@ -225,8 +230,10 @@ def direct_invocation_result(
             ),
             resource_args=resource_arg_mapping,
         )
+        # pyrefly: ignore [bad-argument-type]
         return _type_check_output_wrapper(op_def, result, bound_context)  # (pyright bug)
     except Exception:
+        # pyrefly: ignore [missing-attribute]
         bound_context.unbind()  # (pyright bug)
         raise
 

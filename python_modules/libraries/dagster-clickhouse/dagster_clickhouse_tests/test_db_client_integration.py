@@ -26,6 +26,7 @@ def test_ensure_schema_exists_creates_database(clickhouse_connection):
             client,
         )
         rows = client.execute(f"EXISTS DATABASE `{ch_db}`")
+        # pyrefly: ignore [bad-index, unsupported-operation]
         assert rows[0][0] == 1
     finally:
         client.execute(f"DROP DATABASE IF EXISTS `{ch_db}`")
@@ -66,11 +67,13 @@ def test_truncate_and_partition_delete_on_real_table(clickhouse_connection):
         ClickhouseDbClient.delete_table_slice(ctx, slice_part, client)
 
         # Remaining row should be February only
+        # pyrefly: ignore [bad-index, unsupported-operation]
         cnt = client.execute(f"SELECT count() FROM {fqn}")[0][0]
         assert cnt == 1
 
         slice_full = TableSlice(schema=ch_db, table=table)
         ClickhouseDbClient.delete_table_slice(ctx, slice_full, client)
+        # pyrefly: ignore [bad-index, unsupported-operation]
         cnt2 = client.execute(f"SELECT count() FROM {fqn}")[0][0]
         assert cnt2 == 0
     finally:

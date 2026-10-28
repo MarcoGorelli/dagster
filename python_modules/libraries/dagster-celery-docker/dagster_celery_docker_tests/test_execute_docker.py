@@ -48,6 +48,7 @@ def test_execute_celery_docker_image_on_executor_config(
     }
 
     if IS_BUILDKITE:
+        # pyrefly: ignore [bad-assignment]
         docker_config["registry"] = get_buildkite_registry_config()
     else:
         find_local_test_image(docker_image)
@@ -97,6 +98,7 @@ def test_execute_celery_docker_image_on_job_config(
     }
 
     if IS_BUILDKITE:
+        # pyrefly: ignore [bad-assignment]
         docker_config["registry"] = get_buildkite_registry_config()
 
     else:

@@ -50,6 +50,7 @@ TProcessContext = TypeVar("TProcessContext", bound=IWorkspaceProcessContext)
 
 
 class DagsterWebserver(
+    # pyrefly: ignore [bad-specialization]
     GraphQLServer[TRequestContext],
     Generic[TProcessContext, TRequestContext],
 ):
@@ -78,6 +79,7 @@ class DagsterWebserver(
         return path.join(path.dirname(__file__), rel)
 
     def _make_request_context(self, conn: HTTPConnection) -> TRequestContext:
+        # pyrefly: ignore [bad-return]
         return self._process_context.create_request_context(conn)
 
     def build_middleware(self) -> list[Middleware]:
@@ -155,6 +157,7 @@ class DagsterWebserver(
             # parse content to HTML
             notebook = nbformat.reads(notebook_content, as_version=4)
             html_exporter = HTMLExporter()
+            # pyrefly: ignore [bad-argument-type]
             (body, resources) = html_exporter.from_notebook_node(notebook)
             return HTMLResponse("<style>" + resources["inlining"]["css"][0] + "</style>" + body)
 
@@ -287,6 +290,7 @@ class DagsterWebserver(
             if path.isdir(full_path):
                 routes.append(_static_dir(mount_path, full_path, f"{entry}_static"))
             if path.isfile(full_path):
+                # pyrefly: ignore [bad-argument-type]
                 routes.append(_static_file(mount_path, full_path, "root_static"))
 
         return routes
@@ -296,6 +300,7 @@ class DagsterWebserver(
         subject="/dagit_info and /dagit/notebook endpoint",
         emit_runtime_warning=False,
     )
+    # pyrefly: ignore [bad-override]
     def build_routes(self):
         routes = (
             [

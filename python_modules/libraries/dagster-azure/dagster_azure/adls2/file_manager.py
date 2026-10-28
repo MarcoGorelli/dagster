@@ -77,6 +77,7 @@ class ADLS2FileManager(FileManager):
         return file_handle
 
     @contextmanager
+    # pyrefly: ignore [bad-override]
     def read(self, file_handle: ADLS2FileHandle, mode: str = "rb"):
         check.inst_param(file_handle, "file_handle", ADLS2FileHandle)
         check.str_param(mode, "mode")

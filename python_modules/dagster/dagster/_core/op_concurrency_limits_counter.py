@@ -57,6 +57,7 @@ def compute_run_op_concurrency_info_for_snapshot(
         elif step_pool is None:
             continue
         elif step.key in root_step_keys:
+            # pyrefly: ignore [unsupported-operation]
             root_key_counts[step_pool] += 1
             if step_pool is not None:
                 all_pools.add(step_pool)

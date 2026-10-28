@@ -96,11 +96,13 @@ def test_list_command_grpc_socket():
                 print_fn=no_print,
             )
 
+            # pyrefly: ignore [bad-argument-type]
             result = runner.invoke(job_list_command, ["--grpc-socket", api_client.socket])
             assert_correct_bar_repository_output(result)
 
             result = runner.invoke(
                 job_list_command,
+                # pyrefly: ignore [bad-argument-type]
                 ["--grpc-socket", api_client.socket, "--grpc-host", api_client.host],
             )
             assert_correct_bar_repository_output(result)
@@ -122,20 +124,24 @@ def test_list_command_deployed_grpc():
         ) as server_process:
             api_client = server_process.create_client()
 
+            # pyrefly: ignore [bad-argument-type]
             result = runner.invoke(job_list_command, ["--grpc-port", api_client.port])
             assert_correct_bar_repository_output(result)
 
             result = runner.invoke(
                 job_list_command,
+                # pyrefly: ignore [bad-argument-type]
                 ["--grpc-port", api_client.port, "--grpc-host", api_client.host],
             )
             assert_correct_bar_repository_output(result)
 
+            # pyrefly: ignore [bad-argument-type]
             result = runner.invoke(job_list_command, ["--grpc-port", api_client.port])
             assert_correct_bar_repository_output(result)
 
             result = runner.invoke(
                 job_list_command,
+                # pyrefly: ignore [bad-argument-type]
                 ["--grpc-port", api_client.port, "--grpc-socket", "foonamedsocket"],
             )
             assert result.exit_code != 0

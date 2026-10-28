@@ -244,12 +244,14 @@ class ReconstructableJob(
         return self._replace(repository=self.repository.with_repository_load_data(metadata))
 
     @lru_cache(maxsize=1)
+    # pyrefly: ignore [bad-override-mutable-attribute]
     def get_repository_definition(self) -> Optional["RepositoryDefinition"]:
         return self.repository.get_definition()
 
     # Keep the most recent 1 definition (globally since this is a NamedTuple method)
     # This allows repeated calls to get_definition in execution paths to not reload the job
     @lru_cache(maxsize=1)
+    # pyrefly: ignore [bad-override-mutable-attribute]
     def get_definition(self) -> "JobDefinition":
         return check.not_none(self.get_repository_definition()).get_maybe_subset_job_def(
             self.job_name,

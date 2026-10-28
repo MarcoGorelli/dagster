@@ -56,9 +56,12 @@ def test_from_captured_log_data_with_invalid_utf8_in_stdout():
     result = from_captured_log_data(log_data)
 
     assert result.stdout is not None
+    # pyrefly: ignore [not-iterable]
     assert "Valid text" in result.stdout
+    # pyrefly: ignore [not-iterable]
     assert "More text" in result.stdout
     # Partial multi-byte sequence should be replaced
+    # pyrefly: ignore [not-iterable]
     assert "\ufffd" in result.stdout
     assert result.stderr == "Valid stderr\n"
 
@@ -95,4 +98,5 @@ def test_from_captured_log_data_with_binary_data():
     assert result.stdout is not None
     assert result.stderr is not None
     # Binary data should be replaced with replacement characters
+    # pyrefly: ignore [not-iterable]
     assert "\ufffd" in result.stdout or "\x00" in result.stdout

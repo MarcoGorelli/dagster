@@ -395,6 +395,7 @@ class PipesCloudWatchMessageReader(PipesThreadedMessageReader):
         else:
             return False
 
+    # pyrefly: ignore [bad-override]
     def download_messages(self, cursor: str | None, params: PipesParams) -> tuple[str, str] | None:
         params = {
             "logGroupName": self.log_group,

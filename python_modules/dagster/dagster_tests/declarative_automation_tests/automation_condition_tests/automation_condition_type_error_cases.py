@@ -82,6 +82,7 @@ bad_or = dg.AutomationCondition.eager() | job_scoped  # type: ignore
 # --- negative case: a job-scoped condition cannot be applied to an asset ---
 
 
+# pyrefly: ignore [no-matching-overload]
 @dg.asset(
     # assert-type-error-ty: 'found `JobRootAssetsAutomationCondition`'
     # assert-type-error-pyright: 'Argument of type "JobRootAssetsAutomationCondition" cannot be assigned'

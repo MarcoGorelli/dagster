@@ -629,6 +629,7 @@ def foo_logger(init_context):
     return logger_
 
 
+# pyrefly: ignore [bad-argument-type]
 @logger({"log_level": Field(str), "prefix": Field(str)})
 def bar_logger(init_context):
     class BarLogger(logging.Logger):
@@ -2519,6 +2520,7 @@ def _targets_asset_job(instigator: ScheduleDefinition | SensorDefinition) -> boo
 
 # asset jobs are incompatible with dict repository so we exclude them and any schedules/sensors that target them,
 # e.g. AutomationConditionSensorDefinitions
+# pyrefly: ignore [bad-argument-type]
 @repository(default_executor_def=in_process_executor)
 def test_dict_repo():
     return {

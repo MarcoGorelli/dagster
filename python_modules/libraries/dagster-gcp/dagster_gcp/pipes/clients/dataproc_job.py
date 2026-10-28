@@ -238,6 +238,7 @@ class PipesDataprocJobClient(PipesClient, TreatAsResourceParam):
     def _extract_dagster_metadata(self, job: Job) -> RawMetadataMapping:
         metadata: RawMetadataMapping = {}
 
+        # pyrefly: ignore [unsupported-operation]
         metadata["GCP Dataproc Job ID"] = job.job_uuid
 
         return metadata

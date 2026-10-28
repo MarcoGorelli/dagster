@@ -192,6 +192,7 @@ def create_dagster_pandas_dataframe_type(
 
         return TypeCheck(
             success=True,
+            # pyrefly: ignore[bad-argument-type]
             metadata=_execute_summary_stats(name, value, metadata_fn) if metadata_fn else None,
         )
 

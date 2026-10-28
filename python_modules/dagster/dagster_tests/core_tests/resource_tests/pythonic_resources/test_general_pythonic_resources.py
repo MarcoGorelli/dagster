@@ -204,6 +204,7 @@ def test_yield_in_resource_function():
     class ResourceWithCleanup(ConfigurableResourceFactory[bool]):
         idx: int
 
+        # pyrefly: ignore[bad-override]
         def create_resource(self, context):
             called.append(f"creation_{self.idx}")
             yield True
@@ -591,7 +592,9 @@ def test_nested_config_class_with_runtime_config(
         child: ChildResource,  # ty: ignore[invalid-type-form]
         parent: ParentResource,
     ) -> None:
+        # pyrefly: ignore[missing-attribute]
         assert child.date == "2025-01-21"
+        # pyrefly: ignore[missing-attribute]
         assert parent.child.date == "2025-01-21"
 
     child = ChildResource.configure_at_launch()  # ty: ignore[unresolved-attribute]
@@ -914,6 +917,7 @@ def test_from_resource_context_and_to_config_empty() -> None:
 
     @dg.resource(config_schema=NoConfigResource.to_config_schema())
     def string_resource_function_style(context: InitResourceContext) -> str:
+        # pyrefly: ignore[missing-attribute]
         return NoConfigResource.from_resource_context(context).get_string()  # (??)
 
     assert string_resource_function_style(dg.build_init_resource_context()) == "foo"
@@ -932,6 +936,7 @@ def test_context_on_resource_basic() -> None:
         ContextUsingResource().access_context()
 
     # Can access context after binding one
+    # pyrefly: ignore[missing-attribute]
     ContextUsingResource().with_replaced_resource_context(
         dg.build_init_resource_context()
     ).access_context()  # ty: ignore[unresolved-attribute]
@@ -976,6 +981,7 @@ def test_context_on_resource_use_instance() -> None:
 
         with DagsterInstance.ephemeral() as instance:
             assert (
+                # pyrefly: ignore[missing-attribute]
                 OutputDirResource(output_dir=None)
                 .with_replaced_resource_context(dg.build_init_resource_context(instance=instance))
                 .get_effective_output_dir()  # ty: ignore[unresolved-attribute]

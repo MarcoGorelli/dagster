@@ -252,6 +252,7 @@ def derive_model_type(
                     else _Unset
                 )
                 field_infos.append(
+                    # pyrefly: ignore [bad-argument-type]
                     Field(
                         default=default_value,
                         description=field_resolver.description,

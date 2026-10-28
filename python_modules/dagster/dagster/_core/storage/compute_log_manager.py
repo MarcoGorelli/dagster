@@ -135,6 +135,7 @@ class CapturedLogSubscription:
         log_key: Sequence[str],
         cursor: str | None,
     ):
+        # pyrefly: ignore [bad-assignment, invalid-type-var]
         self._manager = manager
         self._log_key = log_key
         self._cursor = cursor

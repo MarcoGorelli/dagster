@@ -16,6 +16,7 @@ class PassTypeHandler(DbTypeHandler[int]):
     def handle_output(self, *args, **kwargs):
         return None
 
+    # pyrefly: ignore [bad-override]
     def load_input(self, *args, **kwargs):
         return None
 

@@ -170,7 +170,7 @@ class ScenarioSpec:
                         )
                     )
         for check_spec in self.check_specs:
-
+            # pyrefly: ignore [bad-argument-type]
             @dg.asset_check(
                 asset=check_spec.asset_key,
                 name=check_spec.key.name,
@@ -235,8 +235,10 @@ class ScenarioSpec:
                 )
             else:
                 if keys is None or spec.key in {AssetKey.from_coercible(key) for key in keys}:
+                    # pyrefly: ignore [bad-argument-type]
                     new_asset_specs.append(spec._replace(**kwargs))
                 else:
+                    # pyrefly: ignore [bad-argument-type]
                     new_asset_specs.append(spec)
         return dataclasses.replace(self, asset_specs=new_asset_specs)
 

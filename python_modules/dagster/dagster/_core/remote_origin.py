@@ -125,6 +125,7 @@ class RegisteredCodeLocationOrigin(LegacyNamedTupleMixin, CodeLocationOrigin):
     its own mapping from location name to repository location metadata.
     """
 
+    # pyrefly: ignore[bad-override]
     location_name: str
 
     def get_display_metadata(self) -> Mapping[str, Any]:
@@ -154,7 +155,9 @@ class RegisteredCodeLocationOrigin(LegacyNamedTupleMixin, CodeLocationOrigin):
 @whitelist_for_serdes(storage_name="InProcessRepositoryLocationOrigin")
 @record_custom
 class InProcessCodeLocationOrigin(IHaveNew, LegacyNamedTupleMixin, CodeLocationOrigin):
+    # pyrefly: ignore[bad-override]
     loadable_target_origin: LoadableTargetOrigin
+    # pyrefly: ignore[bad-override]
     location_name: str
     container_image: str | None
     entry_point: Sequence[str]
@@ -206,7 +209,9 @@ class ManagedGrpcPythonEnvCodeLocationOrigin(IHaveNew, LegacyNamedTupleMixin, Co
     for these repository locations on startup.
     """
 
+    # pyrefly: ignore[bad-override]
     loadable_target_origin: LoadableTargetOrigin
+    # pyrefly: ignore[bad-override]
     location_name: str
 
     def __new__(
@@ -293,6 +298,7 @@ class GrpcServerCodeLocationOrigin(IHaveNew, LegacyNamedTupleMixin, CodeLocation
     host: str
     port: int | None
     socket: str | None
+    # pyrefly: ignore[bad-override]
     location_name: str
     use_ssl: bool | None
     additional_metadata: Mapping[str, Any] | None

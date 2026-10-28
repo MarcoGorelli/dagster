@@ -91,6 +91,7 @@ async def test_any_checks_match_basic() -> None:
     ) | ~AutomationCondition.cron_tick_passed("* * * * *")
 
     condition = AutomationCondition.any_deps_match(
+        # pyrefly: ignore [bad-argument-type]
         AutomationCondition.any_checks_match(true_condition)
     )
 

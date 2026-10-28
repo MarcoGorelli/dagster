@@ -219,6 +219,7 @@ class FivetranResource(ConfigurableResource):
         succeeded_at = parser.parse(connector_details["succeeded_at"] or min_time_str)
         failed_at = parser.parse(connector_details["failed_at"] or min_time_str)
 
+        # pyrefly: ignore [bad-return]
         return (
             max(succeeded_at, failed_at),
             succeeded_at > failed_at,
@@ -593,6 +594,7 @@ class FivetranClient:
         }
 
         num_retries = 0
+        response: requests.Response | None = None
         while True:
             try:
                 response = requests.request(
@@ -609,7 +611,13 @@ class FivetranClient:
             except RequestException as e:
                 self._log.error("Request to Fivetran API failed: %s", e)
                 if num_retries == self.request_max_retries:
-                    return response
+                    # `response` is bound here if we got as far as `raise_for_status()`
+                    # (e.g. a 4xx/5xx); let the caller inspect it. Otherwise (e.g. a
+                    # connection error before any response was received), there's
+                    # nothing to return, so propagate the original exception.
+                    if response is not None:
+                        return response
+                    raise
                 num_retries += 1
                 delay = self.request_retry_delay * (self.request_backoff_factor**num_retries)
                 self._log.info(
@@ -845,6 +853,7 @@ class FivetranClient:
                 rescheduled_at = parser.parse(connector.rescheduled_for)
                 seconds_to_wait = max(
                     0,
+                    # pyrefly: ignore [unsupported-operation]
                     (rescheduled_at - datetime.now(timezone.utc)).total_seconds(),
                 )
                 if self.retry_on_reschedule:

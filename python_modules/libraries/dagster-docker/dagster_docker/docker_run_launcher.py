@@ -152,6 +152,7 @@ class DockerRunLauncher(RunLauncher, ConfigurableClass):
 
         self._instance.add_run_tags(
             run.run_id,
+            # pyrefly: ignore [bad-assignment]
             {DOCKER_CONTAINER_ID_TAG: container.id, DOCKER_IMAGE_TAG: docker_image},
         )
 

@@ -1000,6 +1000,7 @@ class InvalidRunLauncher(RunLauncher, ConfigurableClass):
     def launch_run(self, context: LaunchRunContext) -> None:
         pass
 
+    # pyrefly: ignore [bad-override]
     def terminate(self, run_id):
         pass
 

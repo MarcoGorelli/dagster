@@ -11,6 +11,7 @@ def job():
     node()
 
 
+# pyrefly: ignore [bad-argument-type]
 @dagster.repository
 def repository():
     return {"jobs": {"job": job}}

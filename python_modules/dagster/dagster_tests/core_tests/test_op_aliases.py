@@ -17,6 +17,7 @@ def test_aliased_ops():
         node_defs=[first, not_first],
         name="test",
         dependencies={  # ty: ignore[invalid-argument-type]
+            # pyrefly: ignore [bad-assignment]
             "not_first": {"prev": dg.DependencyDefinition("first")},
             dg.NodeInvocation("not_first", alias="second"): {
                 "prev": dg.DependencyDefinition("not_first")

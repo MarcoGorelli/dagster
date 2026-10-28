@@ -67,6 +67,7 @@ def redirect_stream(to_stream=os.devnull, from_stream=sys.stdout):
     with os.fdopen(os.dup(from_fd), "wb") as copied:
         from_stream.flush()
         try:
+            # pyrefly: ignore [bad-argument-type]
             os.dup2(_fileno(to_stream), from_fd)
         except ValueError:
             with open(to_stream, "wb") as to_file:

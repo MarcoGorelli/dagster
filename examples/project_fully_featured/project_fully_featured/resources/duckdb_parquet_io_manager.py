@@ -31,7 +31,7 @@ class DuckDBPartitionedParquetIOManager(PartitionedParquetIOManager):
                 to_scan = os.path.join(os.path.dirname(path), "*.pq", "*.parquet")
             else:
                 to_scan = path
-            con.execute(f"create schema if not exists {self._schema(context)};")
+            con.execute(f"create schema if not exists {self._duckdb_schema(context)};")
             con.execute(
                 f"create or replace view {self._table_path(context)} as "
                 f"select * from parquet_scan('{to_scan}');"
@@ -58,9 +58,9 @@ class DuckDBPartitionedParquetIOManager(PartitionedParquetIOManager):
         )
 
     def _table_path(self, context) -> str:
-        return f"{self._schema(context)}.{context.asset_key.path[-1]}"
+        return f"{self._duckdb_schema(context)}.{context.asset_key.path[-1]}"
 
-    def _schema(self, context) -> str:
+    def _duckdb_schema(self, context) -> str:
         return f"{context.asset_key.path[-2]}"
 
     def _connect_duckdb(self):

@@ -55,6 +55,7 @@ class BlockingDataLoader(Generic[KeyT, ReturnT]):
         self._cache = {}
         self._to_query = {}
 
+        # pyrefly: ignore [invalid-type-var]
         self.get_cache_key = get_cache_key or (lambda x: x)
 
         self.batch_load_fn = batch_load_fn
@@ -128,10 +129,12 @@ class DataLoader(_BaseDataLoader[KeyT, ReturnT]):
             self.cache = cache
 
         if get_cache_key is not None:
+            # pyrefly: ignore [invalid-type-var]
             self.get_cache_key = get_cache_key
         if not hasattr(self, "get_cache_key"):
             self.get_cache_key = lambda x: x
 
+        # pyrefly: ignore [invalid-type-var]
         self._cache = cache_map if cache_map is not None else {}
         self._queue: list[Loader] = []
 

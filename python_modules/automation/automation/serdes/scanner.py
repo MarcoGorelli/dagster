@@ -14,6 +14,7 @@ def discover_and_import_serdes_modules(package_name: str, verbose: bool):
     if hasattr(package, "__path__"):
         package_paths = list(package.__path__)
     else:
+        # pyrefly: ignore [bad-argument-type]
         package_paths = [str(Path(package.__file__).parent)]
 
     serdes_modules = []

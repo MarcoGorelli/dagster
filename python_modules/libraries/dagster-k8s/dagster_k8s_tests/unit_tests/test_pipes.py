@@ -31,7 +31,9 @@ def test_pod_building_min_info(test_image):
         base_pod_spec=None,
         base_pod_meta=None,
     )
+    # pyrefly: ignore [missing-attribute]
     assert pod.spec.containers[0].image == test_image
+    # pyrefly: ignore [missing-attribute]
     assert pod.spec.restart_policy == "Never"
 
 
@@ -45,6 +47,7 @@ def test_pod_building_common(test_image):
         base_pod_spec=None,
         base_pod_meta=None,
     )
+    # pyrefly: ignore [missing-attribute]
     assert pod.spec.containers[0].image == test_image
 
 
@@ -64,6 +67,7 @@ def test_pod_building_with_spec(test_image):
         },
         base_pod_meta=None,
     )
+    # pyrefly: ignore [missing-attribute]
     assert pod.spec.containers[0].image == test_image
 
 
@@ -118,8 +122,11 @@ def test_pod_building_multiple_containers_ok(test_image):
         base_pod_meta=None,
     )
 
+    # pyrefly: ignore [missing-attribute]
     assert pod.spec.containers[0].image == test_image
+    # pyrefly: ignore [missing-attribute]
     assert pod.spec.containers[1].image == test_image
+    # pyrefly: ignore [missing-attribute]
     assert pod.spec.init_containers[0].image == test_image
 
 
@@ -140,7 +147,9 @@ def test_pod_building_with_metadata(test_image):
             },
         },
     )
+    # pyrefly: ignore [missing-attribute]
     assert pod.metadata.labels["foo"] == "bar"
+    # pyrefly: ignore [missing-attribute]
     assert pod.metadata.annotations["fizz"] == "buzz"
 
 
@@ -179,7 +188,7 @@ def test_pod_building_env_overrides(test_image):
 
     assert {
         container.name: [env.to_dict() for env in container.env]
-        for container in pod.spec.containers
+        for container in pod.spec.containers  # pyrefly: ignore [missing-attribute]
     } == {
         "main": [
             {"name": "from_spec", "value": "spec", "value_from": None},
@@ -231,7 +240,7 @@ def test_pod_building_pipes_session_env_overrides(test_image):
 
     assert {
         container.name: [env.to_dict() for env in container.env]
-        for container in pod.spec.init_containers + pod.spec.containers
+        for container in pod.spec.init_containers + pod.spec.containers  # pyrefly: ignore [missing-attribute]
     } == {
         "init": [
             {"name": "DAGSTER_PIPES_CONTEXT", "value": "context-var", "value_from": None},
@@ -298,7 +307,7 @@ def test_pod_building_pipes_session_env_overrides_with_custom_pipes_message_writ
 
     assert {
         container.name: [env.to_dict() for env in container.env]
-        for container in pod.spec.init_containers + pod.spec.containers
+        for container in pod.spec.init_containers + pod.spec.containers  # pyrefly: ignore [missing-attribute]
     } == {
         "init": [
             {"name": "DAGSTER_PIPES_CONTEXT", "value": "context-var", "value_from": None},
@@ -369,7 +378,9 @@ def test_pod_building_common_labels_no_overrides(test_image):
         base_pod_spec=None,
         base_pod_meta={"labels": {"app.kubernetes.io/name": "custom"}},
     )
+    # pyrefly: ignore [missing-attribute]
     assert pod.metadata.labels["app.kubernetes.io/name"] == "custom"
+    # pyrefly: ignore [missing-attribute]
     assert pod.metadata.labels["app.kubernetes.io/instance"] == "dagster"
 
 
@@ -383,6 +394,7 @@ def test_pod_building_restart_policy(test_image):
         base_pod_spec={"restartPolicy": "OnFailure"},
         base_pod_meta=None,
     )
+    # pyrefly: ignore [missing-attribute]
     assert pod.spec.restart_policy == "OnFailure"
 
 

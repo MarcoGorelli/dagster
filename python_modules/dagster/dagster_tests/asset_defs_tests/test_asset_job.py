@@ -1240,6 +1240,7 @@ def test_connected_subset():
             instance=instance,
             asset_selection=[dg.AssetKey("foo"), dg.AssetKey("bar"), dg.AssetKey("foo_bar")],
         )
+        # pyrefly: ignore[no-matching-overload]
         materialization_events = sorted(
             [event for event in result.all_events if event.is_step_materialization],
             key=lambda event: event.asset_key,
@@ -1259,6 +1260,7 @@ def test_subset_of_asset_job():
             instance=instance,
             asset_selection=[dg.AssetKey("foo"), dg.AssetKey("bar"), dg.AssetKey("foo_bar")],
         )
+        # pyrefly: ignore[no-matching-overload]
         materialization_events = sorted(
             [event for event in result.all_events if event.is_step_materialization],
             key=lambda event: event.asset_key,
@@ -1282,6 +1284,7 @@ def test_subset_of_assets_job():
             instance=instance,
             asset_selection=[dg.AssetKey("foo"), dg.AssetKey("bar"), dg.AssetKey("foo_bar")],
         )
+        # pyrefly: ignore[no-matching-overload]
         materialization_events = sorted(
             [event for event in result.all_events if event.is_step_materialization],
             key=lambda event: event.asset_key,
@@ -1508,6 +1511,7 @@ def test_multi_subset():
             instance=instance,
             asset_selection=[dg.AssetKey("foo"), dg.AssetKey("a")],
         )
+        # pyrefly: ignore[no-matching-overload]
         materialization_events = sorted(
             [event for event in result.all_events if event.is_step_materialization],
             key=lambda event: event.asset_key,
@@ -1526,6 +1530,7 @@ def test_multi_all():
             instance=instance,
             asset_selection=[dg.AssetKey("foo"), dg.AssetKey("a"), dg.AssetKey("b")],
         )
+        # pyrefly: ignore[no-matching-overload]
         materialization_events = sorted(
             [event for event in result.all_events if event.is_step_materialization],
             key=lambda event: event.asset_key,
@@ -1842,6 +1847,7 @@ def test_transitive_resource_deps_provided():
 @ignore_warning("Class `SourceAsset` is deprecated and will be removed in 2.0.0.")
 @ignore_warning("Parameter `io_manager_def` .* is currently in beta")
 def test_transitive_io_manager_dep_not_provided():
+    # pyrefly: ignore [bad-argument-type]
     @dg.io_manager(required_resource_keys={"foo"})
     def the_manager():
         pass
@@ -2571,6 +2577,8 @@ def test_subset_cycle_resolution_complex():
         can_subset=True,
     )
     def foo(context, x, y):
+        c = None
+        d = None
         if "a" in context.op_execution_context.selected_output_names:
             yield dg.Output(1, "a")
         if "b" in context.op_execution_context.selected_output_names:
@@ -2582,9 +2590,9 @@ def test_subset_cycle_resolution_complex():
             d = y + 1
             yield dg.Output(d, "d")
         if "e" in context.op_execution_context.selected_output_names:
-            yield dg.Output(c + 1, "e")
+            yield dg.Output(check.not_none(c) + 1, "e")
         if "f" in context.op_execution_context.selected_output_names:
-            yield dg.Output(d + 1, "f")
+            yield dg.Output(check.not_none(d) + 1, "f")
 
     @dg.asset
     def x(a):

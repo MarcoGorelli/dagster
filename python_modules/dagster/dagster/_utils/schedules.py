@@ -31,6 +31,7 @@ class CroniterShim(_croniter):
 
     @classmethod
     @functools.lru_cache(maxsize=128)
+    # pyrefly: ignore [bad-override-mutable-attribute]
     def expand(cls, *args, **kwargs):
         return super().expand(*args, **kwargs)
 

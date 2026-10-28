@@ -20,6 +20,8 @@ from summit_financial.assets.silver import (
     transaction_context_windows,
     validated_accounts,
 )
+
+# pyrefly: ignore [missing-import]
 from tests.fakes import MockLLMResource
 
 

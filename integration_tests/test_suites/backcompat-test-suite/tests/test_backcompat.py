@@ -131,6 +131,7 @@ def upload_docker_logs_to_buildkite():
             "w",
             encoding="utf8",
         ) as log:
+            # pyrefly: ignore [no-matching-overload]
             p = subprocess.Popen(
                 ["docker", "logs", c.name],
                 stdout=log,
@@ -139,6 +140,7 @@ def upload_docker_logs_to_buildkite():
             p.communicate()
             print(f"container({c.name}) logs dumped")
             if p.returncode != 0:
+                # pyrefly: ignore [no-matching-overload]
                 q = subprocess.Popen(
                     ["docker", "logs", c.name],
                     stdout=subprocess.PIPE,

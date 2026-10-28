@@ -300,22 +300,27 @@ class AutomationCondition(ABC, Generic[T_EntityKey]):
 
     # see the note on __and__ for why the mixed-scope overloads exist
     @overload
+    # pyrefly: ignore [inconsistent-overload]
     def __or__(
         self: "AutomationCondition[AssetOrCheckKey]", other: "AutomationCondition[AssetKey]"
     ) -> "BuiltinAutomationCondition[AssetKey]": ...
     @overload
+    # pyrefly: ignore [inconsistent-overload]
     def __or__(
         self: "AutomationCondition[AssetKey]", other: "AutomationCondition[AssetOrCheckKey]"
     ) -> "BuiltinAutomationCondition[AssetKey]": ...
     @overload
+    # pyrefly: ignore [inconsistent-overload]
     def __or__(
         self: "AutomationCondition[AssetOrCheckKey]", other: "AutomationCondition[AssetCheckKey]"
     ) -> "BuiltinAutomationCondition[AssetCheckKey]": ...
     @overload
+    # pyrefly: ignore [inconsistent-overload]
     def __or__(
         self: "AutomationCondition[AssetCheckKey]", other: "AutomationCondition[AssetOrCheckKey]"
     ) -> "BuiltinAutomationCondition[AssetCheckKey]": ...
     @overload
+    # pyrefly: ignore [inconsistent-overload]
     def __or__(
         self, other: "AutomationCondition[T_EntityKey]"
     ) -> "BuiltinAutomationCondition[T_EntityKey]": ...

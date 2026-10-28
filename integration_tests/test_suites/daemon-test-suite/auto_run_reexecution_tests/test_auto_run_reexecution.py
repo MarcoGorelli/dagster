@@ -36,6 +36,7 @@ from dagster._daemon.auto_run_reexecution.auto_run_reexecution import (
 )
 from dagster._daemon.auto_run_reexecution.event_log_consumer import EventLogConsumerDaemon
 
+# pyrefly: ignore [missing-import]
 from auto_run_reexecution_tests.utils import bar_repo, foo, get_bar_repo_handle, get_foo_job_handle
 
 logger = logging.getLogger("dagster.test_auto_run_reexecution")

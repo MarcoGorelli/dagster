@@ -577,6 +577,7 @@ class RemoteAssetGraph(BaseAssetGraph[TRemoteAssetNode], ABC, Generic[TRemoteAss
 
     ##### COMMON ASSET GRAPH INTERFACE
     @cached_property
+    # pyrefly: ignore [bad-override]
     def _asset_check_nodes_by_key(self) -> Mapping[AssetCheckKey, AssetCheckNode]:
         return {
             k: self._get_asset_check_node_from_remote_asset_check_node(v)
@@ -990,8 +991,10 @@ def _warn_on_duplicate_nodes(
             elif snap.is_materializable:
                 materializable_locations.append(location)
         if len(observable_locations) > 1:
+            # pyrefly: ignore [unsupported-operation]
             observable_duplicates[node.key] = observable_locations
         if len(materializable_locations) > 1:
+            # pyrefly: ignore [unsupported-operation]
             materializable_duplicates[node.key] = materializable_locations
 
     # It is possible for multiple nodes to exist that share the same key. This is invalid if

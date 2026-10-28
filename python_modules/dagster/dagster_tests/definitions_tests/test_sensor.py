@@ -58,6 +58,7 @@ def test_coerce_to_asset_selection():
     def evaluation_fn(context):
         raise NotImplementedError()
 
+    # pyrefly: ignore [missing-attribute]
     assert dg.SensorDefinition(
         "a", asset_selection=["asset1", "asset2"], evaluation_fn=evaluation_fn
     ).asset_selection.resolve(assets) == {dg.AssetKey("asset1"), dg.AssetKey("asset2")}  # ty: ignore[unresolved-attribute]

@@ -189,7 +189,9 @@ class Map(ConfigType):
         check.inst_param(self.key_type, "key_type", ConfigType)
         check.inst_param(self.inner_type, "inner_type", ConfigType)
         check.param_invariant(
-            self.key_type.kind == ConfigTypeKind.SCALAR, "key_type", "Key type must be a scalar"
+            self.key_type.kind == ConfigTypeKind.SCALAR,
+            "key_type",
+            "Key type must be a scalar",
         )
         check.opt_str_param(self.given_name, "name")
 

@@ -1535,6 +1535,7 @@ class SqlEventLogStorage(EventLogStorage):
             # if we haven't migrated, overfetch in case the first N results are wiped
             fetch_limit = max(limit, MIN_ASSET_ROWS) if limit else None
         result = []
+        rows = []
 
         while should_query:
             rows, has_more, current_cursor = self._fetch_raw_asset_rows(
@@ -1709,6 +1710,7 @@ class SqlEventLogStorage(EventLogStorage):
         )
         with self.index_connection() as conn:
             backcompat_rows = db_fetch_mappings(conn, backcompat_query)
+        # pyrefly: ignore [bad-return]
         return {
             AssetKey.from_db_string(row["asset_key"]): row["timestamp"] for row in backcompat_rows
         }  # type: ignore
@@ -1912,10 +1914,11 @@ class SqlEventLogStorage(EventLogStorage):
         if (
             not isinstance(event_or_materialization, EventLogEntry)
             or not event_or_materialization.is_dagster_event
-            or not event_or_materialization.dagster_event.asset_key
+            or not event_or_materialization.dagster_event.asset_key  # pyrefly: ignore [missing-attribute]
         ):
             return None
 
+        # pyrefly: ignore [missing-attribute]
         return event_or_materialization.dagster_event.step_materialization_data.materialization
 
     def _get_asset_key_values_on_wipe(self) -> Mapping[str, Any]:
@@ -3294,6 +3297,7 @@ class SqlEventLogStorage(EventLogStorage):
                         AssetCheckExecutionsTable.c.asset_key == evaluation.asset_key.to_string(),
                         AssetCheckExecutionsTable.c.check_name == evaluation.check_name,
                         AssetCheckExecutionsTable.c.run_id == event.run_id,
+                        # pyrefly: ignore[bad-argument-type]
                         self._get_asset_check_partition_filter_clause(
                             PartitionKeyFilter(key=evaluation.partition)
                         ),
@@ -3385,6 +3389,7 @@ class SqlEventLogStorage(EventLogStorage):
                 db.and_(
                     AssetCheckExecutionsTable.c.asset_key == check_key.asset_key.to_string(),
                     AssetCheckExecutionsTable.c.check_name == check_key.name,
+                    # pyrefly: ignore[bad-argument-type]
                     self._get_asset_check_partition_filter_clause(partition_filter),
                 )
             )
@@ -3427,6 +3432,7 @@ class SqlEventLogStorage(EventLogStorage):
                         [key.asset_key.to_string() for key in check_keys]
                     ),
                     AssetCheckExecutionsTable.c.check_name.in_([key.name for key in check_keys]),
+                    # pyrefly: ignore[bad-argument-type]
                     self._get_asset_check_partition_filter_clause(partition_filter),
                 )
             )
@@ -3598,6 +3604,7 @@ class SqlEventLogStorage(EventLogStorage):
         return infos
 
     @property
+    # pyrefly: ignore [bad-override]
     def supports_asset_checks(self):
         return self.has_table(AssetCheckExecutionsTable.name)
 

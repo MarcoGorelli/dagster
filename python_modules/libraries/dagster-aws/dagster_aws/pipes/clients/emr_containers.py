@@ -144,6 +144,7 @@ class PipesEMRContainersClient(PipesClient, TreatAsResourceParam):
             # we can reuse the same method as in standard EMR
             # since configurations format is the same
             params["configurationOverrides"]["applicationConfiguration"] = (
+                # pyrefly: ignore [bad-assignment, bad-specialization]
                 emr_inject_pipes_env_vars(
                     session,
                     params["configurationOverrides"]["applicationConfiguration"],
@@ -217,9 +218,11 @@ class PipesEMRContainersClient(PipesClient, TreatAsResourceParam):
     ) -> RawMetadataMapping:
         metadata: RawMetadataMapping = {}
 
+        # pyrefly: ignore [unsupported-operation]
         metadata["AWS EMR Containers Virtual Cluster ID"] = response["jobRun"].get(
             "virtualClusterId"
         )
+        # pyrefly: ignore [unsupported-operation]
         metadata["AWS EMR Containers Job Run ID"] = response["jobRun"].get("id")
 
         # TODO: it would be great to add a url to EMR Studio page for this run

@@ -133,6 +133,7 @@ class TimeWindowPartitionsSubset(
                 partitions_def, "partitions_def", TimeWindowPartitionsDefinition
             ),
             num_partitions=check.opt_int_param(num_partitions, "num_partitions"),
+            # pyrefly: ignore [bad-argument-type]
             included_time_windows=check.sequence_param(
                 included_time_windows, "included_time_windows", of_type=PersistedTimeWindow
             ),
@@ -333,6 +334,7 @@ class TimeWindowPartitionsSubset(
             window_start_timestamp = window.start.timestamp()
             # go in reverse order because it's more common to add partitions at the end than the
             # beginning
+            included_window: PersistedTimeWindow | None = None
             for i in reversed(range(len(result_windows))):
                 included_window = result_windows[i]
                 lt_end_of_range = window_start_timestamp < included_window.end_timestamp
@@ -379,13 +381,15 @@ class TimeWindowPartitionsSubset(
                     break
             else:
                 if result_windows and window_start_timestamp == result_windows[0].start_timestamp:
+                    # if we got here without breaking out of the loop above, `result_windows`
+                    # being non-empty means the loop body ran at least once, so this is bound.
                     result_windows[0] = PersistedTimeWindow.from_public_time_window(
-                        TimeWindow(window.start, included_window.end),
+                        TimeWindow(window.start, check.not_none(included_window).end),
                         self.partitions_def.timezone,
                     )
                 elif result_windows and window.end.timestamp() == result_windows[0].start_timestamp:
                     result_windows[0] = PersistedTimeWindow.from_public_time_window(
-                        TimeWindow(window.start, included_window.end),
+                        TimeWindow(window.start, check.not_none(included_window).end),
                         self.partitions_def.timezone,
                     )
                 else:

@@ -47,8 +47,8 @@ def _subschemas_on_path(
 
     # Optional[ComplexType] (e.g.) will contain multiple schemas in the "anyOf" field
     if "anyOf" in subschema:
-        for inner in subschema["anyOf"]:
-            yield from _subschemas_on_path(valpath, json_schema, inner)
+        for any_of_subschema in subschema["anyOf"]:
+            yield from _subschemas_on_path(valpath, json_schema, any_of_subschema)
 
     el = valpath[0]
     if isinstance(el, str):

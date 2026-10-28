@@ -430,6 +430,7 @@ def test_monitor_sensor_cursor(init_load_context: None, instance: DagsterInstanc
         )
         result = defs.sensors[0](context)  # type: ignore
         assert isinstance(result, SkipReason)
+        # pyrefly: ignore [not-iterable]
         assert "Monitoring job is still running" in result.skip_message
         # Move the run to a finished state.
         instance.report_dagster_event(

@@ -1045,9 +1045,11 @@ def _update_assets_metadata(
         if isinstance(asset, AssetsDefinition):
             updated_assets.append(_update_assets_def_metadata(asset, update))
         elif isinstance(asset, AssetSpec):
+            # pyrefly: ignore [bad-argument-type]
             updated_assets.append(asset.replace_attributes(metadata=update(asset.metadata)))
         elif isinstance(asset, (SourceAsset, CacheableAssetsDefinition)):
             # these types are deprecated and do not support metadata updates, ignore
+            # pyrefly: ignore [bad-argument-type]
             updated_assets.append(asset)
         else:
             check.assert_never(asset)
@@ -1081,6 +1083,7 @@ def _update_schedules_metadata(
             updated_schedules.append(schedule.with_attributes(**new_attrs))
 
         elif isinstance(schedule, UnresolvedPartitionedAssetScheduleDefinition):
+            # pyrefly: ignore [bad-argument-type]
             updated_schedules.append(schedule.with_metadata(update(schedule.metadata or {})))
         else:
             check.assert_never(schedule)
@@ -1113,6 +1116,7 @@ def _update_sensors_metadata(
                                 sensor_job.with_metadata(update(sensor_job.metadata or {}))
                             )
                     else:
+                        # pyrefly: ignore [bad-argument-type]
                         new_sensor_jobs.append(sensor_job)  # other types are not updated
                 new_attrs["jobs"] = new_sensor_jobs
 

@@ -412,6 +412,7 @@ def _get_blocking_asset_check_output_handles_by_asset_key(
 
     for node_handle, assets_def in assets_defs_by_node_handle.items():
         for output_name, check_spec in assets_def.check_specs_by_output_name.items():
+            # pyrefly: ignore [unsupported-operation]
             check_specs_by_node_output_handle[
                 NodeOutputHandle(node_handle=node_handle, output_name=output_name)
             ] = check_spec

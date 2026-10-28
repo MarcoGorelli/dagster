@@ -7,6 +7,7 @@ from sqlglot import (
 
 bq = Dialects.BIGQUERY
 
+# pyrefly: ignore [bad-argument-type]
 custom_bigquery_dialect = check.not_none(Dialect.get(key=Dialects.BIGQUERY))
 custom_bigquery_dialect_inst = custom_bigquery_dialect()
 

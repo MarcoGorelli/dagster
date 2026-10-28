@@ -31,6 +31,7 @@ class PipesGCSContextInjector(PipesContextInjector):
         self.client = client
 
     @contextmanager
+    # pyrefly: ignore [bad-override-param-name]
     def inject_context(self, context: PipesContextData) -> Iterator[PipesParams]:
         key_prefix = (self.key_prefix or "") + "".join(random.choices(string.ascii_letters, k=30))
         key = os.path.join(key_prefix, _CONTEXT_FILENAME)

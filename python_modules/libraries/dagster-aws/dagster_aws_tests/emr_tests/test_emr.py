@@ -32,6 +32,7 @@ def test_emr_add_tags_and_describe_cluster(emr_cluster_config):
 
     emr.add_tags(context.log, {"foobar": "v1", "baz": "123"}, cluster_id)
 
+    # pyrefly: ignore [unsupported-operation]
     tags = emr.describe_cluster(cluster_id)["Cluster"]["Tags"]
 
     assert {"Key": "baz", "Value": "123"} in tags
@@ -43,6 +44,7 @@ def test_emr_describe_cluster(emr_cluster_config):
     context = create_test_pipeline_execution_context()
     cluster = EmrJobRunner(region=REGION)
     cluster_id = cluster.run_job_flow(context.log, emr_cluster_config)
+    # pyrefly: ignore [unsupported-operation]
     cluster_info = cluster.describe_cluster(cluster_id)["Cluster"]
     assert cluster_info["Name"] == "test-emr"
     assert EmrClusterState(cluster_info["Status"]["State"]) == EmrClusterState.Waiting

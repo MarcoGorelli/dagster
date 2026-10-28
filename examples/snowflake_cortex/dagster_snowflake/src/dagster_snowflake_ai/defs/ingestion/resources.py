@@ -3,6 +3,7 @@
 import re
 import time
 from datetime import datetime, timedelta
+from typing import Any
 from urllib.error import URLError
 from urllib.parse import urljoin, urlparse
 
@@ -514,7 +515,7 @@ class WebScraperResource(dg.ConfigurableResource):
                         story_text = item_data.get("text", "")
                         story_title = item_data.get("title", "")
 
-                        story_dict = {
+                        story_dict: dict[str, Any] = {
                             "story_id": str(item_data.get("id", "")),
                             "title": story_title,
                             "url": item_data.get("url", ""),

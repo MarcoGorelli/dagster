@@ -62,6 +62,7 @@ def test_op_invocation_lifecycle():
         pass
 
     # Verify dispose was called on the instance
+    # pyrefly: ignore [missing-attribute]
     assert context.instance.run_storage._held_conn.closed  # noqa
 
 

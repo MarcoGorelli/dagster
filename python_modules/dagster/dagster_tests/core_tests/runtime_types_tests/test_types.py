@@ -256,6 +256,7 @@ def _return_bad_value(_, _value):
     return "foo"
 
 
+# pyrefly: ignore [bad-argument-type]
 BadType = dg.DagsterType(name="BadType", type_check_fn=_return_bad_value)
 
 
@@ -379,6 +380,7 @@ def define_custom_dict(name, permitted_key_names):
                 return dg.TypeCheck(
                     False,
                     description=(
+                        # pyrefly: ignore [missing-attribute]
                         f"Key {value.name} is not a permitted value, values can only be of: {permitted_key_names}"
                     ),
                 )

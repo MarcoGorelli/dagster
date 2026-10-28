@@ -871,4 +871,5 @@ StepInputSourceUnion: TypeAlias = (
     StepInputSource | FromDynamicCollect | FromUnresolvedStepOutput | FromPendingDynamicStepOutput
 )
 
+# pyrefly: ignore[missing-attribute]
 StepInputSourceTypes = StepInputSourceUnion.__args__

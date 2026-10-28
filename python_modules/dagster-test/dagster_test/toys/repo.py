@@ -151,6 +151,7 @@ def toys_repository():
     )
 
 
+# pyrefly: ignore [bad-argument-type]
 @repository
 def basic_assets_repository():
     from dagster_test.toys import basic_assets
@@ -158,6 +159,7 @@ def basic_assets_repository():
     return [load_assets_from_modules([basic_assets]), basic_assets.basic_assets_job]
 
 
+# pyrefly: ignore [bad-argument-type]
 @repository
 def partitioned_assets_repository():
     from dagster_test.toys import partitioned_assets
@@ -171,6 +173,7 @@ def partitioned_assets_repository():
     ]
 
 
+# pyrefly: ignore [bad-argument-type]
 @repository
 def column_schema_repository():
     from dagster_test.toys import column_schema
@@ -192,6 +195,7 @@ def long_asset_keys_repository():
     return cast("Sequence[AssetsDefinition]", load_assets_from_modules([long_asset_keys]))
 
 
+# pyrefly: ignore [bad-argument-type]
 @repository
 def big_honkin_assets_repository():
     return [
@@ -206,11 +210,13 @@ def upstream_assets_repository():
     return upstream_repo_assets
 
 
+# pyrefly: ignore [bad-argument-type]
 @repository
 def downstream_assets_repository1():
     return downstream_repo1_assets
 
 
+# pyrefly: ignore [bad-argument-type]
 @repository
 def downstream_assets_repository2():
     return downstream_repo2_assets

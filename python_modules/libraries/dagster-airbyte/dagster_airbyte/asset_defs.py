@@ -350,6 +350,7 @@ def build_airbyte_assets(
 
     # All non-normalization tables depend on any user-provided upstream assets
     for table in destination_tables:
+        # pyrefly: ignore [unsupported-operation]
         internal_deps[table] = set(upstream_deps) if upstream_deps else set()
 
     @multi_asset(

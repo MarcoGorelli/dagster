@@ -32,7 +32,7 @@ def test_list_in_config():
             "list (e.g. [int]) or dagster.Array (e.g. Array(int)) instead."
         ),
     ):
-
+        # pyrefly: ignore [no-matching-overload]
         @dg.op(config_schema=dg.List[int])
         def _op(_):
             pass

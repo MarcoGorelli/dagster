@@ -547,6 +547,7 @@ def test_asset_with_io_manager_key_only():
 
 
 def test_asset_both_io_manager_args_provided():
+    # pyrefly: ignore [no-matching-overload]
     @dg.io_manager
     def the_io_manager():
         pass

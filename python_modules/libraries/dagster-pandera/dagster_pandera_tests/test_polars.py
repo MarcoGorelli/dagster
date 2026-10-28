@@ -88,6 +88,7 @@ def sample_schema_model(**config_attrs):
             sum_b = df.lazyframe.select(pl.col("b")).sum().collect().item()
             return sum_a > sum_b
 
+        # pyrefly: ignore [bad-assignment]
         Config = make_schema_model_config(**config_attrs)
 
     return SampleDataframeModel

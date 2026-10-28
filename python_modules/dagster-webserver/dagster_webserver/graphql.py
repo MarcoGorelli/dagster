@@ -86,6 +86,7 @@ class GraphQLServer(ABC, Generic[TRequestContext]):
     def request_context(self, conn: HTTPConnection) -> Iterator[TRequestContext]:
         """Creates a request context for the given connection and ensures that it is entered before use."""
         with self._make_request_context(conn) as request_context:
+            # pyrefly: ignore [invalid-yield]
             yield request_context
 
     def handle_graphql_errors(self, errors: Sequence[GraphQLError]):
@@ -356,6 +357,7 @@ class GraphQLServer(ABC, Generic[TRequestContext]):
 
             # in the future we should get back async gen directly, back compat for now
             task = get_event_loop().create_task(
+                # pyrefly: ignore [bad-argument-type]
                 _handle_async_results(async_result, operation_id, websocket)
             )
 

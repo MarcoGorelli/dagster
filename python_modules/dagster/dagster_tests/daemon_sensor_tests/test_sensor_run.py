@@ -618,6 +618,7 @@ def all_code_locations_run_status_sensor():
 @sensor(job=the_job)
 def logging_sensor(context):
     class Handler(logging.Handler):
+        # pyrefly: ignore [bad-override]
         def handle(self, record):
             try:
                 self.message = record.getMessage()
@@ -645,6 +646,7 @@ def logging_sensor(context):
 )
 def multi_asset_logging_sensor(context: MultiAssetSensorEvaluationContext) -> dg.SkipReason:
     class Handler(logging.Handler):
+        # pyrefly: ignore [bad-override]
         def handle(self, record):
             try:
                 self.message = record.getMessage()
@@ -2882,6 +2884,7 @@ def test_status_in_code_sensor(executor, instance):
         create_workspace_load_target(attribute="the_status_in_code_repo"),
         instance=instance,
     ) as workspace_context:
+        # pyrefly: ignore [missing-attribute]
         remote_repo = next(
             iter(workspace_context.create_request_context().get_code_location_entries().values())
         ).code_location.get_repository("the_status_in_code_repo")  # ty: ignore[unresolved-attribute]

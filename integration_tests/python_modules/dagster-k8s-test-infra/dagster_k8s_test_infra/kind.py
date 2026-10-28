@@ -352,6 +352,7 @@ def kind_sync_dockerconfig():
 
     docker_exe = shutil.which("docker")
 
+    # pyrefly: ignore [missing-attribute]
     nodes = kubernetes.client.CoreV1Api().list_node().items
     for node in nodes:
         node_name = node.metadata.name
@@ -410,6 +411,7 @@ def kind_cluster(cluster_name=None, should_cleanup=False, kind_ready_timeout=60.
                         api = kubernetes.client.CoreV1Api()
                         service_accounts = [
                             s.metadata.name
+                            # pyrefly: ignore [missing-attribute]
                             for s in api.list_namespaced_service_account("default").items
                         ]
                         print("Service accounts: ", service_accounts)

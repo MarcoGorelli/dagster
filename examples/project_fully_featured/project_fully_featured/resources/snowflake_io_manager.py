@@ -64,6 +64,7 @@ class SnowflakeIOManager(ConfigurableIOManager):
 
         time_window = context.asset_partitions_time_window if context.has_asset_partitions else None
         with connect_snowflake(config=self._config, schema=schema) as con:
+            # pyrefly: ignore[no-matching-overload]
             con.execute(self._get_cleanup_statement(table, schema, time_window))
 
         if isinstance(obj, SparkDataFrame):
@@ -75,7 +76,8 @@ class SnowflakeIOManager(ConfigurableIOManager):
             config["schema"] = schema
             with connect_snowflake(config=config) as con:
                 df = read_sql(f"SELECT * FROM {context.name} LIMIT 5", con=con)
-                num_rows = con.execute(f"SELECT COUNT(*) FROM {context.name}").fetchone()
+                # pyrefly: ignore[no-matching-overload]
+                num_rows = con.execute(f"SELECT COUNT(*) FROM {context.name}").scalar()
 
             metadata = {
                 "data_sample": MetadataValue.md(df.to_markdown()),

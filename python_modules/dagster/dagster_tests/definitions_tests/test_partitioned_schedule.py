@@ -57,8 +57,10 @@ def test_daily_schedule():
     my_schedule = schedule_for_partitioned_config(
         my_partitioned_config, hour_of_day=9, minute_of_hour=30
     )
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.cron_schedule == "30 9 * * *"
 
+    # pyrefly: ignore [missing-attribute]
     run_request = my_schedule.evaluate_tick(
         dg.build_schedule_context(
             scheduled_execution_time=datetime.strptime("2021-05-08", DATE_FORMAT)
@@ -94,13 +96,16 @@ def test_daily_schedule_with_offsets():
     }
 
     my_schedule_default = schedule_for_partitioned_config(my_partitioned_config)
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule_default.cron_schedule == "15 2 * * *"
 
     my_schedule = schedule_for_partitioned_config(
         my_partitioned_config, hour_of_day=9, minute_of_hour=30
     )
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.cron_schedule == "30 9 * * *"
 
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.evaluate_tick(
         dg.build_schedule_context(scheduled_execution_time=datetime(2021, 5, 8, 9, 30))
     ).run_requests[0].run_config == {
@@ -132,11 +137,14 @@ def test_hourly_schedule():
     }
 
     my_schedule_default = schedule_for_partitioned_config(my_partitioned_config)
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule_default.cron_schedule == "0 * * * *"
 
     my_schedule = schedule_for_partitioned_config(my_partitioned_config, minute_of_hour=30)
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.cron_schedule == "30 * * * *"
 
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.evaluate_tick(
         dg.build_schedule_context(
             scheduled_execution_time=datetime.strptime("2021-05-08", DATE_FORMAT)
@@ -169,8 +177,10 @@ def test_hourly_schedule_with_offsets():
     }
 
     my_schedule = schedule_for_partitioned_config(my_partitioned_config, minute_of_hour=30)
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.cron_schedule == "30 * * * *"
 
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.evaluate_tick(
         dg.build_schedule_context(
             scheduled_execution_time=datetime.strptime("2021-05-08", DATE_FORMAT)
@@ -205,8 +215,10 @@ def test_weekly_schedule():
     my_schedule = schedule_for_partitioned_config(
         my_partitioned_config, hour_of_day=9, minute_of_hour=30, day_of_week=2
     )
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.cron_schedule == "30 9 * * 2"
 
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.evaluate_tick(
         dg.build_schedule_context(
             scheduled_execution_time=datetime.strptime("2021-05-21", DATE_FORMAT)
@@ -243,8 +255,10 @@ def test_weekly_schedule_with_offsets():
     my_schedule = schedule_for_partitioned_config(
         my_partitioned_config, hour_of_day=9, minute_of_hour=30, day_of_week=2
     )
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.cron_schedule == "30 9 * * 2"
 
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.evaluate_tick(
         dg.build_schedule_context(
             scheduled_execution_time=datetime.strptime("2021-05-21", DATE_FORMAT)
@@ -279,8 +293,10 @@ def test_monthly_schedule():
     my_schedule = schedule_for_partitioned_config(
         my_partitioned_config, hour_of_day=9, minute_of_hour=30, day_of_month=2
     )
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.cron_schedule == "30 9 2 * *"
 
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.evaluate_tick(
         dg.build_schedule_context(
             scheduled_execution_time=datetime.strptime("2021-07-21", DATE_FORMAT)
@@ -329,8 +345,10 @@ def test_monthly_schedule_with_offsets():
     my_schedule = schedule_for_partitioned_config(
         my_partitioned_config, hour_of_day=9, minute_of_hour=30, day_of_month=2
     )
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.cron_schedule == "30 9 2 * *"
 
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.evaluate_tick(
         dg.build_schedule_context(
             scheduled_execution_time=datetime.strptime("2021-06-21", DATE_FORMAT)
@@ -356,6 +374,7 @@ def test_empty_partitions():
         my_partitioned_config, hour_of_day=9, minute_of_hour=30
     )
 
+    # pyrefly: ignore [missing-attribute]
     result = my_schedule.evaluate_tick(
         dg.build_schedule_context(
             scheduled_execution_time=datetime.strptime("2021-05-05", DATE_FORMAT)
@@ -375,6 +394,7 @@ def test_future_tick():
 
         my_schedule = schedule_for_partitioned_config(my_partitioned_config)
 
+        # pyrefly: ignore [missing-attribute]
         run_request = my_schedule.evaluate_tick(
             dg.build_schedule_context(
                 scheduled_execution_time=datetime.strptime("2022-03-05", DATE_FORMAT)
@@ -566,14 +586,17 @@ def test_daily_exclusion_schedule():
     assert keys[1] == "2021-05-07"
 
     my_schedule = schedule_for_partitioned_config(my_partitioned_config)
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.cron_schedule == "0 0 * * *"
 
     # tick on excluded date will skip
+    # pyrefly: ignore [missing-attribute]
     tick = my_schedule.evaluate_tick(
         dg.build_schedule_context(scheduled_execution_time=datetime(2021, 5, 7))
     )
     assert tick.run_requests == []
 
+    # pyrefly: ignore [missing-attribute]
     run_request = my_schedule.evaluate_tick(
         dg.build_schedule_context(scheduled_execution_time=datetime(2021, 5, 8))
     ).run_requests[0]
@@ -595,14 +618,17 @@ def test_daily_exclusion_schedule_with_end_offsets():
     assert keys[1] == "2021-05-07"
 
     my_schedule = schedule_for_partitioned_config(my_partitioned_config)
+    # pyrefly: ignore [missing-attribute]
     assert my_schedule.cron_schedule == "0 0 * * *"
 
     # tick on excluded date will skip
+    # pyrefly: ignore [missing-attribute]
     tick = my_schedule.evaluate_tick(
         dg.build_schedule_context(scheduled_execution_time=datetime(2021, 5, 6))
     )
     assert tick.run_requests == []
 
+    # pyrefly: ignore [missing-attribute]
     run_request = my_schedule.evaluate_tick(
         dg.build_schedule_context(scheduled_execution_time=datetime(2021, 5, 7))
     ).run_requests[0]

@@ -131,6 +131,7 @@ def coerce_to_deps_and_check_duplicates(
         if isinstance(dep, AssetsDefinition) and len(dep.keys) > 1:
             all_deps.extend(dep.keys)
         else:
+            # pyrefly: ignore [bad-argument-type]
             all_deps.append(dep)
 
     dep_set = {}

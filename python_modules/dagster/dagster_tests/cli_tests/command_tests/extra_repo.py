@@ -11,6 +11,7 @@ def extra_job():
     do_something()
 
 
+# pyrefly: ignore [bad-argument-type]
 @dg.repository
 def extra():
     return {"jobs": {"extra_job": extra_job}}

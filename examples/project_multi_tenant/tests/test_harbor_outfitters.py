@@ -20,6 +20,8 @@ from harbor_outfitters.assets.silver import (
     standardized_products,
 )
 from shared.io_managers import make_duckdb_io_manager
+
+# pyrefly: ignore [missing-import]
 from tests.fakes import MockLLMResource
 
 

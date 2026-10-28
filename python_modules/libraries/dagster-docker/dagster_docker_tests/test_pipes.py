@@ -43,6 +43,7 @@ def test_default():
 
     result = materialize(
         [number_x],
+        # pyrefly: ignore [bad-argument-type]
         resources={"pipes_client": PipesDockerClient(**ext_config)},
         raise_on_error=False,
     )

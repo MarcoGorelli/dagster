@@ -892,6 +892,7 @@ def test_multiple_nested_optional_resources_complex() -> None:
         if main.outer and main.outer.inner and main.outer.inner.innermost:
             executed["my_asset"] = main.outer.inner.innermost.a_string
         else:
+            # pyrefly: ignore [unsupported-operation]
             executed["my_asset"] = None
 
     for main_resource in [

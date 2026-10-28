@@ -855,6 +855,7 @@ class RunStatusSensorDefinition(SensorDefinition, IHasInternalInit):
                     and (sensor_repo_name == dagster_run_repo_name)
                 ):
                     if monitored_jobs:
+                        # pyrefly: ignore[missing-attribute]
                         if dagster_run.job_name in map(lambda x: x.name, current_repo_jobs):
                             job_match = True
                     else:

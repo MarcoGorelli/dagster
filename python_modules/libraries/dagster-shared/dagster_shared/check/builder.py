@@ -145,6 +145,7 @@ class EvalContext(NamedTuple):
             self.get_merged_ns(),
             local_ns,
         )
+        # pyrefly: ignore [bad-return]
         return local_ns[fn_name]
 
 

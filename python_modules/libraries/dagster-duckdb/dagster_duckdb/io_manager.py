@@ -281,6 +281,7 @@ class DuckDbClient(DbClient):
 
     @staticmethod
     @contextmanager
+    # pyrefly: ignore [bad-override-param-name]
     def connect(context, _):
         config = context.resource_config["connection_config"]
 

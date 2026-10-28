@@ -240,7 +240,7 @@ class SlingResource(ConfigurableResource):
             ]
 
         tmp = None
-        tmp_metadata = {}
+        tmp_metadata: dict[str, Any] = {}
         end_time = time.time()
         target_type = re.findall(r"writing to target ([\w\s]*) ", metadata_string)
         if target_type and target_type[0] == "database":
@@ -534,7 +534,8 @@ class SlingResource(ConfigurableResource):
 
         # define variable to use to compute metadata during run
         current_stream = None
-        metadata_text = []
+        asset_key = None
+        metadata_text: list[str] = []
         metadata = {}
 
         # convert to dict to enable updating the index
@@ -608,7 +609,7 @@ class SlingResource(ConfigurableResource):
                 # Search whether the current stream ended
                 matched = re.findall("execution succeeded", text)
 
-                if matched:
+                if matched and asset_key is not None:
                     # If yes, query metadata and materialize asset
                     metadata = self._query_metadata("\n".join(metadata_text), start_time=start_time)
                     start_time = time.time()

@@ -212,6 +212,7 @@ class TestScheduleStorage:
 
         new_schedule = schedule.with_status(InstigatorStatus.RUNNING).with_data(
             ScheduleInstigatorData(
+                # pyrefly: ignore [missing-attribute]
                 cron_schedule=schedule.instigator_data.cron_schedule,
                 start_timestamp=now_time,
             )

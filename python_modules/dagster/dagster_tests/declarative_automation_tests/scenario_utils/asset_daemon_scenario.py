@@ -214,6 +214,7 @@ class AssetDaemonScenarioState(ScenarioState):
                     debug_crash_flags={},
                 )
 
+                # pyrefly: ignore [bad-argument-type]
                 wait_for_futures(amp_tick_futures)
 
             if stop_mid_iteration:
